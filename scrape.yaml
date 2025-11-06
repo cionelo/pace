@@ -1,0 +1,64 @@
+name: Scrape XpressTiming Event
+
+on:
+  repository_dispatch:
+    types: [scrape-event]
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.SCRAPER_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install playwright beautifulsoup4 lxml requests
+          python -m playwright install chromium
+      
+      - name: Run scraper
+        run: |
+          python splits_scraper.py --url "${{ github.event.client_payload.url }}" --outdir ./data
+        continue-on-error: true
+      
+      - name: Check if scraper succeeded
+        id: check_output
+        run: |
+          EVENT_ID=$(echo "${{ github.event.client_payload.url }}" | rev | cut -d'/' -f1 | rev)
+          if [ -f "data/${EVENT_ID}/split_report.json" ]; then
+            echo "success=true" >> $GITHUB_OUTPUT
+            echo "event_id=${EVENT_ID}" >> $GITHUB_OUTPUT
+          else
+            echo "success=false" >> $GITHUB_OUTPUT
+            echo "Scraper failed to create output files"
+          fi
+      
+      - name: Commit and push if successful
+        if: steps.check_output.outputs.success == 'true'
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add data/
+          git commit -m "Add scraped data for event ${{ steps.check_output.outputs.event_id }}" || echo "No changes to commit"
+          git push
+      
+      - name: Create status file
+        run: |
+          EVENT_ID=$(echo "${{ github.event.client_payload.url }}" | rev | cut -d'/' -f1 | rev)
+          mkdir -p data/${EVENT_ID}
+          if [ "${{ steps.check_output.outputs.success }}" == "true" ]; then
+            echo '{"status":"success","timestamp":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","event_id":"'${EVENT_ID}'"}' > data/${EVENT_ID}/scrape_status.json
+          else
+            echo '{"status":"failed","timestamp":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","event_id":"'${EVENT_ID}'","error":"Scraper failed"}' > data/${EVENT_ID}/scrape_status.json
+          fi
+          git add data/${EVENT_ID}/scrape_status.json
+          git commit -m "Update scrape status for event ${EVENT_ID}" || echo "No status changes"
+          git push || echo "Push failed"

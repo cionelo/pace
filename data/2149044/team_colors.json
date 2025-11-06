@@ -1,0 +1,229 @@
+{
+  "texas-st.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/texas-st.svg",
+    "primary_hex": "#511D20",
+    "palette": [
+      "#511D20",
+      "#B09247"
+    ]
+  },
+  "south-ala.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/south-ala.svg",
+    "primary_hex": "#173A79",
+    "palette": [
+      "#173A79",
+      "#D2103E",
+      "#FFFFFF"
+    ]
+  },
+  "la-lafayette.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+    "primary_hex": "#181210",
+    "palette": [
+      "#181210",
+      "#928B8A",
+      "#D11C2E",
+      "#FFFFFF"
+    ]
+  },
+  "81d89b3415675fc6f44ab620f9f47377-1694796699.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/81d89b3415675fc6f44ab620f9f47377-1694796699.svg",
+    "primary_hex": "#211D1D",
+    "palette": [
+      "#211D1D",
+      "#F6F7F8",
+      "#FBBF16",
+      "#FBBF1A",
+      "#FFFFFF"
+    ]
+  },
+  "marshall.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/marshall.svg",
+    "primary_hex": "#0DAA4C",
+    "palette": [
+      "#0DAA4C",
+      "#231F20",
+      "#FFFFFF"
+    ]
+  },
+  "coastal-caro.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/coastal-caro.svg",
+    "primary_hex": "#006F71",
+    "palette": [
+      "#006F71",
+      "#111111",
+      "#A27752",
+      "#FFFFFF"
+    ]
+  },
+  "arkansas-st.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#D01C2E",
+      "#FFFFFF"
+    ]
+  },
+  "james-madison.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/james-madison.svg",
+    "primary_hex": "#302566",
+    "palette": [
+      "#302566",
+      "#AEA057",
+      "#FFFFFF"
+    ]
+  },
+  "appalachian-st.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+    "primary_hex": "#100F0D",
+    "palette": [
+      "#100F0D",
+      "#FBCF17",
+      "#FFFFFF"
+    ]
+  },
+  "georgia-st.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/georgia-st.svg",
+    "primary_hex": "#264391",
+    "palette": [
+      "#264391",
+      "#FFFFFF"
+    ]
+  },
+  "troy.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/troy.svg",
+    "primary_hex": "#871C30",
+    "palette": [
+      "#871C30",
+      "#B4B3B3",
+      "#FFFFFF"
+    ]
+  },
+  "ga-southern.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/ga-southern.svg",
+    "primary_hex": "#15356F",
+    "palette": [
+      "#15356F",
+      "#927F3B",
+      "#A0B7C1",
+      "#FFFFFF"
+    ]
+  },
+  "Texas State": {
+    "logo_url": "https://static.trackmeet.io/team-images/texas-st.svg",
+    "primary_hex": "#511D20",
+    "palette": [
+      "#511D20",
+      "#B09247"
+    ]
+  },
+  "South Alabama": {
+    "logo_url": "https://static.trackmeet.io/team-images/south-ala.svg",
+    "primary_hex": "#173A79",
+    "palette": [
+      "#173A79",
+      "#D2103E",
+      "#FFFFFF"
+    ]
+  },
+  "Louisiana": {
+    "logo_url": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+    "primary_hex": "#181210",
+    "palette": [
+      "#181210",
+      "#928B8A",
+      "#D11C2E",
+      "#FFFFFF"
+    ]
+  },
+  "Southern Miss.": {
+    "logo_url": "https://static.trackmeet.io/team-images/81d89b3415675fc6f44ab620f9f47377-1694796699.svg",
+    "primary_hex": "#211D1D",
+    "palette": [
+      "#211D1D",
+      "#F6F7F8",
+      "#FBBF16",
+      "#FBBF1A",
+      "#FFFFFF"
+    ]
+  },
+  "Marshall": {
+    "logo_url": "https://static.trackmeet.io/team-images/marshall.svg",
+    "primary_hex": "#0DAA4C",
+    "palette": [
+      "#0DAA4C",
+      "#231F20",
+      "#FFFFFF"
+    ]
+  },
+  "Coastal Carolina": {
+    "logo_url": "https://static.trackmeet.io/team-images/coastal-caro.svg",
+    "primary_hex": "#006F71",
+    "palette": [
+      "#006F71",
+      "#111111",
+      "#A27752",
+      "#FFFFFF"
+    ]
+  },
+  "Arkansas State": {
+    "logo_url": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#D01C2E",
+      "#FFFFFF"
+    ]
+  },
+  "James Madison": {
+    "logo_url": "https://static.trackmeet.io/team-images/james-madison.svg",
+    "primary_hex": "#302566",
+    "palette": [
+      "#302566",
+      "#AEA057",
+      "#FFFFFF"
+    ]
+  },
+  "App State": {
+    "logo_url": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+    "primary_hex": "#100F0D",
+    "palette": [
+      "#100F0D",
+      "#FBCF17",
+      "#FFFFFF"
+    ]
+  },
+  "ULM": {
+    "logo_url": "https://static.trackmeet.io/team-images/5828a4a7befde54356b85194c2ad8904-1714211834.png",
+    "primary_hex": "",
+    "palette": []
+  },
+  "Georgia State": {
+    "logo_url": "https://static.trackmeet.io/team-images/georgia-st.svg",
+    "primary_hex": "#264391",
+    "palette": [
+      "#264391",
+      "#FFFFFF"
+    ]
+  },
+  "Troy": {
+    "logo_url": "https://static.trackmeet.io/team-images/troy.svg",
+    "primary_hex": "#871C30",
+    "palette": [
+      "#871C30",
+      "#B4B3B3",
+      "#FFFFFF"
+    ]
+  },
+  "Georgia Southern": {
+    "logo_url": "https://static.trackmeet.io/team-images/ga-southern.svg",
+    "primary_hex": "#15356F",
+    "palette": [
+      "#15356F",
+      "#927F3B",
+      "#A0B7C1",
+      "#FFFFFF"
+    ]
+  }
+}
