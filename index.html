@@ -22,33 +22,21 @@
         </div>
 
 
-        <div class="scraper-section">
-          <div class="scraper-form">
-            <label for="xpressUrl" class="scraper-label">
-              📎 Paste link to XpressTiming results here:
-            </label>
-            <div class="scraper-inputs">
-              <input 
-                type="text" 
-                id="xpressUrl" 
-                class="scraper-url-input"
-                placeholder="https://live.xpresstiming.com/meets/.../events/xc/..."
-              />
-              <input 
-                type="password" 
-                id="githubToken" 
-                class="scraper-token-input"
-                placeholder="GitHub Token (ghp_...)"
-              />
-              <button id="scrapeBtn" class="btn-scrape">
-                Scrape & Load
-              </button>
-            </div>
-            <p class="scraper-hint">
-              Need a token? <a href="#" id="showTokenInstructions">Click here for setup instructions</a>
-            </p>
+        <div class="event-selector-section">
+          <label for="eventSelect" class="event-selector-label">
+            📊 Select Race to Analyze:
+          </label>
+          <div class="event-selector-wrapper">
+            <select id="eventSelect" class="event-selector">
+              <option value="">Choose a race...</option>
+            </select>
+            <button id="loadEventBtn" class="btn-load-event">
+              Load Race Data
+            </button>
           </div>
-          <div id="scrapeStatus" class="scrape-status" style="display: none;"></div>
+          <p class="event-selector-hint">
+            New races are added automatically after each meet weekend.
+          </p>
         </div>
 
 
@@ -237,7 +225,8 @@
       <div class="spinner"></div>
       <p>Loading race data...</p>
     </div>
-    <script src="./scraper-trigger.js"></script>
+    <!-- Event selector -->
+    <script type="module" src="./event-loader.js"></script>
     <!-- single entry point; Vite loads tw.css/styles via main.js -->
     <script type="module" src="./main.js"></script>
   </body>
