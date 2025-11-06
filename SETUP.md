@@ -2,7 +2,7 @@
 
 ## Step 1: Create GitHub Personal Access Token
 
-1. Go to https://github.com/settings/tokens
+1. Go to    
 2. Click **"Generate new token"** → **"Generate new token (classic)"**
 3. Give it a name: `Race Scraper Token`
 4. Set expiration: `No expiration` (or your preference)
@@ -14,7 +14,6 @@
    - It will look like: `ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
 ## Step 2: Add Token to Repository Secrets
-
 1. Go to your repo: https://github.com/cionelo/pace
 2. Click **Settings** tab
 3. Click **Secrets and variables** → **Actions** (left sidebar)
