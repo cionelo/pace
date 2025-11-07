@@ -1,0 +1,6974 @@
+{
+  "_source": {
+    "ab": "8000m",
+    "ccl": false,
+    "cna": "",
+    "ano": "",
+    "ec": "Individual",
+    "eo": "College",
+    "es": "r",
+    "fi": "s",
+    "g": "Male",
+    "gl": "Men",
+    "he": true,
+    "hh": false,
+    "hhs": false,
+    "hrh": false,
+    "hr": true,
+    "hp": true,
+    "hg": true,
+    "ts": true,
+    "htf": false,
+    "hfrv": false,
+    "hvs": false,
+    "hwr": false,
+    "hno": "",
+    "i": 2149045,
+    "ifi": true,
+    "xc": true,
+    "mi": 57259,
+    "mms": "HY-DB",
+    "na": "College",
+    "n": "Men 8000m College",
+    "nu": 1,
+    "enu": "1",
+    "sn": "Men 8000m College",
+    "peg": "Distance",
+    "pv": null,
+    "rru": null,
+    "rhn": [],
+    "rp": null,
+    "ru": null,
+    "rus": null,
+    "rul": null,
+    "runm": "Finals",
+    "rui": "1-1",
+    "sso": 2,
+    "sk": 8004,
+    "sr": null,
+    "un": "8000",
+    "sg": "Men",
+    "nh": 0,
+    "nrds": 1,
+    "ua": "2025-10-31T14:45:13Z",
+    "nmps": 0,
+    "hds": null,
+    "ifrr": false,
+    "frua": "2025-10-31T14:45:02Z",
+    "fruam": 1761921902000,
+    "hy": true,
+    "ry": [
+      "FR",
+      "JR",
+      "SO",
+      "SR"
+    ],
+    "mag": [],
+    "magt": null,
+    "dvt": [],
+    "dve": [],
+    "fsu": "https://s3.amazonaws.com/spikefalcon-images/57259/top-3-individual-results/facebook-shared-link-image/2149045.jpg",
+    "tsu": "https://s3.amazonaws.com/spikefalcon-images/57259/top-3-individual-results/twitter-in-stream-image/2149045.jpg",
+    "us": "http://xt.anet.live/7t6wr7",
+    "sd": "2025-10-31T14:15:00Z",
+    "mps": [],
+    "hsc": 0,
+    "d": "8000",
+    "me": "meter",
+    "mt": "8000",
+    "se": {
+      "ds": "2025-10-31",
+      "i": 97746,
+      "mi": 57259,
+      "n": "XC Running",
+      "nu": 1
+    },
+    "r": [
+      {
+        "hn": 0,
+        "i": 32545630,
+        "no": "",
+        "p": "1",
+        "hl": "1",
+        "ro": 0,
+        "s": null,
+        "im": 1444410,
+        "vm": 1,
+        "m": "24:04.41",
+        "pt": 1,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": null,
+        "iv": null,
+        "er": "23:46.60",
+        "pr": "23:46.60",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:51.7",
+            "cs": "2:51.7"
+          },
+          {
+            "sp": "2:55.4",
+            "cs": "5:47.1"
+          },
+          {
+            "sp": "3:06.3",
+            "cs": "8:53.4"
+          },
+          {
+            "sp": "2:56.1",
+            "cs": "11:49.5"
+          },
+          {
+            "sp": "2:58.8",
+            "cs": "14:48.3"
+          },
+          {
+            "sp": "2:56.9",
+            "cs": "17:45.2"
+          },
+          {
+            "sp": "3:09.0",
+            "cs": "20:54.2"
+          },
+          {
+            "sp": "3:10.3",
+            "cs": "24:04.5"
+          }
+        ],
+        "a": {
+          "i": 42889923,
+          "n": "Carlo Martinez-Jaramillo",
+          "fn": "Carlo",
+          "l": "Martinez-Jaramillo",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/SsybBEUkif1Ciy5GY95w7eFYfCd2krEdctfDirbFyeHb_nLBF5Pose-HnOPpeMimJBsRL6aS9vP97Znc_gC4c5OE9uy1YD8VhoE=s80-p",
+          "cco": "",
+          "cm": 143,
+          "ani": 29575798,
+          "rg": "CAR-MARD9DAE27",
+          "xc": 1,
+          "t": {
+            "i": 1379468,
+            "f": "Arkansas State",
+            "n": "Arkansas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+            "ani": 20620,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545647,
+        "no": "",
+        "p": "2",
+        "hl": "2",
+        "ro": 1,
+        "s": null,
+        "im": 1444620,
+        "vm": 1,
+        "m": "24:04.62",
+        "pt": 2,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+0.21",
+        "iv": "+0.21",
+        "er": "25:09.70",
+        "pr": "25:09.70",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:52.6",
+            "cs": "2:52.6"
+          },
+          {
+            "sp": "2:54.6",
+            "cs": "5:47.2"
+          },
+          {
+            "sp": "3:06.4",
+            "cs": "8:53.6"
+          },
+          {
+            "sp": "2:55.8",
+            "cs": "11:49.4"
+          },
+          {
+            "sp": "2:51.3",
+            "cs": "14:40.7"
+          },
+          {
+            "sp": "2:52.9",
+            "cs": "17:33.6"
+          },
+          {
+            "sp": "3:05.5",
+            "cs": "20:39.1"
+          },
+          {
+            "sp": "3:25.6",
+            "cs": "24:04.7"
+          }
+        ],
+        "a": {
+          "i": 42890088,
+          "n": "Kgaogelo Moloisi",
+          "fn": "Kgaogelo",
+          "l": "Moloisi",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/OOLOcjaMWBb1GXNCPOWoqrTxg-Xw_dDS2uL4EN_N5PqZUAC-z0_NhQbaupf9uKgv9faRFaQAvMqTBqfxDjjlWVn-CuqauFTh9Q=s80-p",
+          "cco": "",
+          "cm": 207,
+          "ani": 29665614,
+          "rg": "KGA-MOL4465D26",
+          "xc": 1,
+          "t": {
+            "i": 1379479,
+            "f": "ULM",
+            "n": "ULM",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/5828a4a7befde54356b85194c2ad8904-1714211834.png",
+            "ani": 21050,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545638,
+        "no": "",
+        "p": "3",
+        "hl": "3",
+        "ro": 2,
+        "s": null,
+        "im": 1445510,
+        "vm": 1,
+        "m": "24:05.51",
+        "pt": 3,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1.10",
+        "iv": "+0.89",
+        "er": "24:06.20",
+        "pr": "24:06.20",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:52.9",
+            "cs": "2:52.9"
+          },
+          {
+            "sp": "2:55.6",
+            "cs": "5:48.5"
+          },
+          {
+            "sp": "3:05.4",
+            "cs": "8:53.9"
+          },
+          {
+            "sp": "2:56.9",
+            "cs": "11:50.8"
+          },
+          {
+            "sp": "3:04.4",
+            "cs": "14:55.2"
+          },
+          {
+            "sp": "2:54.9",
+            "cs": "17:50.1"
+          },
+          {
+            "sp": "3:05.7",
+            "cs": "20:55.8"
+          },
+          {
+            "sp": "3:09.8",
+            "cs": "24:05.6"
+          }
+        ],
+        "a": {
+          "i": 42889983,
+          "n": "Henry Lyon",
+          "fn": "Henry",
+          "l": "Lyon",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/Y9UbhPFEf1N0d_mX5CWcIh94JjDag1AL3W6dfCb8iXdCPrlZAkurPiCMUb5JSYDLYXBL0cjFJg21Ncy6H_8yyb6DAq8KXr00ovo=s80-p",
+          "cco": "",
+          "cm": 160,
+          "ani": 29568917,
+          "rg": "HEN-LYO8187FF7",
+          "xc": 1,
+          "t": {
+            "i": 1379467,
+            "f": "Louisiana",
+            "n": "Louisiana",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+            "ani": 21049,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545602,
+        "no": "",
+        "p": "4",
+        "hl": "4",
+        "ro": 3,
+        "s": null,
+        "im": 1447410,
+        "vm": 1,
+        "m": "24:07.41",
+        "pt": 4,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+3.00",
+        "iv": "+1.90",
+        "er": "24:40.40",
+        "pr": "24:40.40",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:52.1",
+            "cs": "2:52.1"
+          },
+          {
+            "sp": "2:55.6",
+            "cs": "5:47.7"
+          },
+          {
+            "sp": "3:06.7",
+            "cs": "8:54.4"
+          },
+          {
+            "sp": "2:56.4",
+            "cs": "11:50.8"
+          },
+          {
+            "sp": "3:05.3",
+            "cs": "14:56.1"
+          },
+          {
+            "sp": "2:56.4",
+            "cs": "17:52.5"
+          },
+          {
+            "sp": "3:07.3",
+            "cs": "20:59.8"
+          },
+          {
+            "sp": "3:07.7",
+            "cs": "24:07.5"
+          }
+        ],
+        "a": {
+          "i": 42890024,
+          "n": "Henry Stark",
+          "fn": "Henry",
+          "l": "Stark",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/Z26ffRoiFDxmqP-pRAwt_cNIz0odOUEOO-l0m4WN-lqdAg_TwmaX39TOpmJDYZ8o7Rstxxj0McCwg-IKArXEHXB1hrUL4eRs9oA=s80-p",
+          "cco": "",
+          "cm": 135,
+          "ani": 26760647,
+          "rg": "HEN-STAE50963F",
+          "xc": 1,
+          "t": {
+            "i": 1379473,
+            "f": "App State",
+            "n": "App State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+            "ani": 20615,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545601,
+        "no": "",
+        "p": "5",
+        "hl": "5",
+        "ro": 4,
+        "s": null,
+        "im": 1449710,
+        "vm": 1,
+        "m": "24:09.71",
+        "pt": 5,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+5.30",
+        "iv": "+2.30",
+        "er": "24:54.60",
+        "pr": "24:54.60",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:51.2",
+            "cs": "2:51.2"
+          },
+          {
+            "sp": "2:55.8",
+            "cs": "5:47.0"
+          },
+          {
+            "sp": "3:07.0",
+            "cs": "8:54.0"
+          },
+          {
+            "sp": "2:55.7",
+            "cs": "11:49.7"
+          },
+          {
+            "sp": "3:05.3",
+            "cs": "14:55.0"
+          },
+          {
+            "sp": "2:56.5",
+            "cs": "17:51.5"
+          },
+          {
+            "sp": "3:05.3",
+            "cs": "20:56.8"
+          },
+          {
+            "sp": "3:13.0",
+            "cs": "24:09.8"
+          }
+        ],
+        "a": {
+          "i": 42890020,
+          "n": "Noah Martinson",
+          "fn": "Noah",
+          "l": "Martinson",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/tn-PMrWGBL9ue9fPl0zmSz2FNXLmgKZV8Myzq54mVUS6J7JRKEtcnGBgxWFwP59TEYbx_jEqZWsLDM5z6Vus6XJyBJdTqRGX63I=s80-p",
+          "cco": "",
+          "cm": 131,
+          "ani": 27131833,
+          "rg": "NOA-MAR59B0D30",
+          "xc": 1,
+          "t": {
+            "i": 1379473,
+            "f": "App State",
+            "n": "App State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+            "ani": 20615,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545635,
+        "no": "",
+        "p": "6",
+        "hl": "6",
+        "ro": 5,
+        "s": null,
+        "im": 1452820,
+        "vm": 1,
+        "m": "24:12.82",
+        "pt": 6,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+8.41",
+        "iv": "+3.11",
+        "er": "24:44.20",
+        "pr": "24:44.20",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:52.1",
+            "cs": "2:52.1"
+          },
+          {
+            "sp": "2:56.0",
+            "cs": "5:48.1"
+          },
+          {
+            "sp": "3:05.9",
+            "cs": "8:54.0"
+          },
+          {
+            "sp": "2:56.6",
+            "cs": "11:50.6"
+          },
+          {
+            "sp": "3:05.5",
+            "cs": "14:56.1"
+          },
+          {
+            "sp": "2:56.8",
+            "cs": "17:52.9"
+          },
+          {
+            "sp": "3:08.8",
+            "cs": "21:01.7"
+          },
+          {
+            "sp": "3:11.2",
+            "cs": "24:12.9"
+          }
+        ],
+        "a": {
+          "i": 42890023,
+          "n": "Tate Shore",
+          "fn": "Tate",
+          "l": "Shore",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/CUrYpehhdS_9yrkRD3hdEbZbYahZxOFAVDSSCmm7sdUHnEqF_egj864nzbXsEuwZnWpPTH2vPD9IbhRwmakbVvlGJwvvrElnWw=s80-p",
+          "cco": "",
+          "cm": 134,
+          "ani": 29552395,
+          "rg": "TAT-SHO9B1F4B9",
+          "xc": 1,
+          "t": {
+            "i": 1379473,
+            "f": "App State",
+            "n": "App State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+            "ani": 20615,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545619,
+        "no": "",
+        "p": "7",
+        "hl": "7",
+        "ro": 6,
+        "s": null,
+        "im": 1454730,
+        "vm": 1,
+        "m": "24:14.73",
+        "pt": 7,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+10.32",
+        "iv": "+1.91",
+        "er": "23:54.50",
+        "pr": "23:54.50",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:55.3",
+            "cs": "2:55.3"
+          },
+          {
+            "sp": "2:53.6",
+            "cs": "5:48.9"
+          },
+          {
+            "sp": "3:05.2",
+            "cs": "8:54.1"
+          },
+          {
+            "sp": "2:55.9",
+            "cs": "11:50.0"
+          },
+          {
+            "sp": "3:02.9",
+            "cs": "14:52.9"
+          },
+          {
+            "sp": "2:58.6",
+            "cs": "17:51.5"
+          },
+          {
+            "sp": "3:09.5",
+            "cs": "21:01.0"
+          },
+          {
+            "sp": "3:13.8",
+            "cs": "24:14.8"
+          }
+        ],
+        "a": {
+          "i": 42890044,
+          "n": "Henok Hagos",
+          "fn": "Henok",
+          "l": "Hagos",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/z7mtdHSyiDh1iOU2CiDeRk2GQD_auu9d3JPhrpdRJlzqxFqOCGyGUgBCRt08KVhgX-3oXhy3nk5QQAXvi_ZuG8HwR182BI2_iKY=s80-p",
+          "cco": "",
+          "cm": 184,
+          "ani": 26602313,
+          "rg": "HEN-HAGF0C08C2",
+          "xc": 1,
+          "t": {
+            "i": 1379476,
+            "f": "Texas State",
+            "n": "Texas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/texas-st.svg",
+            "ani": 21460,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545599,
+        "no": "",
+        "p": "8",
+        "hl": "8",
+        "ro": 7,
+        "s": null,
+        "im": 1456780,
+        "vm": 1,
+        "m": "24:16.78",
+        "pt": 8,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+12.37",
+        "iv": "+2.05",
+        "er": "24:12.50",
+        "pr": "24:12.50",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:51.4",
+            "cs": "2:51.4"
+          },
+          {
+            "sp": "2:55.3",
+            "cs": "5:46.7"
+          },
+          {
+            "sp": "3:06.6",
+            "cs": "8:53.3"
+          },
+          {
+            "sp": "2:56.7",
+            "cs": "11:50.0"
+          },
+          {
+            "sp": "3:05.3",
+            "cs": "14:55.3"
+          },
+          {
+            "sp": "2:57.6",
+            "cs": "17:52.9"
+          },
+          {
+            "sp": "3:08.6",
+            "cs": "21:01.5"
+          },
+          {
+            "sp": "3:15.3",
+            "cs": "24:16.8"
+          }
+        ],
+        "a": {
+          "i": 42890026,
+          "n": "Thomas Wlazlowski",
+          "fn": "Thomas",
+          "l": "Wlazlowski",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/X6Npv4_egty62myhRb5e17TuofeKsItZvMl4NBwOgStXYUhu7Rh_cxvLLFPEODZ0ORE2VUhJRRzKSPud-6x5P0rd9PHQ3UbGM_8W=s80-p",
+          "cco": "",
+          "cm": 137,
+          "ani": 29286984,
+          "rg": "THO-WLA00171E6",
+          "xc": 1,
+          "t": {
+            "i": 1379473,
+            "f": "App State",
+            "n": "App State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+            "ani": 20615,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545652,
+        "no": "",
+        "p": "9",
+        "hl": "9",
+        "ro": 8,
+        "s": null,
+        "im": 1460700,
+        "vm": 1,
+        "m": "24:20.70",
+        "pt": 9,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+16.29",
+        "iv": "+3.92",
+        "er": "24:27.60",
+        "pr": "23:43.60",
+        "mps": [],
+        "ern": "SB",
+        "irs": [
+          {
+            "sp": "2:52.4",
+            "cs": "2:52.4"
+          },
+          {
+            "sp": "2:55.0",
+            "cs": "5:47.4"
+          },
+          {
+            "sp": "3:06.3",
+            "cs": "8:53.7"
+          },
+          {
+            "sp": "2:56.9",
+            "cs": "11:50.6"
+          },
+          {
+            "sp": "3:04.9",
+            "cs": "14:55.5"
+          },
+          {
+            "sp": "2:58.1",
+            "cs": "17:53.6"
+          },
+          {
+            "sp": "3:10.6",
+            "cs": "21:04.2"
+          },
+          {
+            "sp": "3:16.5",
+            "cs": "24:20.7"
+          }
+        ],
+        "a": {
+          "i": 42890019,
+          "n": "Ethan Lipham",
+          "fn": "Ethan",
+          "l": "Lipham",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/kEqWC7Q7w5aDgDDDBaM4o3OzlluCRQzpHHkHLFRiz8H7cD4t71o8OtUtIUWhVb4rmmdBfAjJArL7LIqadv627Yk8rk0Wqqhf6mo=s80-p",
+          "cco": "",
+          "cm": 130,
+          "ani": 21294425,
+          "rg": "ETH-LIP0C2CCBF",
+          "xc": 1,
+          "t": {
+            "i": 1379473,
+            "f": "App State",
+            "n": "App State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+            "ani": 20615,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545584,
+        "no": "",
+        "p": "10",
+        "hl": "10",
+        "ro": 9,
+        "s": null,
+        "im": 1469880,
+        "vm": 1,
+        "m": "24:29.88",
+        "pt": 10,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+25.47",
+        "iv": "+9.18",
+        "er": "25:15.90",
+        "pr": "24:56.20",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:52.9",
+            "cs": "2:52.9"
+          },
+          {
+            "sp": "2:55.6",
+            "cs": "5:48.5"
+          },
+          {
+            "sp": "3:05.6",
+            "cs": "8:54.1"
+          },
+          {
+            "sp": "2:55.6",
+            "cs": "11:49.7"
+          },
+          {
+            "sp": "3:05.8",
+            "cs": "14:55.5"
+          },
+          {
+            "sp": "3:03.1",
+            "cs": "17:58.6"
+          },
+          {
+            "sp": "3:12.3",
+            "cs": "21:10.9"
+          },
+          {
+            "sp": "3:19.0",
+            "cs": "24:29.9"
+          }
+        ],
+        "a": {
+          "i": 42889973,
+          "n": "Xavier Johnson",
+          "fn": "Xavier",
+          "l": "Johnson",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/vxH8NWf8zyWUGGcOMvgfaZapvIKK1oEFG_k1U0aHAykSXnJsHKYVx9TxwNJRxOQbDJXCRjwup6EKFoKz_2Y_TvDWYGgY8N0yx5Tb=s80-p",
+          "cco": "",
+          "cm": 176,
+          "ani": 21401783,
+          "rg": "XAV-JOH9A09CDC",
+          "xc": 1,
+          "t": {
+            "i": 1379472,
+            "f": "South Alabama",
+            "n": "South Alabama",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/south-ala.svg",
+            "ani": 21360,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545609,
+        "no": "",
+        "p": "11",
+        "hl": "11",
+        "ro": 10,
+        "s": null,
+        "im": 1472590,
+        "vm": 1,
+        "m": "24:32.59",
+        "pt": 11,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+28.18",
+        "iv": "+2.71",
+        "er": "24:58.40",
+        "pr": "24:58.40",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:56.0",
+            "cs": "2:56.0"
+          },
+          {
+            "sp": "2:56.9",
+            "cs": "5:52.9"
+          },
+          {
+            "sp": "3:05.4",
+            "cs": "8:58.3"
+          },
+          {
+            "sp": "2:56.8",
+            "cs": "11:55.1"
+          },
+          {
+            "sp": "3:04.9",
+            "cs": "15:00.0"
+          },
+          {
+            "sp": "2:56.1",
+            "cs": "17:56.1"
+          },
+          {
+            "sp": "3:12.7",
+            "cs": "21:08.8"
+          },
+          {
+            "sp": "3:23.8",
+            "cs": "24:32.6"
+          }
+        ],
+        "a": {
+          "i": 42889947,
+          "n": "Justin Lipscomb",
+          "fn": "Justin",
+          "l": "Lipscomb",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/817AJOhHjHTbFN19JHYk-AyK_IrXm0lvTUQpmZphaXiR85T_aeXkBO_TegYkpTW4IVDIDohbeokT7fvKrKOxpl3qviK18hahEg=s80-p",
+          "cco": "",
+          "cm": 169,
+          "ani": 26368782,
+          "rg": "JUS-LIP7EF859E",
+          "xc": 1,
+          "t": {
+            "i": 1379471,
+            "f": "Marshall",
+            "n": "Marshall",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/marshall.svg",
+            "ani": 21074,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545600,
+        "no": "",
+        "p": "12",
+        "hl": "12",
+        "ro": 11,
+        "s": null,
+        "im": 1478600,
+        "vm": 1,
+        "m": "24:38.60",
+        "pt": 12,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+34.19",
+        "iv": "+6.01",
+        "er": "24:38.00",
+        "pr": "24:38.00",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:52.0",
+            "cs": "2:52.0"
+          },
+          {
+            "sp": "2:55.5",
+            "cs": "5:47.5"
+          },
+          {
+            "sp": "3:07.0",
+            "cs": "8:54.5"
+          },
+          {
+            "sp": "2:56.7",
+            "cs": "11:51.2"
+          },
+          {
+            "sp": "3:10.2",
+            "cs": "15:01.4"
+          },
+          {
+            "sp": "3:05.6",
+            "cs": "18:07.0"
+          },
+          {
+            "sp": "3:17.6",
+            "cs": "21:24.6"
+          },
+          {
+            "sp": "3:14.0",
+            "cs": "24:38.6"
+          }
+        ],
+        "a": {
+          "i": 42890022,
+          "n": "Memphis Rich",
+          "fn": "Memphis",
+          "l": "Rich",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/m2lVcsJYBNoZsZ7_K32xHd3qjOob1fm2cqRZXbQgY3kKGnHB3fimQ0ySojgsQCZiHdNlRi-M-I0RiypPPxDB7UPn8wcW1HH7YKNf=s80-p",
+          "cco": "",
+          "cm": 133,
+          "ani": 26911430,
+          "rg": "MEM-RIC88B9BF9",
+          "xc": 1,
+          "t": {
+            "i": 1379473,
+            "f": "App State",
+            "n": "App State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+            "ani": 20615,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545625,
+        "no": "",
+        "p": "13",
+        "hl": "13",
+        "ro": 12,
+        "s": null,
+        "im": 1481400,
+        "vm": 1,
+        "m": "24:41.40",
+        "pt": 13,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+36.99",
+        "iv": "+2.80",
+        "er": "24:32.20",
+        "pr": "24:32.20",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:52.5",
+            "cs": "2:52.5"
+          },
+          {
+            "sp": "2:55.6",
+            "cs": "5:48.1"
+          },
+          {
+            "sp": "3:06.3",
+            "cs": "8:54.4"
+          },
+          {
+            "sp": "2:57.2",
+            "cs": "11:51.6"
+          },
+          {
+            "sp": "3:10.4",
+            "cs": "15:02.0"
+          },
+          {
+            "sp": "3:02.8",
+            "cs": "18:04.8"
+          },
+          {
+            "sp": "3:15.5",
+            "cs": "21:20.3"
+          },
+          {
+            "sp": "3:21.1",
+            "cs": "24:41.4"
+          }
+        ],
+        "a": {
+          "i": 42889921,
+          "n": "Noah Herrera",
+          "fn": "Noah",
+          "l": "Herrera",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/vzw9UOwmJroOkfTtrVeZwOFWd8zXeKDva12dfg96fns0xR30hsARB_oqyzShmH1WNpGwxvNxYlUzo8RpKaM3vp7az3w4ZCZjRw=s80-p",
+          "cco": "",
+          "cm": 141,
+          "ani": 29575802,
+          "rg": "NOA-HER8B22673",
+          "xc": 1,
+          "t": {
+            "i": 1379468,
+            "f": "Arkansas State",
+            "n": "Arkansas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+            "ani": 20620,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545626,
+        "no": "",
+        "p": "14",
+        "hl": "14",
+        "ro": 13,
+        "s": null,
+        "im": 1484875,
+        "vm": 1,
+        "m": "24:44.88",
+        "pt": 14,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+40.47",
+        "iv": "+3.48",
+        "er": "24:20.60",
+        "pr": "24:20.60",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:52.9",
+            "cs": "2:52.9"
+          },
+          {
+            "sp": "2:56.9",
+            "cs": "5:49.8"
+          },
+          {
+            "sp": "3:06.3",
+            "cs": "8:56.1"
+          },
+          {
+            "sp": "2:56.7",
+            "cs": "11:52.8"
+          },
+          {
+            "sp": "3:10.7",
+            "cs": "15:03.5"
+          },
+          {
+            "sp": "3:04.8",
+            "cs": "18:08.3"
+          },
+          {
+            "sp": "3:14.4",
+            "cs": "21:22.7"
+          },
+          {
+            "sp": "3:22.2",
+            "cs": "24:44.9"
+          }
+        ],
+        "a": {
+          "i": 42889919,
+          "n": "Joe Edwards",
+          "fn": "Joe",
+          "l": "Edwards",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/DvFjf_9dQUng6JR3htLHCRRXjuodVdHQYvu4ySdua3f3ot97S6gwr09EMx5DlsIyDKMSrtxpjdJKTkVP4bnwKxZm6mhH6iZA5w=s80-p",
+          "cco": "",
+          "cm": 139,
+          "ani": 29575801,
+          "rg": "JOE-EDW917698C",
+          "xc": 1,
+          "t": {
+            "i": 1379468,
+            "f": "Arkansas State",
+            "n": "Arkansas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+            "ani": 20620,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545586,
+        "no": "",
+        "p": "15",
+        "hl": "15",
+        "ro": 14,
+        "s": null,
+        "im": 1488660,
+        "vm": 1,
+        "m": "24:48.66",
+        "pt": 15,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+44.25",
+        "iv": "+3.79",
+        "er": "25:06.00",
+        "pr": "25:06.00",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:53.3",
+            "cs": "2:53.3"
+          },
+          {
+            "sp": "2:56.3",
+            "cs": "5:49.6"
+          },
+          {
+            "sp": "3:07.6",
+            "cs": "8:57.2"
+          },
+          {
+            "sp": "2:58.8",
+            "cs": "11:56.0"
+          },
+          {
+            "sp": "3:12.9",
+            "cs": "15:08.9"
+          },
+          {
+            "sp": "3:04.2",
+            "cs": "18:13.1"
+          },
+          {
+            "sp": "3:15.4",
+            "cs": "21:28.5"
+          },
+          {
+            "sp": "3:20.2",
+            "cs": "24:48.7"
+          }
+        ],
+        "a": {
+          "i": 42889943,
+          "n": "Brady Dawkins",
+          "fn": "Brady",
+          "l": "Dawkins",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/KIHx_URLXItn32RbKHiWiIeDpVaRATByNRTx0rYggzcEdRydLfMTvuc9MyiiquAtLEmP2uD1fHbAPwdzpZveiwCRFetWMZ1Niw=s80-p",
+          "cco": "",
+          "cm": 165,
+          "ani": 23916397,
+          "rg": "BRA-DAW5198D19",
+          "xc": 1,
+          "t": {
+            "i": 1379471,
+            "f": "Marshall",
+            "n": "Marshall",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/marshall.svg",
+            "ani": 21074,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545617,
+        "no": "",
+        "p": "16",
+        "hl": "16",
+        "ro": 15,
+        "s": null,
+        "im": 1491600,
+        "vm": 1,
+        "m": "24:51.60",
+        "pt": 16,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+47.19",
+        "iv": "+2.94",
+        "er": "24:49.20",
+        "pr": "24:28.30",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:54.3",
+            "cs": "2:54.3"
+          },
+          {
+            "sp": "2:55.2",
+            "cs": "5:49.5"
+          },
+          {
+            "sp": "3:05.3",
+            "cs": "8:54.8"
+          },
+          {
+            "sp": "2:59.9",
+            "cs": "11:54.7"
+          },
+          {
+            "sp": "3:13.5",
+            "cs": "15:08.2"
+          },
+          {
+            "sp": "3:05.8",
+            "cs": "18:14.0"
+          },
+          {
+            "sp": "3:16.0",
+            "cs": "21:30.0"
+          },
+          {
+            "sp": "3:21.6",
+            "cs": "24:51.6"
+          }
+        ],
+        "a": {
+          "i": 42890048,
+          "n": "Anthony Parra",
+          "fn": "Anthony",
+          "l": "Parra",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/ej5m5O0AkyN3TldP8rXBRnIg1-Ba2kP_s8xJBZD1JfYdkySP7qqHEew9JtnfGgk_lNjlZ7ZXBeopfktZ4SX5SIYGaKU4Pbt1QuA=s80-p",
+          "cco": "",
+          "cm": 188,
+          "ani": 26602309,
+          "rg": "ANT-PAR1CB8AF8",
+          "xc": 1,
+          "t": {
+            "i": 1379476,
+            "f": "Texas State",
+            "n": "Texas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/texas-st.svg",
+            "ani": 21460,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545603,
+        "no": "",
+        "p": "17",
+        "hl": "17",
+        "ro": 16,
+        "s": null,
+        "im": 1493990,
+        "vm": 1,
+        "m": "24:53.99",
+        "pt": 17,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+49.58",
+        "iv": "+2.39",
+        "er": "24:25.20",
+        "pr": "24:25.20",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:52.4",
+            "cs": "2:52.4"
+          },
+          {
+            "sp": "2:55.4",
+            "cs": "5:47.8"
+          },
+          {
+            "sp": "3:06.7",
+            "cs": "8:54.5"
+          },
+          {
+            "sp": "2:55.8",
+            "cs": "11:50.3"
+          },
+          {
+            "sp": "3:08.5",
+            "cs": "14:58.8"
+          },
+          {
+            "sp": "3:05.8",
+            "cs": "18:04.6"
+          },
+          {
+            "sp": "3:21.3",
+            "cs": "21:25.9"
+          },
+          {
+            "sp": "3:28.1",
+            "cs": "24:54.0"
+          }
+        ],
+        "a": {
+          "i": 42890018,
+          "n": "Aaron Kidd",
+          "fn": "Aaron",
+          "l": "Kidd",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/SjC3rEDzmqLd6i_wEMWKuRugjqdOpU_kxUmsGJfaDvwjvvfs_Yn5PVdhPVs7nZIa1LtYGX58mVvtIS_WyCtFmmtsX7U8z3R-Uwc=s80-p",
+          "cco": "",
+          "cm": 129,
+          "ani": 26497969,
+          "rg": "AAR-KIDBFDB7E6",
+          "xc": 1,
+          "t": {
+            "i": 1379473,
+            "f": "App State",
+            "n": "App State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+            "ani": 20615,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545649,
+        "no": "",
+        "p": "18",
+        "hl": "18",
+        "ro": 17,
+        "s": null,
+        "im": 1494540,
+        "vm": 1,
+        "m": "24:54.54",
+        "pt": 0,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+50.13",
+        "iv": "+0.55",
+        "er": "24:27.50",
+        "pr": "23:53.00",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:52.9",
+            "cs": "2:52.9"
+          },
+          {
+            "sp": "2:55.3",
+            "cs": "5:48.2"
+          },
+          {
+            "sp": "3:05.8",
+            "cs": "8:54.0"
+          },
+          {
+            "sp": "2:57.1",
+            "cs": "11:51.1"
+          },
+          {
+            "sp": "3:17.3",
+            "cs": "15:08.4"
+          },
+          {
+            "sp": "3:09.4",
+            "cs": "18:17.8"
+          },
+          {
+            "sp": "3:17.3",
+            "cs": "21:35.1"
+          },
+          {
+            "sp": "3:19.5",
+            "cs": "24:54.6"
+          }
+        ],
+        "a": {
+          "i": 42890017,
+          "n": "Chase Burrell",
+          "fn": "Chase",
+          "l": "Burrell",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/3XpAhai6gTNSu5AM6JMzJkZg3DilmfscVkQqBKUvaZavHvkU6ORy4xo0HtkgAGHBmB33vRtEgTiboFx0e1_S7yNvOZlA9EyqIQ=s80-p",
+          "cco": "",
+          "cm": 128,
+          "ani": 19195907,
+          "rg": "CHA-BURE818831",
+          "xc": 1,
+          "t": {
+            "i": 1379473,
+            "f": "App State",
+            "n": "App State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/appalachian-st.svg",
+            "ani": 20615,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545645,
+        "no": "",
+        "p": "19",
+        "hl": "19",
+        "ro": 18,
+        "s": null,
+        "im": 1498640,
+        "vm": 1,
+        "m": "24:58.64",
+        "pt": 18,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+54.23",
+        "iv": "+4.10",
+        "er": "25:53.00",
+        "pr": "25:53.00",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:55.6",
+            "cs": "2:55.6"
+          },
+          {
+            "sp": "2:58.8",
+            "cs": "5:54.4"
+          },
+          {
+            "sp": "3:12.3",
+            "cs": "9:06.7"
+          },
+          {
+            "sp": "3:00.4",
+            "cs": "12:07.1"
+          },
+          {
+            "sp": "3:14.2",
+            "cs": "15:21.3"
+          },
+          {
+            "sp": "3:03.7",
+            "cs": "18:25.0"
+          },
+          {
+            "sp": "3:16.8",
+            "cs": "21:41.8"
+          },
+          {
+            "sp": "3:16.9",
+            "cs": "24:58.7"
+          }
+        ],
+        "a": {
+          "i": 42890085,
+          "n": "Joshua Gill",
+          "fn": "Joshua",
+          "l": "Gill",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/GgUiIzcQUvTqg3r2mI4w8NOtfB0xlRBWeKUYIqX3rD6qpvEJ6m-suSrR6sCqJGcVuPOBpnJx229ZLmM6w9QhazqM3KE9Kzwqu7w=s80-p",
+          "cco": "",
+          "cm": 204,
+          "ani": 29665572,
+          "rg": "JOS-GIL9CFD6E3",
+          "xc": 1,
+          "t": {
+            "i": 1379479,
+            "f": "ULM",
+            "n": "ULM",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/5828a4a7befde54356b85194c2ad8904-1714211834.png",
+            "ani": 21050,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545615,
+        "no": "",
+        "p": "20",
+        "hl": "20",
+        "ro": 19,
+        "s": null,
+        "im": 1499490,
+        "vm": 1,
+        "m": "24:59.49",
+        "pt": 19,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+55.08",
+        "iv": "+0.85",
+        "er": "25:06.70",
+        "pr": "25:06.70",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:02.8",
+            "cs": "3:02.8"
+          },
+          {
+            "sp": "2:59.3",
+            "cs": "6:02.1"
+          },
+          {
+            "sp": "3:11.8",
+            "cs": "9:13.9"
+          },
+          {
+            "sp": "3:02.8",
+            "cs": "12:16.7"
+          },
+          {
+            "sp": "3:12.1",
+            "cs": "15:28.8"
+          },
+          {
+            "sp": "3:01.3",
+            "cs": "18:30.1"
+          },
+          {
+            "sp": "3:12.9",
+            "cs": "21:43.0"
+          },
+          {
+            "sp": "3:16.5",
+            "cs": "24:59.5"
+          }
+        ],
+        "a": {
+          "i": 42889984,
+          "n": "Matthew Maynard",
+          "fn": "Matthew",
+          "l": "Maynard",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/JEt46hCAc3-k-pEq-QIwbakfBOQuOVkQFfVNpysl0QboWPY5vbFmtn3dUV7rfcLAfvgGZ1L6imTt8H1QFoWS_lzVetgcXVkduXhH=s80-p",
+          "cco": "",
+          "cm": 161,
+          "ani": 26585595,
+          "rg": "MAT-MAY32F066A",
+          "xc": 1,
+          "t": {
+            "i": 1379467,
+            "f": "Louisiana",
+            "n": "Louisiana",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+            "ani": 21049,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545651,
+        "no": "",
+        "p": "21",
+        "hl": "21",
+        "ro": 20,
+        "s": null,
+        "im": 1504101,
+        "vm": 1,
+        "m": "25:04.11",
+        "pt": 20,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+59.70",
+        "iv": "+4.62",
+        "er": "26:53.00",
+        "pr": "25:38.50",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:57.8",
+            "cs": "2:57.8"
+          },
+          {
+            "sp": "2:58.6",
+            "cs": "5:56.4"
+          },
+          {
+            "sp": "3:14.0",
+            "cs": "9:10.4"
+          },
+          {
+            "sp": "3:06.3",
+            "cs": "12:16.7"
+          },
+          {
+            "sp": "3:16.2",
+            "cs": "15:32.9"
+          },
+          {
+            "sp": "3:07.9",
+            "cs": "18:40.8"
+          },
+          {
+            "sp": "3:16.2",
+            "cs": "21:57.0"
+          },
+          {
+            "sp": "3:07.2",
+            "cs": "25:04.2"
+          }
+        ],
+        "a": {
+          "i": 42890082,
+          "n": "Juwan Blignaut",
+          "fn": "Juwan",
+          "l": "Blignaut",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/psN3K5MW5r1MpTVYvWo3vBK54-6Ufk6uy3fib_SCvfZJHaP36oJ6GE36MNHvt_eEBuHNv9fMiXSyhmFY4a7Yy54-69iUzSND9Ng=s80-p",
+          "cco": "",
+          "cm": 201,
+          "ani": 19393871,
+          "rg": "JUW-BLI7D44D43",
+          "xc": 1,
+          "t": {
+            "i": 1379479,
+            "f": "ULM",
+            "n": "ULM",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/5828a4a7befde54356b85194c2ad8904-1714211834.png",
+            "ani": 21050,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545613,
+        "no": "",
+        "p": "22",
+        "hl": "22",
+        "ro": 21,
+        "s": null,
+        "im": 1505690,
+        "vm": 1,
+        "m": "25:05.69",
+        "pt": 21,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:01.28",
+        "iv": "+1.59",
+        "er": "25:44.00",
+        "pr": "25:44.00",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:03.8",
+            "cs": "3:03.8"
+          },
+          {
+            "sp": "3:00.1",
+            "cs": "6:03.9"
+          },
+          {
+            "sp": "3:11.5",
+            "cs": "9:15.4"
+          },
+          {
+            "sp": "3:03.4",
+            "cs": "12:18.8"
+          },
+          {
+            "sp": "3:14.1",
+            "cs": "15:32.9"
+          },
+          {
+            "sp": "3:06.8",
+            "cs": "18:39.7"
+          },
+          {
+            "sp": "3:13.8",
+            "cs": "21:53.5"
+          },
+          {
+            "sp": "3:12.2",
+            "cs": "25:05.7"
+          }
+        ],
+        "a": {
+          "i": 42890008,
+          "n": "Lane Watson",
+          "fn": "Lane",
+          "l": "Watson",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/UjRKrTdvbta43z3VT2twzbF0qt4xb7eQrii9Pu_TeXNMBrSFN6mgAha6EPUIC2PfJPx76Ig3My5V2wiQbQSDJWu8Pn3_rL15bQ=s80-p",
+          "cco": "",
+          "cm": 200,
+          "ani": 26491036,
+          "rg": "LAN-WAT5914011",
+          "xc": 1,
+          "t": {
+            "i": 1379474,
+            "f": "Troy",
+            "n": "Troy",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/troy.svg",
+            "ani": 21478,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545629,
+        "no": "",
+        "p": "23",
+        "hl": "23",
+        "ro": 22,
+        "s": null,
+        "im": 1508440,
+        "vm": 1,
+        "m": "25:08.44",
+        "pt": 22,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:04.03",
+        "iv": "+2.75",
+        "er": "24:34.70",
+        "pr": "24:34.70",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:51.8",
+            "cs": "2:51.8"
+          },
+          {
+            "sp": "2:56.3",
+            "cs": "5:48.1"
+          },
+          {
+            "sp": "3:06.7",
+            "cs": "8:54.8"
+          },
+          {
+            "sp": "2:59.1",
+            "cs": "11:53.9"
+          },
+          {
+            "sp": "3:16.1",
+            "cs": "15:10.0"
+          },
+          {
+            "sp": "3:08.8",
+            "cs": "18:18.8"
+          },
+          {
+            "sp": "3:20.6",
+            "cs": "21:39.4"
+          },
+          {
+            "sp": "3:29.1",
+            "cs": "25:08.5"
+          }
+        ],
+        "a": {
+          "i": 42889925,
+          "n": "Parker Noffz",
+          "fn": "Parker",
+          "l": "Noffz",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/hxuVa6q4OxKLFC0MyqUsc-b4kntcKLmCaaho1kmQMDnHoHRxA9RWhcjh5c6_g4Finz_PkGlK_eE5BCgk2c4q1l1KDJdMsr-C-PI=s80-p",
+          "cco": "",
+          "cm": 145,
+          "ani": 29575804,
+          "rg": "PAR-NOFEEECC6B",
+          "xc": 1,
+          "t": {
+            "i": 1379468,
+            "f": "Arkansas State",
+            "n": "Arkansas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+            "ani": 20620,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545624,
+        "no": "",
+        "p": "24",
+        "hl": "24",
+        "ro": 23,
+        "s": null,
+        "im": 1508650,
+        "vm": 1,
+        "m": "25:08.65",
+        "pt": 23,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:04.24",
+        "iv": "+0.21",
+        "er": "24:39.40",
+        "pr": "24:39.40",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:54.6",
+            "cs": "2:54.6"
+          },
+          {
+            "sp": "2:59.8",
+            "cs": "5:54.4"
+          },
+          {
+            "sp": "3:15.1",
+            "cs": "9:09.5"
+          },
+          {
+            "sp": "3:06.6",
+            "cs": "12:16.1"
+          },
+          {
+            "sp": "3:14.5",
+            "cs": "15:30.6"
+          },
+          {
+            "sp": "3:08.7",
+            "cs": "18:39.3"
+          },
+          {
+            "sp": "3:10.4",
+            "cs": "21:49.7"
+          },
+          {
+            "sp": "3:19.0",
+            "cs": "25:08.7"
+          }
+        ],
+        "a": {
+          "i": 42890073,
+          "n": "Braxton Theel",
+          "fn": "Braxton",
+          "l": "Theel",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/3sPGcDqY7w_sFdGxhEeZIaPD8kXKCJs7GNOLJFhkemmCDt3uHMMc33CrOuOAcuE03Odpv6wDQZgRSOuKjAwGhZKtP9MKlM1_1bY=s80-p",
+          "cco": "",
+          "cm": 153,
+          "ani": 29560294,
+          "rg": "BRA-THE265C65B",
+          "xc": 1,
+          "t": {
+            "i": 1379478,
+            "f": "Coastal Carolina",
+            "n": "Coastal Carolina",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/coastal-caro.svg",
+            "ani": 20755,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545633,
+        "no": "",
+        "p": "25",
+        "hl": "25",
+        "ro": 24,
+        "s": null,
+        "im": 1511050,
+        "vm": 1,
+        "m": "25:11.05",
+        "pt": 24,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:06.64",
+        "iv": "+2.40",
+        "er": "25:33.90",
+        "pr": "25:33.90",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:53.4",
+            "cs": "2:53.4"
+          },
+          {
+            "sp": "2:56.8",
+            "cs": "5:50.2"
+          },
+          {
+            "sp": "3:10.1",
+            "cs": "9:00.3"
+          },
+          {
+            "sp": "3:04.4",
+            "cs": "12:04.7"
+          },
+          {
+            "sp": "3:17.3",
+            "cs": "15:22.0"
+          },
+          {
+            "sp": "3:07.5",
+            "cs": "18:29.5"
+          },
+          {
+            "sp": "3:21.2",
+            "cs": "21:50.7"
+          },
+          {
+            "sp": "3:20.4",
+            "cs": "25:11.1"
+          }
+        ],
+        "a": {
+          "i": 42889949,
+          "n": "Maxton Sowers",
+          "fn": "Maxton",
+          "l": "Sowers",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/4pwT060CvmglweMwTgp-vRmFLZ8lyfPGCISecRcTncByIY6Xsk6UwlCFCoab_Rvw-xwHQUKxpm5IcChh5Pu4kvTAK2vaTENymUzp=s80-p",
+          "cco": "",
+          "cm": 171,
+          "ani": 29523499,
+          "rg": "MAX-SOWEDC1AF3",
+          "xc": 1,
+          "t": {
+            "i": 1379471,
+            "f": "Marshall",
+            "n": "Marshall",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/marshall.svg",
+            "ani": 21074,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545595,
+        "no": "",
+        "p": "26",
+        "hl": "26",
+        "ro": 25,
+        "s": null,
+        "im": 1512830,
+        "vm": 1,
+        "m": "25:12.83",
+        "pt": 25,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:08.42",
+        "iv": "+1.78",
+        "er": "25:04.30",
+        "pr": "25:02.60",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "3:02.2",
+            "cs": "3:02.2"
+          },
+          {
+            "sp": "3:01.5",
+            "cs": "6:03.7"
+          },
+          {
+            "sp": "3:12.8",
+            "cs": "9:16.5"
+          },
+          {
+            "sp": "3:01.3",
+            "cs": "12:17.8"
+          },
+          {
+            "sp": "3:12.2",
+            "cs": "15:30.0"
+          },
+          {
+            "sp": "3:05.3",
+            "cs": "18:35.3"
+          },
+          {
+            "sp": "3:16.4",
+            "cs": "21:51.7"
+          },
+          {
+            "sp": "3:21.2",
+            "cs": "25:12.9"
+          }
+        ],
+        "a": {
+          "i": 42890049,
+          "n": "Anthony Sandavol",
+          "fn": "Anthony",
+          "l": "Sandavol",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/sr2-jFy-shcsHCPbz9XuKE0oyohl-05QnaaaT4SLZgKrIs3DtEvaStyuDa2tdXqeJ6V1nMgZiEBQzGe9JbVtO0HF7LxUyiVbEs-n=s80-p",
+          "cco": "",
+          "cm": 189,
+          "ani": 23840598,
+          "rg": "ANT-SAN8269596",
+          "xc": 1,
+          "t": {
+            "i": 1379476,
+            "f": "Texas State",
+            "n": "Texas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/texas-st.svg",
+            "ani": 21460,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545596,
+        "no": "",
+        "p": "27",
+        "hl": "27",
+        "ro": 26,
+        "s": null,
+        "im": 1514940,
+        "vm": 1,
+        "m": "25:14.94",
+        "pt": 26,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:10.53",
+        "iv": "+2.11",
+        "er": "24:43.20",
+        "pr": "24:43.20",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:51.8",
+            "cs": "2:51.8"
+          },
+          {
+            "sp": "2:57.4",
+            "cs": "5:49.2"
+          },
+          {
+            "sp": "3:07.8",
+            "cs": "8:57.0"
+          },
+          {
+            "sp": "3:05.4",
+            "cs": "12:02.4"
+          },
+          {
+            "sp": "3:21.0",
+            "cs": "15:23.4"
+          },
+          {
+            "sp": "3:12.9",
+            "cs": "18:36.3"
+          },
+          {
+            "sp": "3:22.9",
+            "cs": "21:59.2"
+          },
+          {
+            "sp": "3:15.8",
+            "cs": "25:15.0"
+          }
+        ],
+        "a": {
+          "i": 42890043,
+          "n": "Jack Deelman",
+          "fn": "Jack",
+          "l": "Deelman",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/weNsLvzynF0LTcECa95nBvho9enjvD8JDVjWzkv2eopgBrs6rFboL1igTdkWpbFCc9HiyxpZA2UOeZB5S0OZBbBsQKRtDA7o5w=s80-p",
+          "cco": "",
+          "cm": 183,
+          "ani": 23840601,
+          "rg": "JAC-DEE746AFCC",
+          "xc": 1,
+          "t": {
+            "i": 1379476,
+            "f": "Texas State",
+            "n": "Texas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/texas-st.svg",
+            "ani": 21460,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545593,
+        "no": "",
+        "p": "28",
+        "hl": "28",
+        "ro": 27,
+        "s": null,
+        "im": 1515550,
+        "vm": 1,
+        "m": "25:15.55",
+        "pt": 27,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:11.14",
+        "iv": "+0.61",
+        "er": "26:11.30",
+        "pr": "25:33.90",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:03.5",
+            "cs": "3:03.5"
+          },
+          {
+            "sp": "3:02.1",
+            "cs": "6:05.6"
+          },
+          {
+            "sp": "3:13.4",
+            "cs": "9:19.0"
+          },
+          {
+            "sp": "3:00.5",
+            "cs": "12:19.5"
+          },
+          {
+            "sp": "3:13.9",
+            "cs": "15:33.4"
+          },
+          {
+            "sp": "3:06.4",
+            "cs": "18:39.8"
+          },
+          {
+            "sp": "3:16.3",
+            "cs": "21:56.1"
+          },
+          {
+            "sp": "3:19.5",
+            "cs": "25:15.6"
+          }
+        ],
+        "a": {
+          "i": 42890007,
+          "n": "Keith Warner",
+          "fn": "Keith",
+          "l": "Warner",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/tt3YTXQxDy4g_6xOQ6YTf66xT23Zd9hr_oX3zspZogW7spUx3ADaKAqHtmY-0IXhbcFt0j7dFheLtPHutu1JfgSsZja4kulqINBO=s80-p",
+          "cco": "",
+          "cm": 199,
+          "ani": 23912298,
+          "rg": "KEI-WAR22B64CD",
+          "xc": 1,
+          "t": {
+            "i": 1379474,
+            "f": "Troy",
+            "n": "Troy",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/troy.svg",
+            "ani": 21478,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545620,
+        "no": "",
+        "p": "29",
+        "hl": "29",
+        "ro": 28,
+        "s": null,
+        "im": 1517040,
+        "vm": 1,
+        "m": "25:17.04",
+        "pt": 28,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:12.63",
+        "iv": "+1.49",
+        "er": "24:25.30",
+        "pr": "24:25.30",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:54.5",
+            "cs": "2:54.5"
+          },
+          {
+            "sp": "2:55.6",
+            "cs": "5:50.1"
+          },
+          {
+            "sp": "3:09.4",
+            "cs": "8:59.5"
+          },
+          {
+            "sp": "3:06.3",
+            "cs": "12:05.8"
+          },
+          {
+            "sp": "3:19.2",
+            "cs": "15:25.0"
+          },
+          {
+            "sp": "3:13.2",
+            "cs": "18:38.2"
+          },
+          {
+            "sp": "3:19.8",
+            "cs": "21:58.0"
+          },
+          {
+            "sp": "3:19.1",
+            "cs": "25:17.1"
+          }
+        ],
+        "a": {
+          "i": 42890067,
+          "n": "Jacob Barraza",
+          "fn": "Jacob",
+          "l": "Barraza",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/-4YpOEiCatsoj2hnijxDIleVG1aDG74R-RnBNAB4vm9MkMdBGKXx7g82DViMv3xg9c0jmKzMz1iddRoo0oB-4WOGehBsZUsoYQII=s80-p",
+          "cco": "",
+          "cm": 147,
+          "ani": 29560342,
+          "rg": "JAC-BAR65E9381",
+          "xc": 1,
+          "t": {
+            "i": 1379478,
+            "f": "Coastal Carolina",
+            "n": "Coastal Carolina",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/coastal-caro.svg",
+            "ani": 20755,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545642,
+        "no": "",
+        "p": "30",
+        "hl": "30",
+        "ro": 29,
+        "s": null,
+        "im": 1517190,
+        "vm": 1,
+        "m": "25:17.19",
+        "pt": 29,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:12.78",
+        "iv": "+0.15",
+        "er": "25:18.80",
+        "pr": "25:18.80",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:53.6",
+            "cs": "2:53.6"
+          },
+          {
+            "sp": "2:56.8",
+            "cs": "5:50.4"
+          },
+          {
+            "sp": "3:12.1",
+            "cs": "9:02.5"
+          },
+          {
+            "sp": "3:05.8",
+            "cs": "12:08.3"
+          },
+          {
+            "sp": "3:18.1",
+            "cs": "15:26.4"
+          },
+          {
+            "sp": "3:12.4",
+            "cs": "18:38.8"
+          },
+          {
+            "sp": "3:17.5",
+            "cs": "21:56.3"
+          },
+          {
+            "sp": "3:20.9",
+            "cs": "25:17.2"
+          }
+        ],
+        "a": {
+          "i": 42889974,
+          "n": "Brady Keller",
+          "fn": "Brady",
+          "l": "Keller",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/6FULvHM_5V-5S-j1c1IQACr8vJKPghNlR24y67FCdm3-NzR3HRtl_2PkdUFhj7ljf2Oyatkyz5KzhFA7Fic2IXDoQ9NaW92ck0U=s80-p",
+          "cco": "",
+          "cm": 177,
+          "ani": 29568944,
+          "rg": "BRA-KEL8CA40F1",
+          "xc": 1,
+          "t": {
+            "i": 1379472,
+            "f": "South Alabama",
+            "n": "South Alabama",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/south-ala.svg",
+            "ani": 21360,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545610,
+        "no": "",
+        "p": "31",
+        "hl": "31",
+        "ro": 30,
+        "s": null,
+        "im": 1517610,
+        "vm": 1,
+        "m": "25:17.61",
+        "pt": 30,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:13.20",
+        "iv": "+0.42",
+        "er": "26:31.20",
+        "pr": "25:17.70",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:01.6",
+            "cs": "3:01.6"
+          },
+          {
+            "sp": "3:02.8",
+            "cs": "6:04.4"
+          },
+          {
+            "sp": "3:14.0",
+            "cs": "9:18.4"
+          },
+          {
+            "sp": "3:03.9",
+            "cs": "12:22.3"
+          },
+          {
+            "sp": "3:14.7",
+            "cs": "15:37.0"
+          },
+          {
+            "sp": "3:05.9",
+            "cs": "18:42.9"
+          },
+          {
+            "sp": "3:16.6",
+            "cs": "21:59.5"
+          },
+          {
+            "sp": "3:18.2",
+            "cs": "25:17.7"
+          }
+        ],
+        "a": {
+          "i": 42889969,
+          "n": "Carson Barlow",
+          "fn": "Carson",
+          "l": "Barlow",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/UqV6zQrKvQRC-6xoNRPlyi8vxaTAdd1bu78gj88DqtvImm8Vypj19bfABjiIRaE8ay7PQGTXZyWJh2ihtCD3qg0AKkMdB8oWEw=s80-p",
+          "cco": "",
+          "cm": 172,
+          "ani": 26493829,
+          "rg": "CAR-BARE496E2F",
+          "xc": 1,
+          "t": {
+            "i": 1379472,
+            "f": "South Alabama",
+            "n": "South Alabama",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/south-ala.svg",
+            "ani": 21360,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545597,
+        "no": "",
+        "p": "32",
+        "hl": "32",
+        "ro": 31,
+        "s": null,
+        "im": 1521410,
+        "vm": 1,
+        "m": "25:21.41",
+        "pt": 31,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:17.00",
+        "iv": "+3.80",
+        "er": "25:39.30",
+        "pr": "25:26.00",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:56.8",
+            "cs": "2:56.8"
+          },
+          {
+            "sp": "2:58.8",
+            "cs": "5:55.6"
+          },
+          {
+            "sp": "3:11.6",
+            "cs": "9:07.2"
+          },
+          {
+            "sp": "3:02.6",
+            "cs": "12:09.8"
+          },
+          {
+            "sp": "3:16.0",
+            "cs": "15:25.8"
+          },
+          {
+            "sp": "3:06.8",
+            "cs": "18:32.6"
+          },
+          {
+            "sp": "3:20.1",
+            "cs": "21:52.7"
+          },
+          {
+            "sp": "3:28.8",
+            "cs": "25:21.5"
+          }
+        ],
+        "a": {
+          "i": 42890086,
+          "n": "Chase Gunn",
+          "fn": "Chase",
+          "l": "Gunn",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/LN3QKcVXQ1fF-HnYjLqsoetw2zzPpnjJXkMzmufb-p8THwCd2DGZ0wbrG2FKJfUEj3pKaxRz-WR3-EbKttgvm1xoVDGkRuiTGWM=s80-p",
+          "cco": "",
+          "cm": 205,
+          "ani": 23886250,
+          "rg": "CHA-GUNF21B441",
+          "xc": 1,
+          "t": {
+            "i": 1379479,
+            "f": "ULM",
+            "n": "ULM",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/5828a4a7befde54356b85194c2ad8904-1714211834.png",
+            "ani": 21050,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545607,
+        "no": "",
+        "p": "33",
+        "hl": "33",
+        "ro": 32,
+        "s": null,
+        "im": 1521540,
+        "vm": 1,
+        "m": "25:21.54",
+        "pt": 32,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:17.13",
+        "iv": "+0.13",
+        "er": "26:43.10",
+        "pr": "26:43.10",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:57.5",
+            "cs": "2:57.5"
+          },
+          {
+            "sp": "2:58.7",
+            "cs": "5:56.2"
+          },
+          {
+            "sp": "3:14.4",
+            "cs": "9:10.6"
+          },
+          {
+            "sp": "3:06.3",
+            "cs": "12:16.9"
+          },
+          {
+            "sp": "3:16.0",
+            "cs": "15:32.9"
+          },
+          {
+            "sp": "3:08.3",
+            "cs": "18:41.2"
+          },
+          {
+            "sp": "3:17.5",
+            "cs": "21:58.7"
+          },
+          {
+            "sp": "3:22.9",
+            "cs": "25:21.6"
+          }
+        ],
+        "a": {
+          "i": 42890089,
+          "n": "Joseph Morgan",
+          "fn": "Joseph",
+          "l": "Morgan",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/MRG3WG9vXVL_vd7QlWcdI0yG43JvePNr4OV4_L3JP2mcTuD9_rTKmTAj96LlWDOU9OX9c385l9bZcPF-osa8M5NwMRTFK5xQQA=s80-p",
+          "cco": "",
+          "cm": 208,
+          "ani": 26637317,
+          "rg": "JOS-MOR98664D8",
+          "xc": 1,
+          "t": {
+            "i": 1379479,
+            "f": "ULM",
+            "n": "ULM",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/5828a4a7befde54356b85194c2ad8904-1714211834.png",
+            "ani": 21050,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545605,
+        "no": "",
+        "p": "34",
+        "hl": "34",
+        "ro": 33,
+        "s": null,
+        "im": 1526350,
+        "vm": 1,
+        "m": "25:26.35",
+        "pt": 33,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:21.94",
+        "iv": "+4.81",
+        "er": "25:14.10",
+        "pr": "24:23.00",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:51.4",
+            "cs": "2:51.4"
+          },
+          {
+            "sp": "2:56.3",
+            "cs": "5:47.7"
+          },
+          {
+            "sp": "3:10.3",
+            "cs": "8:58.0"
+          },
+          {
+            "sp": "3:07.1",
+            "cs": "12:05.1"
+          },
+          {
+            "sp": "3:20.2",
+            "cs": "15:25.3"
+          },
+          {
+            "sp": "3:10.4",
+            "cs": "18:35.7"
+          },
+          {
+            "sp": "3:23.3",
+            "cs": "21:59.0"
+          },
+          {
+            "sp": "3:27.4",
+            "cs": "25:26.4"
+          }
+        ],
+        "a": {
+          "i": 42889926,
+          "n": "Avinash Patel",
+          "fn": "Avinash",
+          "l": "Patel",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/sDMdd857BhCiylRNumgIVB3zqWqqtG5cibn54Rg7Z0QukY7qlStLR912F2B7yQl63bozFA36loUHT95y7WjNurXCf0grRQ4YUsA=s80-p",
+          "cco": "",
+          "cm": 146,
+          "ani": 26596612,
+          "rg": "AVI-PATC94F9CE",
+          "xc": 1,
+          "t": {
+            "i": 1379468,
+            "f": "Arkansas State",
+            "n": "Arkansas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+            "ani": 20620,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545589,
+        "no": "",
+        "p": "35",
+        "hl": "35",
+        "ro": 34,
+        "s": null,
+        "im": 1532590,
+        "vm": 1,
+        "m": "25:32.59",
+        "pt": 34,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:28.18",
+        "iv": "+6.24",
+        "er": "23:28.30",
+        "pr": "23:28.30",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:53.3",
+            "cs": "2:53.3"
+          },
+          {
+            "sp": "2:55.6",
+            "cs": "5:48.9"
+          },
+          {
+            "sp": "3:07.4",
+            "cs": "8:56.3"
+          },
+          {
+            "sp": "3:03.8",
+            "cs": "12:00.1"
+          },
+          {
+            "sp": "3:22.7",
+            "cs": "15:22.8"
+          },
+          {
+            "sp": "3:15.1",
+            "cs": "18:37.9"
+          },
+          {
+            "sp": "3:23.1",
+            "cs": "22:01.0"
+          },
+          {
+            "sp": "3:31.6",
+            "cs": "25:32.6"
+          }
+        ],
+        "a": {
+          "i": 42890069,
+          "n": "Adam Groves",
+          "fn": "Adam",
+          "l": "Groves",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/_FaKaL74O8lDJ1JI-iZz1U6l-NrL6dI40pPVhjzdnPheTAvw-fMulOYhmRGyLnNeD8wpmScoBCJdLpjzgFcoppSYReiSYWX8gcA=s80-p",
+          "cco": "",
+          "cm": 149,
+          "ani": 23832208,
+          "rg": "ADA-GRO259966B",
+          "xc": 1,
+          "t": {
+            "i": 1379478,
+            "f": "Coastal Carolina",
+            "n": "Coastal Carolina",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/coastal-caro.svg",
+            "ani": 20755,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545653,
+        "no": "",
+        "p": "36",
+        "hl": "36",
+        "ro": 35,
+        "s": null,
+        "im": 1535770,
+        "vm": 1,
+        "m": "25:35.77",
+        "pt": 35,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:31.36",
+        "iv": "+3.18",
+        "er": "26:05.20",
+        "pr": "26:05.20",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:02.5",
+            "cs": "3:02.5"
+          },
+          {
+            "sp": "2:59.8",
+            "cs": "6:02.3"
+          },
+          {
+            "sp": "3:11.3",
+            "cs": "9:13.6"
+          },
+          {
+            "sp": "3:02.9",
+            "cs": "12:16.5"
+          },
+          {
+            "sp": "3:16.1",
+            "cs": "15:32.6"
+          },
+          {
+            "sp": "3:11.4",
+            "cs": "18:44.0"
+          },
+          {
+            "sp": "3:24.7",
+            "cs": "22:08.7"
+          },
+          {
+            "sp": "3:27.1",
+            "cs": "25:35.8"
+          }
+        ],
+        "a": {
+          "i": 42889981,
+          "n": "Mason Haley",
+          "fn": "Mason",
+          "l": "Haley",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/mZn2WxIteDB4lrcOv9TNnMtW76858SAIH07W3vPCxX0KIDxSGvCVnMxBlTVDKqB_YqmD4fWeaJL8IBLPm0tDNnP0K37haWUp3X9F=s80-p",
+          "cco": "",
+          "cm": 158,
+          "ani": 21544860,
+          "rg": "MAS-HALD6F41A4",
+          "xc": 1,
+          "t": {
+            "i": 1379467,
+            "f": "Louisiana",
+            "n": "Louisiana",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+            "ani": 21049,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545623,
+        "no": "",
+        "p": "37",
+        "hl": "37",
+        "ro": 36,
+        "s": null,
+        "im": 1537150,
+        "vm": 1,
+        "m": "25:37.15",
+        "pt": 36,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:32.74",
+        "iv": "+1.38",
+        "er": "24:18.10",
+        "pr": "24:18.10",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:53.7",
+            "cs": "2:53.7"
+          },
+          {
+            "sp": "2:55.5",
+            "cs": "5:49.2"
+          },
+          {
+            "sp": "3:10.2",
+            "cs": "8:59.4"
+          },
+          {
+            "sp": "3:06.4",
+            "cs": "12:05.8"
+          },
+          {
+            "sp": "3:19.2",
+            "cs": "15:25.0"
+          },
+          {
+            "sp": "3:13.4",
+            "cs": "18:38.4"
+          },
+          {
+            "sp": "3:37.5",
+            "cs": "22:15.9"
+          },
+          {
+            "sp": "3:21.3",
+            "cs": "25:37.2"
+          }
+        ],
+        "a": {
+          "i": 42890071,
+          "n": "Thomas Nitz",
+          "fn": "Thomas",
+          "l": "Nitz",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/IwCCmkFYApZGxAeTrjg34lS84bGgcrpU1po8yNhhm3VHcj62yXEzJBAyYXI6nSpijQx8xj_DSYxlnEK9-qVO1FCcH4TQKiBQhA=s80-p",
+          "cco": "",
+          "cm": 151,
+          "ani": 29560298,
+          "rg": "THO-NITCA7486B",
+          "xc": 1,
+          "t": {
+            "i": 1379478,
+            "f": "Coastal Carolina",
+            "n": "Coastal Carolina",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/coastal-caro.svg",
+            "ani": 20755,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545637,
+        "no": "",
+        "p": "38",
+        "hl": "38",
+        "ro": 37,
+        "s": null,
+        "im": 1540640,
+        "vm": 1,
+        "m": "25:40.64",
+        "pt": 37,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:36.23",
+        "iv": "+3.49",
+        "er": "26:13.10",
+        "pr": "26:13.10",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:04.1",
+            "cs": "3:04.1"
+          },
+          {
+            "sp": "3:03.3",
+            "cs": "6:07.4"
+          },
+          {
+            "sp": "3:16.6",
+            "cs": "9:24.0"
+          },
+          {
+            "sp": "3:06.0",
+            "cs": "12:30.0"
+          },
+          {
+            "sp": "3:17.1",
+            "cs": "15:47.1"
+          },
+          {
+            "sp": "3:09.4",
+            "cs": "18:56.5"
+          },
+          {
+            "sp": "3:21.0",
+            "cs": "22:17.5"
+          },
+          {
+            "sp": "3:23.2",
+            "cs": "25:40.7"
+          }
+        ],
+        "a": {
+          "i": 42889982,
+          "n": "Jackson Jarrett",
+          "fn": "Jackson",
+          "l": "Jarrett",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/36ssflh9FVTASYQVY8GmDdcQvRfbkipN1bbA_FnJ388PGdrGEK6embfppe9SoTZMT_ksFFUgLEWw0dHZiUBSUIGbT-lvcVk-ycU=s80-p",
+          "cco": "",
+          "cm": 159,
+          "ani": 29568919,
+          "rg": "JAC-JAR3553607",
+          "xc": 1,
+          "t": {
+            "i": 1379467,
+            "f": "Louisiana",
+            "n": "Louisiana",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+            "ani": 21049,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545592,
+        "no": "",
+        "p": "39",
+        "hl": "39",
+        "ro": 38,
+        "s": null,
+        "im": 1543840,
+        "vm": 1,
+        "m": "25:43.84",
+        "pt": 38,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:39.43",
+        "iv": "+3.20",
+        "er": "25:31.30",
+        "pr": "25:31.30",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "3:03.1",
+            "cs": "3:03.1"
+          },
+          {
+            "sp": "3:00.8",
+            "cs": "6:03.9"
+          },
+          {
+            "sp": "3:12.1",
+            "cs": "9:16.0"
+          },
+          {
+            "sp": "3:03.0",
+            "cs": "12:19.0"
+          },
+          {
+            "sp": "3:20.4",
+            "cs": "15:39.4"
+          },
+          {
+            "sp": "3:14.6",
+            "cs": "18:54.0"
+          },
+          {
+            "sp": "3:23.1",
+            "cs": "22:17.1"
+          },
+          {
+            "sp": "3:26.8",
+            "cs": "25:43.9"
+          }
+        ],
+        "a": {
+          "i": 42890002,
+          "n": "Caden Blackman",
+          "fn": "Caden",
+          "l": "Blackman",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/Chrl87ONrYhNEY_kw3c3cKzijNooryicCu2S2XMljZ5f49lIcCWe92EQ_b_qXIiwfosVqMRJHe1xn2k15a4csMOtv62Rna0un-0=s80-p",
+          "cco": "",
+          "cm": 192,
+          "ani": 23972223,
+          "rg": "CAD-BLAF7D05BA",
+          "xc": 1,
+          "t": {
+            "i": 1379474,
+            "f": "Troy",
+            "n": "Troy",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/troy.svg",
+            "ani": 21478,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545654,
+        "no": "",
+        "p": "40",
+        "hl": "40",
+        "ro": 39,
+        "s": null,
+        "im": 1546400,
+        "vm": 1,
+        "m": "25:46.40",
+        "pt": 39,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:41.99",
+        "iv": "+2.56",
+        "er": "26:09.20",
+        "pr": "25:11.40",
+        "mps": [],
+        "ern": "SB",
+        "irs": [
+          {
+            "sp": "3:02.8",
+            "cs": "3:02.8"
+          },
+          {
+            "sp": "3:01.9",
+            "cs": "6:04.7"
+          },
+          {
+            "sp": "3:18.2",
+            "cs": "9:22.9"
+          },
+          {
+            "sp": "3:07.1",
+            "cs": "12:30.0"
+          },
+          {
+            "sp": "3:19.5",
+            "cs": "15:49.5"
+          },
+          {
+            "sp": "3:13.7",
+            "cs": "19:03.2"
+          },
+          {
+            "sp": "3:23.4",
+            "cs": "22:26.6"
+          },
+          {
+            "sp": "3:19.8",
+            "cs": "25:46.4"
+          }
+        ],
+        "a": {
+          "i": 42889985,
+          "n": "John Walker McDonald",
+          "fn": "John Walker",
+          "l": "McDonald",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/--Hlg6nTnLx0k0zjVBKjibMZPaNLk0AGOBvfG9nFZMiwR7hbinL12NSKdLfDBqageCZXgIdI-J3DAtYVcPC1dLAeVAf8xkfBvg=s80-p",
+          "cco": "",
+          "cm": 162,
+          "ani": 21544858,
+          "rg": "JOH-MCD88A0E68",
+          "xc": 1,
+          "t": {
+            "i": 1379467,
+            "f": "Louisiana",
+            "n": "Louisiana",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+            "ani": 21049,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545646,
+        "no": "",
+        "p": "41",
+        "hl": "41",
+        "ro": 40,
+        "s": null,
+        "im": 1547430,
+        "vm": 1,
+        "m": "25:47.43",
+        "pt": 40,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:43.02",
+        "iv": "+1.03",
+        "er": "26:47.10",
+        "pr": "26:47.10",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:57.9",
+            "cs": "2:57.9"
+          },
+          {
+            "sp": "3:01.8",
+            "cs": "5:59.7"
+          },
+          {
+            "sp": "3:15.5",
+            "cs": "9:15.2"
+          },
+          {
+            "sp": "3:05.8",
+            "cs": "12:21.0"
+          },
+          {
+            "sp": "3:19.2",
+            "cs": "15:40.2"
+          },
+          {
+            "sp": "3:13.3",
+            "cs": "18:53.5"
+          },
+          {
+            "sp": "3:25.5",
+            "cs": "22:19.0"
+          },
+          {
+            "sp": "3:28.5",
+            "cs": "25:47.5"
+          }
+        ],
+        "a": {
+          "i": 42890090,
+          "n": "River Richard",
+          "fn": "River",
+          "l": "Richard",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/xiGov54aIDS24mrVK1IVFuE2x8kKiRR1D5auVyJMtqvkPFPdTNjKAySTkGiSEFK4JIGHMaTtH7imDC2TK-X3dK3NoexvI7DHOAI=s80-p",
+          "cco": "",
+          "cm": 209,
+          "ani": 29665622,
+          "rg": "RIV-RICF192369",
+          "xc": 1,
+          "t": {
+            "i": 1379479,
+            "f": "ULM",
+            "n": "ULM",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/5828a4a7befde54356b85194c2ad8904-1714211834.png",
+            "ani": 21050,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545634,
+        "no": "",
+        "p": "42",
+        "hl": "42",
+        "ro": 41,
+        "s": null,
+        "im": 1548070,
+        "vm": 1,
+        "m": "25:48.07",
+        "pt": 41,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:43.66",
+        "iv": "+0.64",
+        "er": "25:51.80",
+        "pr": "25:12.50",
+        "mps": [],
+        "ern": "SB",
+        "irs": [
+          {
+            "sp": "2:56.5",
+            "cs": "2:56.5"
+          },
+          {
+            "sp": "2:59.4",
+            "cs": "5:55.9"
+          },
+          {
+            "sp": "3:13.8",
+            "cs": "9:09.7"
+          },
+          {
+            "sp": "3:07.9",
+            "cs": "12:17.6"
+          },
+          {
+            "sp": "3:21.6",
+            "cs": "15:39.2"
+          },
+          {
+            "sp": "3:14.1",
+            "cs": "18:53.3"
+          },
+          {
+            "sp": "3:26.5",
+            "cs": "22:19.8"
+          },
+          {
+            "sp": "3:28.3",
+            "cs": "25:48.1"
+          }
+        ],
+        "a": {
+          "i": 42889946,
+          "n": "Clay Kelly",
+          "fn": "Clay",
+          "l": "Kelly",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/fhlfVwHIPDleRKwL1kdhJtP6eUOe7K0LxHnpWPkAd66QNOw0giGmFRRIzdqiIAPeTRbgaflfcY_Kwjh5POQDILs1H2WjzNnHY4o=s80-p",
+          "cco": "",
+          "cm": 168,
+          "ani": 29523494,
+          "rg": "CLA-KEL9C0E913",
+          "xc": 1,
+          "t": {
+            "i": 1379471,
+            "f": "Marshall",
+            "n": "Marshall",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/marshall.svg",
+            "ani": 21074,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545588,
+        "no": "",
+        "p": "43",
+        "hl": "43",
+        "ro": 42,
+        "s": null,
+        "im": 1551992,
+        "vm": 1,
+        "m": "25:52.00",
+        "pt": 42,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:47.59",
+        "iv": "+3.93",
+        "er": "25:37.00",
+        "pr": "25:37.00",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "3:03.2",
+            "cs": "3:03.2"
+          },
+          {
+            "sp": "3:05.5",
+            "cs": "6:08.7"
+          },
+          {
+            "sp": "3:18.9",
+            "cs": "9:27.6"
+          },
+          {
+            "sp": "3:07.2",
+            "cs": "12:34.8"
+          },
+          {
+            "sp": "3:20.8",
+            "cs": "15:55.6"
+          },
+          {
+            "sp": "3:10.5",
+            "cs": "19:06.1"
+          },
+          {
+            "sp": "3:20.8",
+            "cs": "22:26.9"
+          },
+          {
+            "sp": "3:25.1",
+            "cs": "25:52.0"
+          }
+        ],
+        "a": {
+          "i": 42889978,
+          "n": "Peyton Bourgeois",
+          "fn": "Peyton",
+          "l": "Bourgeois",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/axllMGMIeHSqzMndNuoQ8G08GPiKlwrpiIbRELTLPEGJYXFks3RnBeLZA9x8RyEqyJXzR8GNfBh-1sE6jXVC2Yz5UmT60UKXGGA1=s80-p",
+          "cco": "",
+          "cm": 155,
+          "ani": 23726190,
+          "rg": "PEY-BOUD2F8776",
+          "xc": 1,
+          "t": {
+            "i": 1379467,
+            "f": "Louisiana",
+            "n": "Louisiana",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+            "ani": 21049,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545587,
+        "no": "",
+        "p": "44",
+        "hl": "44",
+        "ro": 43,
+        "s": null,
+        "im": 1552630,
+        "vm": 1,
+        "m": "25:52.63",
+        "pt": 43,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:48.22",
+        "iv": "+0.64",
+        "er": "25:29.80",
+        "pr": "25:22.40",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:58.4",
+            "cs": "2:58.4"
+          },
+          {
+            "sp": "3:05.0",
+            "cs": "6:03.4"
+          },
+          {
+            "sp": "3:17.6",
+            "cs": "9:21.0"
+          },
+          {
+            "sp": "3:12.1",
+            "cs": "12:33.1"
+          },
+          {
+            "sp": "3:23.3",
+            "cs": "15:56.4"
+          },
+          {
+            "sp": "3:13.8",
+            "cs": "19:10.2"
+          },
+          {
+            "sp": "3:25.7",
+            "cs": "22:35.9"
+          },
+          {
+            "sp": "3:16.8",
+            "cs": "25:52.7"
+          }
+        ],
+        "a": {
+          "i": 42889944,
+          "n": "Garrett Ferguson",
+          "fn": "Garrett",
+          "l": "Ferguson",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/DvE5k7wPPH02XtvDCkATgHfC4UgAGsB_vwamAC0otaCnkV5mcFnH5tV-Pg4lszVJ-e7ZzV9G05A31RpIBbyCkQf2xMuFWAAyE9Q0=s80-p",
+          "cco": "",
+          "cm": 166,
+          "ani": 23916399,
+          "rg": "GAR-FER2350812",
+          "xc": 1,
+          "t": {
+            "i": 1379471,
+            "f": "Marshall",
+            "n": "Marshall",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/marshall.svg",
+            "ani": 21074,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545622,
+        "no": "",
+        "p": "45",
+        "hl": "45",
+        "ro": 44,
+        "s": null,
+        "im": 1553280,
+        "vm": 1,
+        "m": "25:53.28",
+        "pt": 44,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:48.87",
+        "iv": "+0.65",
+        "er": "25:45.90",
+        "pr": "25:45.90",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:57.4",
+            "cs": "2:57.4"
+          },
+          {
+            "sp": "3:03.3",
+            "cs": "6:00.7"
+          },
+          {
+            "sp": "3:17.1",
+            "cs": "9:17.8"
+          },
+          {
+            "sp": "3:08.9",
+            "cs": "12:26.7"
+          },
+          {
+            "sp": "3:22.5",
+            "cs": "15:49.2"
+          },
+          {
+            "sp": "3:16.1",
+            "cs": "19:05.3"
+          },
+          {
+            "sp": "3:23.0",
+            "cs": "22:28.3"
+          },
+          {
+            "sp": "3:25.0",
+            "cs": "25:53.3"
+          }
+        ],
+        "a": {
+          "i": 42890070,
+          "n": "Owen Mullins",
+          "fn": "Owen",
+          "l": "Mullins",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/nDJU3xYKD22pE7oa-bs566Fk6iIcUs-uKiJG2wg64rX1ee7IjMRolZ3vusjUZd2OgpfiYOJDDLNQD2NkZo5OgEVVBjguBvtnlw=s80-p",
+          "cco": "",
+          "cm": 150,
+          "ani": 29659761,
+          "rg": "OWE-MUL386A743",
+          "xc": 1,
+          "t": {
+            "i": 1379478,
+            "f": "Coastal Carolina",
+            "n": "Coastal Carolina",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/coastal-caro.svg",
+            "ani": 20755,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545598,
+        "no": "",
+        "p": "46",
+        "hl": "46",
+        "ro": 45,
+        "s": null,
+        "im": 1554940,
+        "vm": 1,
+        "m": "25:54.94",
+        "pt": 45,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:50.53",
+        "iv": "+1.66",
+        "er": "26:24.70",
+        "pr": "26:09.80",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:01.8",
+            "cs": "3:01.8"
+          },
+          {
+            "sp": "3:00.9",
+            "cs": "6:02.7"
+          },
+          {
+            "sp": "3:16.8",
+            "cs": "9:19.5"
+          },
+          {
+            "sp": "3:07.2",
+            "cs": "12:26.7"
+          },
+          {
+            "sp": "3:22.5",
+            "cs": "15:49.2"
+          },
+          {
+            "sp": "3:11.5",
+            "cs": "19:00.7"
+          },
+          {
+            "sp": "3:25.5",
+            "cs": "22:26.2"
+          },
+          {
+            "sp": "3:28.8",
+            "cs": "25:55.0"
+          }
+        ],
+        "a": {
+          "i": 42889970,
+          "n": "Blayton Bernard",
+          "fn": "Blayton",
+          "l": "Bernard",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/vONcg693iu4kmpXrno6hcKaKGVnCNT7Zkb8nBl6doq_It7J1R3z3OXNBnTuQ3hz3n82V07c0mFojsPTU0QK0VV60E3Z3yGFBkV9a=s80-p",
+          "cco": "",
+          "cm": 173,
+          "ani": 23911538,
+          "rg": "BLA-BER94D9B53",
+          "xc": 1,
+          "t": {
+            "i": 1379472,
+            "f": "South Alabama",
+            "n": "South Alabama",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/south-ala.svg",
+            "ani": 21360,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545650,
+        "no": "",
+        "p": "47",
+        "hl": "47",
+        "ro": 46,
+        "s": null,
+        "im": 1555021,
+        "vm": 1,
+        "m": "25:55.03",
+        "pt": 46,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:50.62",
+        "iv": "+0.09",
+        "er": "26:06.10",
+        "pr": "26:06.10",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:08.7",
+            "cs": "3:08.7"
+          },
+          {
+            "sp": "3:08.1",
+            "cs": "6:16.8"
+          },
+          {
+            "sp": "3:18.9",
+            "cs": "9:35.7"
+          },
+          {
+            "sp": "3:07.6",
+            "cs": "12:43.3"
+          },
+          {
+            "sp": "3:20.0",
+            "cs": "16:03.3"
+          },
+          {
+            "sp": "3:11.2",
+            "cs": "19:14.5"
+          },
+          {
+            "sp": "3:22.2",
+            "cs": "22:36.7"
+          },
+          {
+            "sp": "3:18.4",
+            "cs": "25:55.1"
+          }
+        ],
+        "a": {
+          "i": 42889972,
+          "n": "Tyler Doty",
+          "fn": "Tyler",
+          "l": "Doty",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/PbPgX6OX5rNb81BuVg91i6pW6KAJFkNKrN_3EhkYFVQHFYGFPXnZcpYLK9-zUltZ3Sp-hj6cAnRZkZJBaF9uxBPdWocSbTplhKtb=s80-p",
+          "cco": "",
+          "cm": 175,
+          "ani": 19652757,
+          "rg": "TYL-DOT1937ACD",
+          "xc": 1,
+          "t": {
+            "i": 1379472,
+            "f": "South Alabama",
+            "n": "South Alabama",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/south-ala.svg",
+            "ani": 21360,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545594,
+        "no": "",
+        "p": "48",
+        "hl": "48",
+        "ro": 47,
+        "s": null,
+        "im": 1556050,
+        "vm": 1,
+        "m": "25:56.05",
+        "pt": 47,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:51.64",
+        "iv": "+1.03",
+        "er": "25:05.30",
+        "pr": "25:05.30",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:55.3",
+            "cs": "2:55.3"
+          },
+          {
+            "sp": "2:59.3",
+            "cs": "5:54.6"
+          },
+          {
+            "sp": "3:15.4",
+            "cs": "9:10.0"
+          },
+          {
+            "sp": "3:08.3",
+            "cs": "12:18.3"
+          },
+          {
+            "sp": "3:23.8",
+            "cs": "15:42.1"
+          },
+          {
+            "sp": "3:16.6",
+            "cs": "18:58.7"
+          },
+          {
+            "sp": "3:29.1",
+            "cs": "22:27.8"
+          },
+          {
+            "sp": "3:28.3",
+            "cs": "25:56.1"
+          }
+        ],
+        "a": {
+          "i": 42890047,
+          "n": "Elias Palmer",
+          "fn": "Elias",
+          "l": "Palmer",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/hft47l2H5kbCXDVUkClZ-HaL1tJvmfQNb9KYlNAeDfyF09O1KElmpUWD-E9F2b7s6uShuMBAsCTGvj7QLFVnTrB5h0r8PlB7UQ=s80-p",
+          "cco": "",
+          "cm": 187,
+          "ani": 21831308,
+          "rg": "ELI-PAL6B154E6",
+          "xc": 1,
+          "t": {
+            "i": 1379476,
+            "f": "Texas State",
+            "n": "Texas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/texas-st.svg",
+            "ani": 21460,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545608,
+        "no": "",
+        "p": "49",
+        "hl": "49",
+        "ro": 48,
+        "s": null,
+        "im": 1556600,
+        "vm": 1,
+        "m": "25:56.60",
+        "pt": 48,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:52.19",
+        "iv": "+0.55",
+        "er": "26:43.40",
+        "pr": "26:43.40",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:02.2",
+            "cs": "3:02.2"
+          },
+          {
+            "sp": "3:00.7",
+            "cs": "6:02.9"
+          },
+          {
+            "sp": "3:15.4",
+            "cs": "9:18.3"
+          },
+          {
+            "sp": "3:08.2",
+            "cs": "12:26.5"
+          },
+          {
+            "sp": "3:22.1",
+            "cs": "15:48.6"
+          },
+          {
+            "sp": "3:14.4",
+            "cs": "19:03.0"
+          },
+          {
+            "sp": "3:27.5",
+            "cs": "22:30.5"
+          },
+          {
+            "sp": "3:26.1",
+            "cs": "25:56.6"
+          }
+        ],
+        "a": {
+          "i": 42889942,
+          "n": "Landon Brumfield",
+          "fn": "Landon",
+          "l": "Brumfield",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/JMLNH4gW9AQtnYC89rLfSQOxGhi3zvq4Stctz2dj9Vt5-nmLbzG88ulgr5nnho_1g_48oWFEIocileEn3UTeOG2721_yWAZFIDvT=s80-p",
+          "cco": "",
+          "cm": 164,
+          "ani": 26368783,
+          "rg": "LAN-BRUC193BA6",
+          "xc": 1,
+          "t": {
+            "i": 1379471,
+            "f": "Marshall",
+            "n": "Marshall",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/marshall.svg",
+            "ani": 21074,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545604,
+        "no": "",
+        "p": "50",
+        "hl": "50",
+        "ro": 49,
+        "s": null,
+        "im": 1560380,
+        "vm": 1,
+        "m": "26:00.38",
+        "pt": 49,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+1:55.97",
+        "iv": "+3.78",
+        "er": "25:16.60",
+        "pr": "25:16.60",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:53.0",
+            "cs": "2:53.0"
+          },
+          {
+            "sp": "2:56.3",
+            "cs": "5:49.3"
+          },
+          {
+            "sp": "3:09.6",
+            "cs": "8:58.9"
+          },
+          {
+            "sp": "3:06.6",
+            "cs": "12:05.5"
+          },
+          {
+            "sp": "3:29.9",
+            "cs": "15:35.4"
+          },
+          {
+            "sp": "3:27.2",
+            "cs": "19:02.6"
+          },
+          {
+            "sp": "3:34.6",
+            "cs": "22:37.2"
+          },
+          {
+            "sp": "3:23.2",
+            "cs": "26:00.4"
+          }
+        ],
+        "a": {
+          "i": 42889922,
+          "n": "Brett Jacobs",
+          "fn": "Brett",
+          "l": "Jacobs",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/2g6FJCmeAaBC7R4uWer-I9VMABsoUDpON_VML-Shb0W5bOUB1VJWXnH00AVm6ak2z2iBteLnDLFw9c_18bRTKh3KBdNyS2RoktPp=s80-p",
+          "cco": "",
+          "cm": 142,
+          "ani": 29286740,
+          "rg": "BRE-JAC50019A1",
+          "xc": 1,
+          "t": {
+            "i": 1379468,
+            "f": "Arkansas State",
+            "n": "Arkansas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+            "ani": 20620,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545627,
+        "no": "",
+        "p": "51",
+        "hl": "51",
+        "ro": 50,
+        "s": null,
+        "im": 1566330,
+        "vm": 1,
+        "m": "26:06.33",
+        "pt": 50,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:01.92",
+        "iv": "+5.95",
+        "er": "24:54.70",
+        "pr": "24:34.00",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:52.4",
+            "cs": "2:52.4"
+          },
+          {
+            "sp": "3:00.9",
+            "cs": "5:53.3"
+          },
+          {
+            "sp": "3:15.9",
+            "cs": "9:09.2"
+          },
+          {
+            "sp": "3:11.2",
+            "cs": "12:20.4"
+          },
+          {
+            "sp": "3:28.0",
+            "cs": "15:48.4"
+          },
+          {
+            "sp": "3:16.1",
+            "cs": "19:04.5"
+          },
+          {
+            "sp": "3:25.5",
+            "cs": "22:30.0"
+          },
+          {
+            "sp": "3:36.4",
+            "cs": "26:06.4"
+          }
+        ],
+        "a": {
+          "i": 42889918,
+          "n": "Craig Alan Becker",
+          "fn": "Craig Alan",
+          "l": "Becker",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/rr6tflnnXXsx5EPUpCIhUR-iAxd5_NcUpkKr5mEEqsScjg0eBgBHF7paKcakACinWDftIE5jR00q5F8FnnEoAlecAGwRybCmYRU=s80-p",
+          "cco": "",
+          "cm": 138,
+          "ani": 29575800,
+          "rg": "CRA-BEC90C9F79",
+          "xc": 1,
+          "t": {
+            "i": 1379468,
+            "f": "Arkansas State",
+            "n": "Arkansas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+            "ani": 20620,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545618,
+        "no": "",
+        "p": "52",
+        "hl": "52",
+        "ro": 51,
+        "s": null,
+        "im": 1566770,
+        "vm": 1,
+        "m": "26:06.77",
+        "pt": 51,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:02.36",
+        "iv": "+0.44",
+        "er": "25:39.00",
+        "pr": "25:39.00",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:59.3",
+            "cs": "2:59.3"
+          },
+          {
+            "sp": "3:01.6",
+            "cs": "6:00.9"
+          },
+          {
+            "sp": "3:15.0",
+            "cs": "9:15.9"
+          },
+          {
+            "sp": "3:08.6",
+            "cs": "12:24.5"
+          },
+          {
+            "sp": "3:24.6",
+            "cs": "15:49.1"
+          },
+          {
+            "sp": "3:13.6",
+            "cs": "19:02.7"
+          },
+          {
+            "sp": "3:30.9",
+            "cs": "22:33.6"
+          },
+          {
+            "sp": "3:33.2",
+            "cs": "26:06.8"
+          }
+        ],
+        "a": {
+          "i": 42890042,
+          "n": "Eyan Calico",
+          "fn": "Eyan",
+          "l": "Calico",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/-u3rZKQQOYo5xGYaoxgq3so5O3IjNt4MJCXWQeflG57mqjx7rPQetDuWeUJf_PhWw9LqZKdQvYD_UOWUSLH--17c4Ce0W2ulOmg=s80-p",
+          "cco": "",
+          "cm": 182,
+          "ani": 26602311,
+          "rg": "EYA-CAL2119587",
+          "xc": 1,
+          "t": {
+            "i": 1379476,
+            "f": "Texas State",
+            "n": "Texas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/texas-st.svg",
+            "ani": 21460,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545643,
+        "no": "",
+        "p": "53",
+        "hl": "53",
+        "ro": 52,
+        "s": null,
+        "im": 1567330,
+        "vm": 1,
+        "m": "26:07.33",
+        "pt": 52,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:02.92",
+        "iv": "+0.56",
+        "er": "25:07.10",
+        "pr": "25:07.10",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:57.1",
+            "cs": "2:57.1"
+          },
+          {
+            "sp": "2:57.6",
+            "cs": "5:54.7"
+          },
+          {
+            "sp": "3:15.8",
+            "cs": "9:10.5"
+          },
+          {
+            "sp": "3:12.5",
+            "cs": "12:23.0"
+          },
+          {
+            "sp": "3:27.4",
+            "cs": "15:50.4"
+          },
+          {
+            "sp": "3:18.3",
+            "cs": "19:08.7"
+          },
+          {
+            "sp": "3:28.8",
+            "cs": "22:37.5"
+          },
+          {
+            "sp": "3:29.9",
+            "cs": "26:07.4"
+          }
+        ],
+        "a": {
+          "i": 42890050,
+          "n": "David Serrato",
+          "fn": "David",
+          "l": "Serrato",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/LuPi-T7Uhi8BwnZxMY9aMLIec1HZuLlz43FlaLZML5tE7z4RfigRFzdZkDRRu6unPawY6jb9VPQH1HNBZyI3ofYkErMIpIlrpzM=s80-p",
+          "cco": "",
+          "cm": 190,
+          "ani": 27174698,
+          "rg": "DAV-SERA18CD98",
+          "xc": 1,
+          "t": {
+            "i": 1379476,
+            "f": "Texas State",
+            "n": "Texas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/texas-st.svg",
+            "ani": 21460,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545632,
+        "no": "",
+        "p": "54",
+        "hl": "54",
+        "ro": 53,
+        "s": null,
+        "im": 1567590,
+        "vm": 1,
+        "m": "26:07.59",
+        "pt": 53,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:03.18",
+        "iv": "+0.26",
+        "er": "26:12.60",
+        "pr": "26:12.60",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:57.7",
+            "cs": "2:57.7"
+          },
+          {
+            "sp": "3:01.8",
+            "cs": "5:59.5"
+          },
+          {
+            "sp": "3:14.8",
+            "cs": "9:14.3"
+          },
+          {
+            "sp": "3:07.6",
+            "cs": "12:21.9"
+          },
+          {
+            "sp": "3:20.7",
+            "cs": "15:42.6"
+          },
+          {
+            "sp": "3:14.5",
+            "cs": "18:57.1"
+          },
+          {
+            "sp": "3:29.3",
+            "cs": "22:26.4"
+          },
+          {
+            "sp": "3:41.2",
+            "cs": "26:07.6"
+          }
+        ],
+        "a": {
+          "i": 42889948,
+          "n": "Conner Meyers",
+          "fn": "Conner",
+          "l": "Meyers",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/NDeD13NT78SM0QLlGFlvBcMGbKw7Oj_rZJz8SLMhA7KEHwuo3vK-sMUulk-wJL7G7Ema8KSo56y796GDFl3u0aTTQax5yC-iiLg=s80-p",
+          "cco": "",
+          "cm": 170,
+          "ani": 29523495,
+          "rg": "CON-MEY431423F",
+          "xc": 1,
+          "t": {
+            "i": 1379471,
+            "f": "Marshall",
+            "n": "Marshall",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/marshall.svg",
+            "ani": 21074,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545636,
+        "no": "",
+        "p": "55",
+        "hl": "55",
+        "ro": 54,
+        "s": null,
+        "im": 1586970,
+        "vm": 1,
+        "m": "26:26.97",
+        "pt": 54,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:22.56",
+        "iv": "+19.38",
+        "er": "27:02.20",
+        "pr": "27:02.20",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:08.4",
+            "cs": "3:08.4"
+          },
+          {
+            "sp": "3:08.6",
+            "cs": "6:17.0"
+          },
+          {
+            "sp": "3:19.1",
+            "cs": "9:36.1"
+          },
+          {
+            "sp": "3:09.1",
+            "cs": "12:45.2"
+          },
+          {
+            "sp": "3:26.1",
+            "cs": "16:11.3"
+          },
+          {
+            "sp": "3:17.8",
+            "cs": "19:29.1"
+          },
+          {
+            "sp": "3:30.8",
+            "cs": "22:59.9"
+          },
+          {
+            "sp": "3:27.1",
+            "cs": "26:27.0"
+          }
+        ],
+        "a": {
+          "i": 42889977,
+          "n": "Reed Boudreaux",
+          "fn": "Reed",
+          "l": "Boudreaux",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/ops4ooMCBwwrtz9NuBypB4I8Mr8toL3xpLS2lUF54B0I8r_7HxOHG6lJ3QQaXdeos1gYry45_uz56EtzLCBNekQ41jiY8KqmCA=s80-p",
+          "cco": "",
+          "cm": 154,
+          "ani": 29568921,
+          "rg": "REE-BOU4B9438D",
+          "xc": 1,
+          "t": {
+            "i": 1379467,
+            "f": "Louisiana",
+            "n": "Louisiana",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+            "ani": 21049,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545590,
+        "no": "",
+        "p": "55",
+        "hl": "55",
+        "ro": 55,
+        "s": null,
+        "im": 1586970,
+        "vm": 1,
+        "m": "26:26.97",
+        "pt": 55,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:22.56",
+        "iv": "+0.00",
+        "er": "24:47.10",
+        "pr": "24:47.10",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:54.6",
+            "cs": "2:54.6"
+          },
+          {
+            "sp": "3:00.3",
+            "cs": "5:54.9"
+          },
+          {
+            "sp": "3:16.5",
+            "cs": "9:11.4"
+          },
+          {
+            "sp": "3:10.5",
+            "cs": "12:21.9"
+          },
+          {
+            "sp": "3:27.9",
+            "cs": "15:49.8"
+          },
+          {
+            "sp": "3:24.7",
+            "cs": "19:14.5"
+          },
+          {
+            "sp": "3:38.7",
+            "cs": "22:53.2"
+          },
+          {
+            "sp": "3:33.8",
+            "cs": "26:27.0"
+          }
+        ],
+        "a": {
+          "i": 42890072,
+          "n": "Sterling Sellier",
+          "fn": "Sterling",
+          "l": "Sellier",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/X5Ky6m-Oo0ClJDBt0CAV_uwAWvPO8wFPr1H8SNA3xY7ma-s8TfubB-wZ-FSgHx2uwaXfisGfPFvYF6yEc091onC-i_JR2N93wlY=s80-p",
+          "cco": "",
+          "cm": 152,
+          "ani": 23832213,
+          "rg": "STE-SEL6A127D4",
+          "xc": 1,
+          "t": {
+            "i": 1379478,
+            "f": "Coastal Carolina",
+            "n": "Coastal Carolina",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/coastal-caro.svg",
+            "ani": 20755,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545621,
+        "no": "",
+        "p": "57",
+        "hl": "57",
+        "ro": 56,
+        "s": null,
+        "im": 1588570,
+        "vm": 1,
+        "m": "26:28.57",
+        "pt": 56,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:24.16",
+        "iv": "+1.60",
+        "er": "24:56.00",
+        "pr": "24:56.00",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:55.0",
+            "cs": "2:55.0"
+          },
+          {
+            "sp": "3:05.4",
+            "cs": "6:00.4"
+          },
+          {
+            "sp": "3:17.7",
+            "cs": "9:18.1"
+          },
+          {
+            "sp": "3:18.7",
+            "cs": "12:36.8"
+          },
+          {
+            "sp": "3:32.3",
+            "cs": "16:09.1"
+          },
+          {
+            "sp": "3:21.0",
+            "cs": "19:30.1"
+          },
+          {
+            "sp": "3:27.4",
+            "cs": "22:57.5"
+          },
+          {
+            "sp": "3:31.1",
+            "cs": "26:28.6"
+          }
+        ],
+        "a": {
+          "i": 42890068,
+          "n": "Calvin Dovgalyuk",
+          "fn": "Calvin",
+          "l": "Dovgalyuk",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/3reNXAch-ovbGIBSFh1yvMrrOuu2WSFRq6Z14RdR16zw4wNtqm4FhYzKfZOtVhwn-TCRVKAp5FcMUi81G5PNh8mB7m7LOIEX5w=s80-p",
+          "cco": "",
+          "cm": 148,
+          "ani": 29560295,
+          "rg": "CAL-DOV8BC70C4",
+          "xc": 1,
+          "t": {
+            "i": 1379478,
+            "f": "Coastal Carolina",
+            "n": "Coastal Carolina",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/coastal-caro.svg",
+            "ani": 20755,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545585,
+        "no": "",
+        "p": "58",
+        "hl": "58",
+        "ro": 57,
+        "s": null,
+        "im": 1591470,
+        "vm": 1,
+        "m": "26:31.47",
+        "pt": 57,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:27.06",
+        "iv": "+2.90",
+        "er": "26:50.50",
+        "pr": "24:31.80",
+        "mps": [],
+        "ern": "SB",
+        "irs": [
+          {
+            "sp": "3:04.2",
+            "cs": "3:04.2"
+          },
+          {
+            "sp": "3:07.0",
+            "cs": "6:11.2"
+          },
+          {
+            "sp": "3:24.2",
+            "cs": "9:35.4"
+          },
+          {
+            "sp": "3:09.6",
+            "cs": "12:45.0"
+          },
+          {
+            "sp": "3:25.7",
+            "cs": "16:10.7"
+          },
+          {
+            "sp": "3:16.3",
+            "cs": "19:27.0"
+          },
+          {
+            "sp": "3:29.7",
+            "cs": "22:56.7"
+          },
+          {
+            "sp": "3:34.8",
+            "cs": "26:31.5"
+          }
+        ],
+        "a": {
+          "i": 42889976,
+          "n": "Amos Pkemoi",
+          "fn": "Amos",
+          "l": "Pkemoi",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/JTfwTRRTKTBka0uPOTem_sveYGafjJiDRrWmVWUCRc6U3yopk--MMPHd1cbEyhHPHFXKpygOGznIS8zHUdYgskSyf5wgUvOHVIA=s80-p",
+          "cco": "",
+          "cm": 179,
+          "ani": 21401781,
+          "rg": "AMO-PKE79DDE64",
+          "xc": 1,
+          "t": {
+            "i": 1379472,
+            "f": "South Alabama",
+            "n": "South Alabama",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/south-ala.svg",
+            "ani": 21360,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545591,
+        "no": "",
+        "p": "59",
+        "hl": "59",
+        "ro": 58,
+        "s": null,
+        "im": 1592340,
+        "vm": 1,
+        "m": "26:32.34",
+        "pt": 58,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:27.93",
+        "iv": "+0.87",
+        "er": "27:09.10",
+        "pr": "26:42.40",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:08.5",
+            "cs": "3:08.5"
+          },
+          {
+            "sp": "3:08.3",
+            "cs": "6:16.8"
+          },
+          {
+            "sp": "3:19.1",
+            "cs": "9:35.9"
+          },
+          {
+            "sp": "3:08.5",
+            "cs": "12:44.4"
+          },
+          {
+            "sp": "3:25.9",
+            "cs": "16:10.3"
+          },
+          {
+            "sp": "3:17.3",
+            "cs": "19:27.6"
+          },
+          {
+            "sp": "3:30.4",
+            "cs": "22:58.0"
+          },
+          {
+            "sp": "3:34.4",
+            "cs": "26:32.4"
+          }
+        ],
+        "a": {
+          "i": 42890001,
+          "n": "Gavan Baxley",
+          "fn": "Gavan",
+          "l": "Baxley",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/X34kZPqJAquozsMIahpByb8H2zPHr9huxInhFmOQlDOpAW_ImEbWaag-3ZLDgh5gOIcVMzNhxEiapVutpC_queoL43z6AYmqjLpE=s80-p",
+          "cco": "",
+          "cm": 191,
+          "ani": 23912296,
+          "rg": "GAV-BAX381B020",
+          "xc": 1,
+          "t": {
+            "i": 1379474,
+            "f": "Troy",
+            "n": "Troy",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/troy.svg",
+            "ani": 21478,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545644,
+        "no": "",
+        "p": "60",
+        "hl": "60",
+        "ro": 59,
+        "s": null,
+        "im": 1596010,
+        "vm": 1,
+        "m": "26:36.01",
+        "pt": 59,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:31.60",
+        "iv": "+3.67",
+        "er": "26:11.00",
+        "pr": "26:11.00",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:58.1",
+            "cs": "2:58.1"
+          },
+          {
+            "sp": "3:01.8",
+            "cs": "5:59.9"
+          },
+          {
+            "sp": "3:17.9",
+            "cs": "9:17.8"
+          },
+          {
+            "sp": "3:14.5",
+            "cs": "12:32.3"
+          },
+          {
+            "sp": "3:30.3",
+            "cs": "16:02.6"
+          },
+          {
+            "sp": "3:21.6",
+            "cs": "19:24.2"
+          },
+          {
+            "sp": "3:35.0",
+            "cs": "22:59.2"
+          },
+          {
+            "sp": "3:36.9",
+            "cs": "26:36.1"
+          }
+        ],
+        "a": {
+          "i": 42890084,
+          "n": "Isaac Cupp",
+          "fn": "Isaac",
+          "l": "Cupp",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/Q5pR-rr-p9M8KxzDm-XQyQufCx85jUi39pyCCynWUVOaHHw2kvXrIbzyT3lUUSoolFgB92GZaIPmih9w58-hGPKG1TuZI9YMkQ=s80-p",
+          "cco": "",
+          "cm": 203,
+          "ani": 29665570,
+          "rg": "ISA-CUPA1D758C",
+          "xc": 1,
+          "t": {
+            "i": 1379479,
+            "f": "ULM",
+            "n": "ULM",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/5828a4a7befde54356b85194c2ad8904-1714211834.png",
+            "ani": 21050,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545639,
+        "no": "",
+        "p": "61",
+        "hl": "61",
+        "ro": 60,
+        "s": null,
+        "im": 1603940,
+        "vm": 1,
+        "m": "26:43.94",
+        "pt": 60,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:39.53",
+        "iv": "+7.93",
+        "er": "27:08.20",
+        "pr": "27:08.20",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:08.7",
+            "cs": "3:08.7"
+          },
+          {
+            "sp": "3:08.1",
+            "cs": "6:16.8"
+          },
+          {
+            "sp": "3:19.7",
+            "cs": "9:36.5"
+          },
+          {
+            "sp": "3:14.3",
+            "cs": "12:50.8"
+          },
+          {
+            "sp": "3:31.0",
+            "cs": "16:21.8"
+          },
+          {
+            "sp": "3:20.4",
+            "cs": "19:42.2"
+          },
+          {
+            "sp": "3:33.1",
+            "cs": "23:15.3"
+          },
+          {
+            "sp": "3:28.7",
+            "cs": "26:44.0"
+          }
+        ],
+        "a": {
+          "i": 42890005,
+          "n": "Ethan Newsome",
+          "fn": "Ethan",
+          "l": "Newsome",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/XMoMxIDoT2vauHIHg4W-Qea-lHH442PZBW_b830Pd6XQ00KP488_9r03YcYNXVdWQ1dTLYL_UlZO5sKFFb9aiYigvSjo9xIF6fY=s80-p",
+          "cco": "",
+          "cm": 197,
+          "ani": 29547225,
+          "rg": "ETH-NEWD286C51",
+          "xc": 1,
+          "t": {
+            "i": 1379474,
+            "f": "Troy",
+            "n": "Troy",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/troy.svg",
+            "ani": 21478,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545631,
+        "no": "",
+        "p": "62",
+        "hl": "62",
+        "ro": 61,
+        "s": null,
+        "im": 1606680,
+        "vm": 1,
+        "m": "26:46.68",
+        "pt": 0,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:42.27",
+        "iv": "+2.74",
+        "er": "25:40.50",
+        "pr": "25:40.50",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:55.9",
+            "cs": "2:55.9"
+          },
+          {
+            "sp": "2:59.3",
+            "cs": "5:55.2"
+          },
+          {
+            "sp": "3:15.6",
+            "cs": "9:10.8"
+          },
+          {
+            "sp": "3:16.5",
+            "cs": "12:27.3"
+          },
+          {
+            "sp": "3:31.8",
+            "cs": "15:59.1"
+          },
+          {
+            "sp": "3:24.3",
+            "cs": "19:23.4"
+          },
+          {
+            "sp": "3:41.9",
+            "cs": "23:05.3"
+          },
+          {
+            "sp": "3:41.4",
+            "cs": "26:46.7"
+          }
+        ],
+        "a": {
+          "i": 42889945,
+          "n": "Ryan Hughes",
+          "fn": "Ryan",
+          "l": "Hughes",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/Ex5GWjksQC5glWWec6o0QUBIe7oZR1Jo0rGxkx9pNFwXwd14YBK-iKAuZIu_rCR8Bxp9JXN9ORWXY5J6_VnSjamnQt7wunXrKsg=s80-p",
+          "cco": "",
+          "cm": 167,
+          "ani": 29523500,
+          "rg": "RYA-HUGF32AE31",
+          "xc": 1,
+          "t": {
+            "i": 1379471,
+            "f": "Marshall",
+            "n": "Marshall",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/marshall.svg",
+            "ani": 21074,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545648,
+        "no": "",
+        "p": "63",
+        "hl": "63",
+        "ro": 62,
+        "s": null,
+        "im": 1606910,
+        "vm": 1,
+        "m": "26:46.91",
+        "pt": 61,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:42.50",
+        "iv": "+0.23",
+        "er": "27:29.60",
+        "pr": "27:29.60",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:09.1",
+            "cs": "3:09.1"
+          },
+          {
+            "sp": "3:12.5",
+            "cs": "6:21.6"
+          },
+          {
+            "sp": "3:22.4",
+            "cs": "9:44.0"
+          },
+          {
+            "sp": "3:15.7",
+            "cs": "12:59.7"
+          },
+          {
+            "sp": "3:28.2",
+            "cs": "16:27.9"
+          },
+          {
+            "sp": "3:19.1",
+            "cs": "19:47.0"
+          },
+          {
+            "sp": "3:31.4",
+            "cs": "23:18.4"
+          },
+          {
+            "sp": "3:28.6",
+            "cs": "26:47.0"
+          }
+        ],
+        "a": {
+          "i": 42889975,
+          "n": "Jean-Pierre Le Roux",
+          "fn": "Jean-Pierre",
+          "l": "Le Roux",
+          "y": "SR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/03XSwnhlde8uvKHBY_G9Gqk14WXz6Xhk4bGxJDo0vipjNfCScGKuEJRsFBeWv7e6V__0HQGbIhNbEdgyNqRAu3OThZvwIL6U8A=s80-p",
+          "cco": "",
+          "cm": 178,
+          "ani": 19383717,
+          "rg": "JEA-LER2E1AA51",
+          "xc": 1,
+          "t": {
+            "i": 1379472,
+            "f": "South Alabama",
+            "n": "South Alabama",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/south-ala.svg",
+            "ani": 21360,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545641,
+        "no": "",
+        "p": "64",
+        "hl": "64",
+        "ro": 63,
+        "s": null,
+        "im": 1608290,
+        "vm": 1,
+        "m": "26:48.29",
+        "pt": 0,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:43.88",
+        "iv": "+1.38",
+        "er": "25:49.60",
+        "pr": "25:49.60",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "3:01.9",
+            "cs": "3:01.9"
+          },
+          {
+            "sp": "3:04.1",
+            "cs": "6:06.0"
+          },
+          {
+            "sp": "3:21.1",
+            "cs": "9:27.1"
+          },
+          {
+            "sp": "3:16.2",
+            "cs": "12:43.3"
+          },
+          {
+            "sp": "3:30.4",
+            "cs": "16:13.7"
+          },
+          {
+            "sp": "3:21.3",
+            "cs": "19:35.0"
+          },
+          {
+            "sp": "3:35.5",
+            "cs": "23:10.5"
+          },
+          {
+            "sp": "3:37.8",
+            "cs": "26:48.3"
+          }
+        ],
+        "a": {
+          "i": 42889989,
+          "n": "JD Wine",
+          "fn": "JD",
+          "l": "Wine",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/bWOyho97bI4xS9QA2Hpkgd9WRVs3bcw3eZbS_pNquFYd9eVOfEDuDTIIileRBR9IpWnKnievfviztzXOeXcIVJM8eKtuQMMlFQ=s80-p",
+          "cco": "",
+          "cm": 181,
+          "ani": 29568946,
+          "rg": "JD*-WIN1A7C50A",
+          "xc": 1,
+          "t": {
+            "i": 1379472,
+            "f": "South Alabama",
+            "n": "South Alabama",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/south-ala.svg",
+            "ani": 21360,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545628,
+        "no": "",
+        "p": "65",
+        "hl": "65",
+        "ro": 64,
+        "s": null,
+        "im": 1610820,
+        "vm": 1,
+        "m": "26:50.82",
+        "pt": 0,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:46.41",
+        "iv": "+2.53",
+        "er": "24:52.20",
+        "pr": "24:52.20",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "2:51.7",
+            "cs": "2:51.7"
+          },
+          {
+            "sp": "2:56.5",
+            "cs": "5:48.2"
+          },
+          {
+            "sp": "3:09.5",
+            "cs": "8:57.7"
+          },
+          {
+            "sp": "3:17.2",
+            "cs": "12:14.9"
+          },
+          {
+            "sp": "3:39.3",
+            "cs": "15:54.2"
+          },
+          {
+            "sp": "3:32.4",
+            "cs": "19:26.6"
+          },
+          {
+            "sp": "3:40.1",
+            "cs": "23:06.7"
+          },
+          {
+            "sp": "3:44.2",
+            "cs": "26:50.9"
+          }
+        ],
+        "a": {
+          "i": 42889924,
+          "n": "Owen Morgan",
+          "fn": "Owen",
+          "l": "Morgan",
+          "y": "FR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/w6Ca3acsgGRmch0HX0g6jvpiULlwWM75_pIPVd-fKudewLGVgMWpvrBmEBEE8POp5Iengi7qhViOMwFoW6nxNn8Z9rwAkx0rWDzr=s80-p",
+          "cco": "",
+          "cm": 144,
+          "ani": 29575803,
+          "rg": "OWE-MOR884C663",
+          "xc": 1,
+          "t": {
+            "i": 1379468,
+            "f": "Arkansas State",
+            "n": "Arkansas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/arkansas-st.svg",
+            "ani": 20620,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545606,
+        "no": "",
+        "p": "66",
+        "hl": "66",
+        "ro": 65,
+        "s": null,
+        "im": 1620000,
+        "vm": 1,
+        "m": "27:00.00",
+        "pt": 0,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:55.59",
+        "iv": "+9.18",
+        "er": "27:15.90",
+        "pr": "27:15.90",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "2:59.5",
+            "cs": "2:59.5"
+          },
+          {
+            "sp": "3:06.3",
+            "cs": "6:05.8"
+          },
+          {
+            "sp": "3:21.8",
+            "cs": "9:27.6"
+          },
+          {
+            "sp": "3:15.1",
+            "cs": "12:42.7"
+          },
+          {
+            "sp": "3:31.5",
+            "cs": "16:14.2"
+          },
+          {
+            "sp": "3:25.3",
+            "cs": "19:39.5"
+          },
+          {
+            "sp": "3:39.2",
+            "cs": "23:18.7"
+          },
+          {
+            "sp": "3:41.3",
+            "cs": "27:00.0"
+          }
+        ],
+        "a": {
+          "i": 42890083,
+          "n": "Silas Christie",
+          "fn": "Silas",
+          "l": "Christie",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/CL6nNPFhB8FHE1h6_2lqSwqUzthfVSQB9iOgn3M6Y9OZP0jGiz4StQJIEba3G3rZTmnH--cWvOKZpY1JIZGyMO3YwseLrbM417c=s80-p",
+          "cco": "",
+          "cm": 202,
+          "ani": 26561471,
+          "rg": "SIL-CHRB6965BF",
+          "xc": 1,
+          "t": {
+            "i": 1379479,
+            "f": "ULM",
+            "n": "ULM",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/5828a4a7befde54356b85194c2ad8904-1714211834.png",
+            "ani": 21050,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545611,
+        "no": "",
+        "p": "67",
+        "hl": "67",
+        "ro": 66,
+        "s": null,
+        "im": 1623590,
+        "vm": 1,
+        "m": "27:03.59",
+        "pt": 62,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+2:59.18",
+        "iv": "+3.59",
+        "er": "26:10.80",
+        "pr": "26:10.80",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "3:03.6",
+            "cs": "3:03.6"
+          },
+          {
+            "sp": "3:02.0",
+            "cs": "6:05.6"
+          },
+          {
+            "sp": "3:18.1",
+            "cs": "9:23.7"
+          },
+          {
+            "sp": "3:18.6",
+            "cs": "12:42.3"
+          },
+          {
+            "sp": "3:33.5",
+            "cs": "16:15.8"
+          },
+          {
+            "sp": "3:26.0",
+            "cs": "19:41.8"
+          },
+          {
+            "sp": "3:40.2",
+            "cs": "23:22.0"
+          },
+          {
+            "sp": "3:41.6",
+            "cs": "27:03.6"
+          }
+        ],
+        "a": {
+          "i": 42890004,
+          "n": "Patterson Graham",
+          "fn": "Patterson",
+          "l": "Graham",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/5_RUTWpul5XA0dYq_7wHqbh36VZSoHlK0FpmwIDsoy5e3KFii5VqnqVS4bQ3hiPZEWjmvjhK9GfT3DB-hQABZI07ZAw0ou8qroY=s80-p",
+          "cco": "",
+          "cm": 195,
+          "ani": 26491037,
+          "rg": "PAT-GRA98C9518",
+          "xc": 1,
+          "t": {
+            "i": 1379474,
+            "f": "Troy",
+            "n": "Troy",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/troy.svg",
+            "ani": 21478,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545616,
+        "no": "",
+        "p": "68",
+        "hl": "68",
+        "ro": 67,
+        "s": null,
+        "im": 1637590,
+        "vm": 1,
+        "m": "27:17.59",
+        "pt": 0,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+3:13.18",
+        "iv": "+14.00",
+        "er": "25:42.50",
+        "pr": "25:42.50",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "3:01.0",
+            "cs": "3:01.0"
+          },
+          {
+            "sp": "3:08.1",
+            "cs": "6:09.1"
+          },
+          {
+            "sp": "3:26.9",
+            "cs": "9:36.0"
+          },
+          {
+            "sp": "3:18.6",
+            "cs": "12:54.6"
+          },
+          {
+            "sp": "3:37.9",
+            "cs": "16:32.5"
+          },
+          {
+            "sp": "3:26.1",
+            "cs": "19:58.6"
+          },
+          {
+            "sp": "3:41.3",
+            "cs": "23:39.9"
+          },
+          {
+            "sp": "3:37.7",
+            "cs": "27:17.6"
+          }
+        ],
+        "a": {
+          "i": 42890045,
+          "n": "David Herring",
+          "fn": "David",
+          "l": "Herring",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/oRGxSYH6d9ybbeOkhRWCaaLnhuKYvUdzoFepfHhqv8DRsdzX8DYrDczHMxK8F127JdJNZ2yMbDWAYdA7T-y0YonuiSKvoKSfWtk=s80-p",
+          "cco": "",
+          "cm": 185,
+          "ani": 27794712,
+          "rg": "DAV-HER0780546",
+          "xc": 1,
+          "t": {
+            "i": 1379476,
+            "f": "Texas State",
+            "n": "Texas State",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/texas-st.svg",
+            "ani": 21460,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545640,
+        "no": "",
+        "p": "69",
+        "hl": "69",
+        "ro": 68,
+        "s": null,
+        "im": 1639220,
+        "vm": 1,
+        "m": "27:19.22",
+        "pt": 63,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+3:14.81",
+        "iv": "+1.63",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "3:16.3",
+            "cs": "3:16.3"
+          },
+          {
+            "sp": "3:21.7",
+            "cs": "6:38.0"
+          },
+          {
+            "sp": "3:34.7",
+            "cs": "10:12.7"
+          },
+          {
+            "sp": "3:24.5",
+            "cs": "13:37.2"
+          },
+          {
+            "sp": "3:29.6",
+            "cs": "17:06.8"
+          },
+          {
+            "sp": "3:17.9",
+            "cs": "20:24.7"
+          },
+          {
+            "sp": "3:27.9",
+            "cs": "23:52.6"
+          },
+          {
+            "sp": "3:26.7",
+            "cs": "27:19.3"
+          }
+        ],
+        "a": {
+          "i": 42890039,
+          "n": "Pierre Boerkey",
+          "fn": "Pierre",
+          "l": "Boerkey",
+          "y": "JR",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "",
+          "cco": "",
+          "cm": 193,
+          "ani": 29547226,
+          "rg": "PIE-BOEFB608B7",
+          "xc": 1,
+          "t": {
+            "i": 1379474,
+            "f": "Troy",
+            "n": "Troy",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/troy.svg",
+            "ani": 21478,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545614,
+        "no": "",
+        "p": "70",
+        "hl": "70",
+        "ro": 69,
+        "s": null,
+        "im": 1644980,
+        "vm": 1,
+        "m": "27:24.98",
+        "pt": 0,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+3:20.57",
+        "iv": "+5.76",
+        "er": "26:49.30",
+        "pr": "26:49.30",
+        "mps": [],
+        "irs": [
+          {
+            "sp": "3:09.4",
+            "cs": "3:09.4"
+          },
+          {
+            "sp": "3:10.0",
+            "cs": "6:19.4"
+          },
+          {
+            "sp": "3:27.7",
+            "cs": "9:47.1"
+          },
+          {
+            "sp": "3:19.0",
+            "cs": "13:06.1"
+          },
+          {
+            "sp": "3:33.6",
+            "cs": "16:39.7"
+          },
+          {
+            "sp": "3:22.4",
+            "cs": "20:02.1"
+          },
+          {
+            "sp": "3:39.3",
+            "cs": "23:41.4"
+          },
+          {
+            "sp": "3:43.6",
+            "cs": "27:25.0"
+          }
+        ],
+        "a": {
+          "i": 42889979,
+          "n": "Justin Descant",
+          "fn": "Justin",
+          "l": "Descant",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/mdvT7GOcNseDtxo4XqwiCbJ1BwwPeKpWphtKdNrk_7ZT5WefRtk7t7p2CzCdgOqz5A-r-EjUcYbuJmeL6-ujAJtbxZ4Iq_ClH8L6=s80-p",
+          "cco": "",
+          "cm": 156,
+          "ani": 26585594,
+          "rg": "JUS-DES7B0B102",
+          "xc": 1,
+          "t": {
+            "i": 1379467,
+            "f": "Louisiana",
+            "n": "Louisiana",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/la-lafayette.svg",
+            "ani": 21049,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      },
+      {
+        "hn": 0,
+        "i": 32545612,
+        "no": "",
+        "p": "71",
+        "hl": "71",
+        "ro": 70,
+        "s": null,
+        "im": 1662720,
+        "vm": 1,
+        "m": "27:42.72",
+        "pt": 0,
+        "cp": null,
+        "co": null,
+        "w": "",
+        "hfli": 0,
+        "hflv": 0,
+        "ith": "",
+        "iu": "",
+        "hfav": 0,
+        "gap": "+3:38.31",
+        "iv": "+17.74",
+        "er": "27:43.50",
+        "pr": "27:43.50",
+        "mps": [],
+        "ern": "PR",
+        "irs": [
+          {
+            "sp": "3:08.8",
+            "cs": "3:08.8"
+          },
+          {
+            "sp": "3:08.4",
+            "cs": "6:17.2"
+          },
+          {
+            "sp": "3:27.0",
+            "cs": "9:44.2"
+          },
+          {
+            "sp": "3:23.6",
+            "cs": "13:07.8"
+          },
+          {
+            "sp": "3:33.7",
+            "cs": "16:41.5"
+          },
+          {
+            "sp": "3:28.0",
+            "cs": "20:09.5"
+          },
+          {
+            "sp": "3:40.5",
+            "cs": "23:50.0"
+          },
+          {
+            "sp": "3:52.8",
+            "cs": "27:42.8"
+          }
+        ],
+        "a": {
+          "i": 42890006,
+          "n": "Bennett Phillips",
+          "fn": "Bennett",
+          "l": "Phillips",
+          "y": "SO",
+          "ag": "",
+          "g": "Male",
+          "mi": 57259,
+          "phu": "https://lh3.googleusercontent.com/1Eze7fcjOirXovExz9sMfamX_e5uK3P8UsCqnlTEksmP8rjsBJzThVbKXxESTCDC5mqDExsPVUgn_YkIAO2mAJynm7f9vxUD1lI=s80-p",
+          "cco": "",
+          "cm": 198,
+          "ani": 26491034,
+          "rg": "BEN-PHIEAE8B3C",
+          "xc": 1,
+          "t": {
+            "i": 1379474,
+            "f": "Troy",
+            "n": "Troy",
+            "mi": 57259,
+            "hr": false,
+            "hir": false,
+            "hrr": false,
+            "he": false,
+            "hie": false,
+            "hre": false,
+            "cco": "",
+            "lg": "https://static.trackmeet.io/team-images/troy.svg",
+            "ani": 21478,
+            "xc": 1,
+            "hbl": true,
+            "rks": [],
+            "rknfe": [],
+            "rknma": []
+          }
+        }
+      }
+    ],
+    "irds": [],
+    "itds": [],
+    "spd": [
+      {
+        "n": "1K",
+        "nu": 0
+      },
+      {
+        "n": "2K",
+        "nu": 1
+      },
+      {
+        "n": "3K",
+        "nu": 2
+      },
+      {
+        "n": "4K",
+        "nu": 3
+      },
+      {
+        "n": "5K",
+        "nu": 4
+      },
+      {
+        "n": "6K",
+        "nu": 5
+      },
+      {
+        "n": "7K",
+        "nu": 6
+      },
+      {
+        "n": "8K",
+        "nu": 7
+      }
+    ]
+  }
+}
