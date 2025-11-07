@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!-- new improved vs legacy -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PACE</title>
+    <!-- Vite handles Tailwind + Chart.js via ESM; no CDN tags -->
+    <script type="module" crossorigin src="/pace/assets/index-BCccimmN.js"></script>
+    <link rel="stylesheet" crossorigin href="/pace/assets/index-ClFvaGVM.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="dashboard-header">
+        <div class="header-content">
+          <h1>Performance Analysis & Coaching Engine (PACE) </h1>
+          <p class="subtitle" id="raceTitle">RACE_TITLE</p>
+          <div class="race-info">
+            <span id="raceDate">📍 RACE_DATE</span>
+            <span id="numAthletes">👥 NUM_ATHLETES</span>
+            <span id="numTeams">🏫 NUM_TEAMS</span>
+          </div>
+        </div>
+
+
+        <div class="event-selector-section">
+          <label for="eventSelect" class="event-selector-label">
+            📊 Select Race to Analyze:
+          </label>
+          <div class="event-selector-wrapper">
+            <select id="eventSelect" class="event-selector">
+              <option value="">Choose a race...</option>
+            </select>
+            <button id="loadEventBtn" class="btn-load-event">
+              Load Race Data
+            </button>
+          </div>
+          <p class="event-selector-hint">
+            New races are added automatically after each meet weekend.
+          </p>
+        </div>
+
+
+        <!-- optional hint area (safe to keep) -->
+        <div id="initHint" style="margin:.5rem 0; font-size:.9rem; opacity:.8;"></div>
+
+      </header>
+
+      <section class="controls-panel">
+        <div class="control-group">
+            <label for="teamSelect">Primary Team:</label>
+            <select id="teamSelect" class="team-select"></select>
+        </div>
+    
+        <div class="control-group">
+            <label for="compareTeams">Compare Teams:</label>
+            <select id="compareTeams" multiple class="team-select-multi"></select>
+        </div>
+    
+        <div class="control-group">
+            <label>
+                <input type="checkbox" id="showDisplacers" />
+                Show 6th/7th Runners (Displacers)
+            </label>
+        </div>
+    
+        <button id="resetBtn" class="btn-reset">Reset Filters</button>
+    </section>
+     
+
+      <main class="chart-grid">
+        <!-- Collapsible Individual Analysis Section -->
+        <section class="chart-card collapsible-section">
+          <button class="collapse-toggle" id="teamPaceToggle">
+            <span class="toggle-icon">▶</span>
+            <h3>Team Progression <span class="section-label">[In-Team Comparison]</span></h3>
+          </button>
+          <div class="collapsible-content" id="teamPaceContent" style="display: none;">
+            <p class="chart-description" style="margin-bottom: 1rem;">Per-split performance for every athlete on a team. Toggle between pace and position views.</p>
+            <div class="chart-controls">
+              <label>Team:
+                <select id="teamSelectPace"></select>
+              </label>
+              <label>
+                <input type="checkbox" id="teamPaceShowAvg" checked>
+                <span>Show team average</span>
+              </label>
+              <label>B Team:
+                <select id="teamSelectPaceB">
+                  <option value="">None</option>
+                </select>
+              </label>
+              <label>
+                <input type="checkbox" id="showBTeamRunners">
+                <span>Show B Team Runners</span>
+              </label>
+              <button class="btn-toggle" id="teamPaceViewToggle">
+                Switch to Position
+              </button>
+            </div>
+            <div class="chart-container"><canvas id="teamPaceChart"></canvas></div>
+            <p class="chart-note">💡 Click legend items to hide/show individual runners. Filters above do not affect this chart.</p>
+          </div>
+        </section>
+
+        <section class="chart-card collapsible-section">
+          <button class="collapse-toggle" id="runnerCompareToggle">
+            <span class="toggle-icon">▶</span>
+            <h3>Runner Progression <span class="section-label">[Individual Comparison]</span></h3>
+          </button>
+          <div class="collapsible-content" id="runnerCompareContent" style="display: none;">
+            <p class="chart-description" style="margin-bottom: 1rem;">Compare split-by-split performance between any two athletes.</p>
+            <div class="chart-controls">
+              <label>Runner A:
+                <select id="runnerASelect"></select>
+              </label>
+              <label>Runner B:
+                <select id="runnerBSelect"></select>
+              </label>
+              <button class="btn-toggle" id="runnerCompareViewToggle">
+                Switch to Position
+              </button>
+            </div>  
+            <div class="chart-container"><canvas id="runnerCompareChart"></canvas></div>
+            <p class="chart-note">💡 Filters above do not affect this chart.</p>
+          </div>
+        </section>
+
+
+        <section class="chart-card">
+          <div class="chart-header">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h2>📊 Split Pace Progression</h2>
+                <p class="chart-description">Compare interval pacing (time per kilometer).</p>
+              </div>
+              <button class="btn-toggle" id="pacingViewToggle">
+                Switch to Position
+              </button>
+            </div>
+          </div>
+          <div class="chart-container"><canvas id="pacingChart"></canvas></div>
+          <div class="chart-insights" id="pacingInsights"></div>
+        </section>
+
+        <section class="chart-card">
+          <div class="chart-header">
+            <h2>📈 Position Movement Through Race</h2>
+            <p class="chart-description">Track place changes at each split.</p>
+          </div>
+          <div class="chart-container"><canvas id="positionChart"></canvas></div>
+          <div class="chart-insights" id="positionInsights"></div>
+        </section>
+
+        <section class="chart-card">
+          <div class="chart-header">
+            <h2>📏 Team Spread Evolution</h2>
+            <p class="chart-description">Pack time from first to fifth scorer.</p>
+          </div>
+          <div class="chart-container"><canvas id="spreadChart"></canvas></div>
+          <div class="chart-insights" id="spreadInsights"></div>
+        </section>
+
+        <section class="chart-card">
+          <div class="chart-header">
+            <h2>🏆 Cumulative Team Scoring</h2>
+            <p class="chart-description">XC scoring progression.</p>
+          </div>
+          <div class="chart-container"><canvas id="scoringChart"></canvas></div>
+          <div class="chart-insights" id="scoringInsights"></div>
+        </section>
+      </main>
+
+      <section class="data-table-section">
+        <h2>📋 Race Results</h2>
+        <button id="loadResultsBtn" class="btn-primary" style="margin-bottom: 1rem;">
+          Show Race Results
+        </button>
+        <div id="resultsTableWrapper" style="display: none;">
+          <div class="table-controls">
+            <input type="text" id="searchAthlete" placeholder="Search athlete..." />
+            <select id="filterTeam"><option value="">All Teams</option></select>
+          </div>
+          <div class="table-container">
+            <table id="resultsTable">
+              <thead>
+                <tr>
+                  <th>Place</th>
+                  <th>Name</th>
+                  <th>Team</th>
+                  <th>Time</th>
+                  <th>Points</th>
+                  <th>1K</th><th>2K</th><th>3K</th><th>4K</th><th>5K</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <footer class="dashboard-footer">
+        <p>
+          Built with Vite + Tailwind + Chart.js + vanilla modules<br>
+          🏃‍♀️ Sun Belt XC Championship<br>
+          <a href="https://github.com/yourusername/race-analytics" target="_blank">Source on GitHub</a>
+        </p>
+      </footer>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+      <div class="spinner"></div>
+      <p>Loading race data...</p>
+    </div>
+    <!-- Event selector -->
+    <!-- single entry point; Vite loads tw.css/styles via main.js -->
+  </body>
+</html>
