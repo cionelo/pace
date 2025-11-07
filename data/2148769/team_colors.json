@@ -1,0 +1,171 @@
+{
+  "c70a92e3200def0c6e6c1ae7d89a7b47-1694792215.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/c70a92e3200def0c6e6c1ae7d89a7b47-1694792215.svg",
+    "primary_hex": "#0A1F41",
+    "palette": [
+      "#0A1F41",
+      "#772330"
+    ]
+  },
+  "montevallo.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/montevallo.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#3D1152",
+      "#A25EB5",
+      "#FFC629",
+      "#FFFFFF"
+    ]
+  },
+  "union-tn.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/union-tn.svg",
+    "primary_hex": "#1A1919",
+    "palette": [
+      "#1A1919",
+      "#8A8B8A",
+      "#951432",
+      "#CBCCCB",
+      "#FFFFFE"
+    ]
+  },
+  "christian-bros.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/christian-bros.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#B3A098",
+      "#C6B6B0",
+      "#E51636",
+      "#FFFFFF"
+    ]
+  },
+  "west-florida.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/west-florida.svg",
+    "primary_hex": "#0E2B58",
+    "palette": [
+      "#0E2B58",
+      "#26B481",
+      "#2D7BC8",
+      "#C6C5C5",
+      "#FFFFFF"
+    ]
+  },
+  "aub-montgomery.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/aub-montgomery.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#EF3920",
+      "#FFFFFF"
+    ]
+  },
+  "west-ala.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/west-ala.svg",
+    "primary_hex": "#A91A2D",
+    "palette": [
+      "#A91A2D"
+    ]
+  },
+  "valdosta-st.svg": {
+    "logo_url": "https://static.trackmeet.io/team-images/valdosta-st.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#D91A31",
+      "#FEFEFE"
+    ]
+  },
+  "Alabama-Huntsville": {
+    "logo_url": "https://static.trackmeet.io/team-images/26f34708fcdca2eb982f253ea4b576d3-1759859670.png",
+    "primary_hex": "",
+    "palette": []
+  },
+  "Lee (Tenn.)": {
+    "logo_url": "https://static.trackmeet.io/team-images/c70a92e3200def0c6e6c1ae7d89a7b47-1694792215.svg",
+    "primary_hex": "#0A1F41",
+    "palette": [
+      "#0A1F41",
+      "#772330"
+    ]
+  },
+  "Montevallo": {
+    "logo_url": "https://static.trackmeet.io/team-images/montevallo.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#3D1152",
+      "#A25EB5",
+      "#FFC629",
+      "#FFFFFF"
+    ]
+  },
+  "Union (Tenn.)": {
+    "logo_url": "https://static.trackmeet.io/team-images/union-tn.svg",
+    "primary_hex": "#1A1919",
+    "palette": [
+      "#1A1919",
+      "#8A8B8A",
+      "#951432",
+      "#CBCCCB",
+      "#FFFFFE"
+    ]
+  },
+  "Christian Bros.": {
+    "logo_url": "https://static.trackmeet.io/team-images/christian-bros.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#B3A098",
+      "#C6B6B0",
+      "#E51636",
+      "#FFFFFF"
+    ]
+  },
+  "Mississippi College": {
+    "logo_url": "https://static.trackmeet.io/team-images/e02b8e71ef7cfc1e963e4dc32cdd003b-1760551505.png",
+    "primary_hex": "",
+    "palette": []
+  },
+  "West Florida": {
+    "logo_url": "https://static.trackmeet.io/team-images/west-florida.svg",
+    "primary_hex": "#0E2B58",
+    "palette": [
+      "#0E2B58",
+      "#26B481",
+      "#2D7BC8",
+      "#C6C5C5",
+      "#FFFFFF"
+    ]
+  },
+  "Auburn Montgomery": {
+    "logo_url": "https://static.trackmeet.io/team-images/aub-montgomery.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#EF3920",
+      "#FFFFFF"
+    ]
+  },
+  "Trevecca Nazarene": {
+    "logo_url": "https://static.trackmeet.io/team-images/fd3032c4432f7b37693174ec498b3bfb-1740087170.png",
+    "primary_hex": "",
+    "palette": []
+  },
+  "West Alabama": {
+    "logo_url": "https://static.trackmeet.io/team-images/west-ala.svg",
+    "primary_hex": "#A91A2D",
+    "palette": [
+      "#A91A2D"
+    ]
+  },
+  "Valdosta State": {
+    "logo_url": "https://static.trackmeet.io/team-images/valdosta-st.svg",
+    "primary_hex": "#231F20",
+    "palette": [
+      "#231F20",
+      "#D91A31",
+      "#FEFEFE"
+    ]
+  }
+}

@@ -4,4 +4,4 @@ node_modules/
    *.log
    .vscode/
    .idea/
-   dist/
+   dist/venv/

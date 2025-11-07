@@ -1,10 +1,50 @@
 [
   {
     "id": "2149044",
-    "name": "Sun Belt XC Championship - Women's 5K",
-    "date": "2024-11-01",
-    "location": "Myrtle Beach, SC",
+    "name": "2025 Sun Belt XC Championship - Women's 5K",
+    "date": "2025-10-31",
+    "location": "Unknown",
     "gender": "Women",
     "distance": "5K"
+  },
+  {
+    "id": "2149045",
+    "name": "2025 Sun Belt XC Championship - Men's 8K",
+    "date": "2025-10-31",
+    "location": "Unknown",
+    "gender": "Men",
+    "distance": "8K"
+  },
+  {
+    "id": "2148769",
+    "name": "2025 GSC XC Championships - Men's 8K",
+    "date": "2025-10-25",
+    "location": "Unknown",
+    "gender": "Men",
+    "distance": "8K"
+  },
+  {
+    "id": "2148768",
+    "name": "2025 GSC XC Championships - Women's 6K",
+    "date": "2025-10-25",
+    "location": "Unknown",
+    "gender": "Women",
+    "distance": "6K"
+  },
+  {
+    "id": "2151153",
+    "name": "ACCC/Region 22 Championships 2025 - Women's 5K",
+    "date": "2025-10-24",
+    "location": "Unknown",
+    "gender": "Women",
+    "distance": "5K"
+  },
+  {
+    "id": "2151152",
+    "name": "ACCC/Region 22 Championships 2025 - Men's 8K",
+    "date": "2025-10-24",
+    "location": "Unknown",
+    "gender": "Men",
+    "distance": "8K"
   }
 ]
