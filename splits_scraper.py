@@ -1,29 +1,10 @@
 # splits_scraper.py
-# v2.0 — capture split_report + ind_res_list JSON and team colors
-# Saves under: data/<event_id>/{split_report.json, ind_res_list.json, team_colors.json}
-#
-# Requires:
-#   pip install playwright bs4 lxml requests
-#   python -m playwright install chromium
-
-# Usage:
-#   python splits_scraper.py --url "https://live.xpresstiming.com/meets/57259/events/xc/2149044"
-#
-# Run headful (first time recommended so JS loads splits):
-#   python splits_scraper.py --url "https://live.xpresstiming.com/meets/57259/events/xc/2149044" --headful
-#
-# Force rebuild / overwrite cache:
-#   python splits_scraper.py --url "https://live.xpresstiming.com/meets/57259/events/xc/2149044" --force
-#
-# Custom output directory (default = ./data):
-#   python splits_scraper.py --url "https://live.xpresstiming.com/meets/57259/events/xc/2149044" --outdir "./race_cache"
-#
-# What gets created (per event ID):
-#   data/<event_id>/
-#     split_report.json     # per-split timing data + place movement
-#     ind_res_list.json     # result labels, PR/SB flags, bib, team text labels
-#     team_colors.json      # primary hex + palette extracted from SVG logos
-
+# v2.1 — CI-hardened: always write split_report.json, ind_res_list.json, team_colors.json
+# - Broader network sniff (split_report, ind_res_list_doc, ind_res_list, res_list)
+# - Alternating tab clicks (Splits <-> Results/Individuals) with timed retries
+# - Headless-safe scrolling + viewport nudges
+# - Guaranteed fallback: DOM scrape builds minimal ind_res_list.json if network never yields JSON
+# - More explicit logging for GitHub Actions
 
 import argparse, asyncio, json, pathlib, re, sys, time
 from typing import Any, Dict, List, Optional, Tuple
@@ -47,7 +28,6 @@ def extract_hexes(svg_text: str) -> List[str]:
     return [h.upper() for h in uniq]
 
 def pick_primary(hexes: List[str]) -> Optional[str]:
-    # prefer non-white/black-ish colors
     bad = {"#000000","#0D0D0D","#111111","#1A1A1A","#212121",
            "#FFFFFF","#FFFDFD","#FEFEFE","#F6F6F6"}
     for h in hexes:
@@ -78,18 +58,24 @@ def build_team_colors_json(logos: Dict[str, str]) -> Dict[str, Any]:
         }
     return out
 
-# -------- Playwright capture --------
+# -------- URL classifiers --------
 def _looks_like_event_json(u: str) -> bool:
-    # accept both key feeds regardless of suffix/content-type
     ul = u.lower()
-    return ("split_report" in ul) or ("ind_res_list_doc" in ul)
+    return (
+        ("split_report" in ul)
+        or ("ind_res_list_doc" in ul)
+        or ("ind_res_list" in ul)
+        or ("res_list" in ul and "/api/" in ul)
+    )
 
 def _is_split(u: str) -> bool:
     return "split_report" in u.lower()
 
 def _is_reslist(u: str) -> bool:
-    return "ind_res_list_doc" in u.lower()
+    ul = u.lower()
+    return ("ind_res_list_doc" in ul) or ("ind_res_list" in ul) or ("res_list" in ul)
 
+# -------- Playwright capture --------
 async def _scroll_everywhere(page, total_ms=20000):
     # window scroll
     t0 = time.time()
@@ -97,7 +83,7 @@ async def _scroll_everywhere(page, total_ms=20000):
     while (time.time() - t0) * 1000 < total_ms:
         await page.mouse.wheel(0, step_px)
         await page.wait_for_timeout(160)
-    # scroll all overflow containers
+    # scroll overflow containers
     await page.evaluate("""
 (() => {
   const nodes = Array.from(document.querySelectorAll('*'));
@@ -111,23 +97,29 @@ async def _scroll_everywhere(page, total_ms=20000):
 })();
 """)
 
-async def _click_splits_tab(page):
-    labels = ["Splits", "SPLITS", "Split"]
+async def _click_tab(page, labels: List[str], log_prefix: str) -> bool:
     for text in labels:
         try:
             await page.get_by_role("tab", name=text).click(timeout=900)
-            await page.wait_for_timeout(450)
-            print(f"[ui] clicked tab via role: {text}")
+            await page.wait_for_timeout(350)
+            print(f"[ui] {log_prefix} via role: {text}")
             return True
         except Exception:
             try:
                 await page.get_by_text(text, exact=False).click(timeout=900)
-                await page.wait_for_timeout(450)
-                print(f"[ui] clicked tab via text: {text}")
+                await page.wait_for_timeout(350)
+                print(f"[ui] {log_prefix} via text: {text}")
                 return True
             except Exception:
                 continue
     return False
+
+async def _click_splits_tab(page):
+    return await _click_tab(page, ["Splits","SPLITS","Split"], "clicked Splits")
+
+async def _click_results_tab(page):
+    # Sites vary: Results/Individuals/Athletes
+    return await _click_tab(page, ["Results","RESULTS","Individuals","INDIVIDUALS","Individual","Athletes"], "clicked Results/Individuals")
 
 async def sniff_event_json(url: str, headful: bool) -> Tuple[Optional[Dict[str,Any]], Optional[str],
                                                               Optional[Dict[str,Any]], Optional[str],
@@ -152,47 +144,62 @@ async def sniff_event_json(url: str, headful: bool) -> Tuple[Optional[Dict[str,A
             # try JSON
             try:
                 data = await resp.json()
-            except Exception:
-                # fallback: text->json
+            except Exception as e:
                 try:
                     txt = await resp.text()
                     data = json.loads(txt)
-                except Exception:
-                    print(f"[saw event json but parse failed] {u}")
+                except Exception as e2:
+                    print(f"[json-miss] {u} ({type(e).__name__}/{type(e2).__name__})")
                     return
             if _is_split(u):
-                split_report, split_url = data, u
-                print(f"[captured split_report] {u}")
+                if split_report is None:
+                    split_report, split_url = data, u
+                    print(f"[captured split_report] {u}")
             elif _is_reslist(u):
-                ind_res, ind_url = data, u
-                print(f"[captured ind_res_list_doc] {u}")
-        except Exception:
-            pass
+                if ind_res is None:
+                    ind_res, ind_url = data, u
+                    print(f"[captured ind_res_list] {u}")
+        except Exception as e:
+            print(f"[resp-handler-err] {type(e).__name__}")
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=not headful)
+        browser = await p.chromium.launch(headless=not headful, args=[
+            # help on some CI/containers
+            "--disable-dev-shm-usage", "--no-sandbox",
+        ])
         ctx = await browser.new_context(
+            viewport={"width": 1400, "height": 1000},
             user_agent=("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                         "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15")
         )
         page = await ctx.new_page()
-        page.on("response", lambda r: asyncio.create_task(on_response(r)))
+
+        # Verbose but useful in CI logs
+        page.on("response", on_response)
 
         print(f"[nav] {url}")
         await page.goto(url, wait_until="domcontentloaded", timeout=60000)
-        await page.wait_for_timeout(1000)
+        await page.wait_for_timeout(800)
 
+        # initial tries on both tabs
+        await _click_results_tab(page)
+        await _scroll_everywhere(page, total_ms=2000)
         await _click_splits_tab(page)
-        await _scroll_everywhere(page, total_ms=20000)
+        await _scroll_everywhere(page, total_ms=2000)
 
-        # nudge up to 60s, re-clicking and scrolling
-        deadline = time.time() + 60
+        # Alternate tabs and scroll for up to ~120s
+        deadline = time.time() + 120
+        toggle = True
         while (split_report is None or ind_res is None) and time.time() < deadline:
-            await _scroll_everywhere(page, total_ms=2500)
-            await page.wait_for_timeout(300)
-            await _click_splits_tab(page)
+            if toggle:
+                await _click_splits_tab(page)
+            else:
+                await _click_results_tab(page)
+            toggle = not toggle
+            await _scroll_everywhere(page, total_ms=1800)
+            await page.wait_for_timeout(350)
 
-        # collect possible logo urls from DOM as fallback
+        # harvest logo URLs from DOM
         try:
             html = await page.content()
             soup = BeautifulSoup(html, "lxml")
@@ -210,11 +217,9 @@ async def sniff_event_json(url: str, headful: bool) -> Tuple[Optional[Dict[str,A
     def harvest_from_json(blob: Optional[Dict[str,Any]]):
         if not blob: return
         src = (blob.get("_source") or {})
-        # split_report uses spr[], ind_res_list uses r[]
         for arr_key in ("spr","r"):
             rows = src.get(arr_key) or []
             for entry in rows:
-                # normalize record shape
                 r = entry.get("r") if isinstance(entry.get("r"), dict) else entry
                 if not isinstance(r, dict): continue
                 a = r.get("a") or {}
@@ -229,12 +234,33 @@ async def sniff_event_json(url: str, headful: bool) -> Tuple[Optional[Dict[str,A
 
     return split_report, split_url, ind_res, ind_url, logos
 
+# -------- Fallback builders --------
+def build_minimal_reslist_from_dom(html: str) -> Optional[Dict[str,Any]]:
+    soup = BeautifulSoup(html, "lxml")
+    rows = []
+    # generic table scrape; adjust if needed later
+    table = soup.find("table")
+    if not table:
+        # sometimes rows are list items
+        for li in soup.select("li"):
+            txt = li.get_text(" ", strip=True)
+            if txt:
+                rows.append({"cells":[txt]})
+    else:
+        for tr in table.select("tr"):
+            cells = [c.get_text(" ", strip=True) for c in tr.select("th,td")]
+            if len(cells) >= 1:
+                rows.append({"cells": cells})
+    if rows:
+        return {"_source": {"r": rows}, "_note": "fallback_dom_scrape_minimal"}
+    return None
+
 # -------- CLI --------
 def main():
-    ap = argparse.ArgumentParser("Capture split_report + ind_res_list JSON and team colors")
+    ap = argparse.ArgumentParser("Capture split_report + ind_res_list JSON and team colors (CI-hardened)")
     ap.add_argument("--url", required=True, help="Event URL (e.g., https://live.xpresstiming.com/meets/.../2149044)")
     ap.add_argument("--outdir", default="data", help="Root folder to store cached JSONs")
-    ap.add_argument("--headful", action="store_true", help="Open a visible browser (recommended first run)")
+    ap.add_argument("--headful", action="store_true", help="Open a visible browser (optional in CI)")
     ap.add_argument("--force", action="store_true", help="Ignore cache and rebuild")
     args = ap.parse_args()
 
@@ -252,24 +278,42 @@ def main():
         print("done.")
         return
 
+    # sniff network first
     split_report, split_url, ind_res, ind_url, logos = asyncio.run(
         sniff_event_json(args.url, headful=args.headful)
     )
 
+    # if still missing res list, do a one-shot headless DOM fetch for minimal
+    if ind_res is None:
+        try:
+            # single GET to page; JS won’t run here but we only want static text fallback
+            r = requests.get(args.url, timeout=30, headers={
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
+            })
+            r.raise_for_status()
+            dom_fallback = build_minimal_reslist_from_dom(r.text)
+            if dom_fallback:
+                ind_res = dom_fallback
+                ind_url = "(fallback_dom)"
+                print("[fallback] built minimal ind_res_list from DOM")
+        except Exception as e:
+            print(f"[fallback-failed] {type(e).__name__}")
+
+    # require split_report (critical); res_list can be fallback
     if not split_report:
-        print("error: split_report not captured. Run with --headful, click 'Splits', scroll until 1K/2K/3K are visible.")
-        sys.exit(1)
+        print("error: split_report not captured. Exiting with code 2 so CI can retry.")
+        sys.exit(2)
 
     # write split_report
     split_path.write_text(json.dumps(split_report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"wrote {split_path}")
 
-    # write ind_res_list if captured
-    if ind_res:
-        reslist_path.write_text(json.dumps(ind_res, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"wrote {reslist_path}")
-    else:
-        print("warn: ind_res_list not captured; UI labels like PR/SB may be limited this run.")
+    # write ind_res_list (guaranteed by now)
+    if not ind_res:
+        ind_res = {"_source": {"r": []}, "_note": "empty_placeholder"}  # absolute last resort
+        print("[warn] writing empty placeholder ind_res_list.json")
+    reslist_path.write_text(json.dumps(ind_res, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"wrote {reslist_path}")
 
     # write team colors
     colors = build_team_colors_json(logos)
