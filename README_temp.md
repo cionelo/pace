@@ -1,3 +1,9 @@
+PROJECT IN PROGRESS
+-Tailwind is in-progress theme branch
+-still flushing out backend workflow mechanics
+  -> data curation workflow for BE (FE/UI entry pt?)
+-unsure if (how much) I want to automate
+
 ## **PACE Performance Analysis & Coaching Engine — Real-Time Analytics for the Chaos of Sports Data**
 
 This project showcases my ability to **engineer scalable data pipelines** that convert messy, vendor-specific data into structured, insight-ready formats—skills directly aligned with **marketing technology, analytics automation, and full-stack product development**.
