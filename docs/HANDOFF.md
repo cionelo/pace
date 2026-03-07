@@ -4,9 +4,7 @@
 
 ## Current State (March 7, 2026)
 
-### What's Working
-
-Full end-to-end pipeline verified:
+Full stack live and deployed. End-to-end pipeline verified:
 
 1. **Scraper** (`py/pace_scraper.py`) — Multi-provider Playwright scraper (XHR + DOM).
 2. **Discover** (`py/pace_discover.py`) — Takes a meet URL, finds all events, classifies them.
@@ -28,13 +26,16 @@ Full end-to-end pipeline verified:
 
 ### Chart Modes (SplitChart.tsx)
 
-Three-mode toggle in `SplitChart.tsx` — `ChartMode = "gap" | "virtual" | "raw"`:
+Four-mode toggle in `SplitChart.tsx` — `ChartMode = "virtual" | "raw" | "position" | "time_gain_loss"`:
 
-- **Gap** (default): cumulative time gap vs first athlete. Y-axis in ±seconds. Zero line = leader.
-- **Virtual**: detrended elapsed — subtract average even-pace line. Shows pacing variation (positive = slow lap, negative = fast lap).
-- **Raw Splits**: lap-by-lap times. Y-axis in mm:ss.
+- **Virtual Gap** (default): detrended elapsed — subtract average even-pace line. Shows pacing variation (positive = slow lap, negative = fast lap). Y-axis ±s, zero reference line.
+- **Lap Pace**: lap-by-lap times. Y-axis in mm:ss.
+- **Position**: rank of each athlete at every split (1 = leader). Y-axis inverted, integer ticks. Tooltip shows `P1`, `P2` etc + elapsed.
+- **Time Gain/Loss**: per-segment lap delta vs field average lap pace. Positive = lost time vs avg; negative = gained. Y-axis ±s, zero reference line. Requires ≥2 athletes (shows message otherwise).
 
-Gap/Virtual tooltips show ±s with elapsed and lap context. Y-axis formats as `+/-Xs` in gap modes, `mm:ss` in raw.
+Gap/position/time-gain-loss tooltips show ±s or rank with elapsed context. Y-axis formats as `+/-Xs`, integer, or `mm:ss` depending on mode.
+
+`ChartFaqModal` (`apps/web/src/components/ChartFaqModal.tsx`) — circular `?` button left of the toggle group. Click opens a modal with a brief description of each chart view.
 
 Chart aligns athletes by `distance_m` with linear interpolation when available, falling back to ordinal position. Enables cross-conference overlays where split intervals differ (e.g. 200m vs 400m laps).
 
@@ -144,7 +145,8 @@ py/data/                 → cached scrape output (always pass --data-root py/da
 apps/web/src/lib/supabase.ts       → Supabase client
 apps/web/src/lib/db.ts             → Query functions
 apps/web/src/stores/window-store.ts → Zustand state
-apps/web/src/components/SplitChart.tsx → Three-mode chart (gap/virtual/raw)
+apps/web/src/components/SplitChart.tsx → Four-mode chart (virtual gap/lap pace/position/time gain-loss)
+apps/web/src/components/ChartFaqModal.tsx → ? button + modal explaining each chart view
 apps/web/src/components/           → All UI components
 
 supabase/migrations/001_initial_schema.sql → DB schema (5 tables)
@@ -162,7 +164,18 @@ docs/d2 indoor conf urls 2026.md   → Conference meet URLs with notes
 
 ---
 
+## Deployment (live as of March 7, 2026)
+
+- **GitHub:** https://github.com/cionelo/pace (single clean initial commit, fresh history)
+- **Live URL:** https://pace-kappa.vercel.app
+- **Auto-deploy:** every push to `main` → Vercel rebuild (~30s). Root directory: `apps/web`.
+- **Env vars set in Vercel:** `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_FORMSPREE_ID` (all environments)
+- **Ko-fi:** `https://ko-fi.com/devbynemo` — already live in Header.tsx
+- **Formspree:** configured and deployed
+
+---
+
 ## Next Steps
 
-1. **Vercel deploy** — Plan at `docs/plans/2026-03-05-vercel-deploy.md`. Not yet done.
-2. **Outdoor season ingestion** — Separate session once outdoor conference meets are posted.
+1. **Outdoor season ingestion** — Separate session once outdoor conference meets are posted.
+2. **M/W gender filter bug** — In athlete search, toggling M/W doesn't immediately re-filter the "add athlete" list. Needs fix in `AthleteSearch.tsx`.
