@@ -136,7 +136,7 @@ def main():
     spec.loader.exec_module(discover_mod)
 
     print(f"\nDiscovering events at: {args.url}")
-    events = asyncio.run(discover_mod.discover_events(args.url))
+    events = discover_mod.discover_meet(args.url)
 
     if not events:
         print("No events found on this meet page.")

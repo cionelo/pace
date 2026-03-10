@@ -24,8 +24,8 @@ from typing import Optional
 
 DISTANCE_RE = re.compile(r'(800|1500|Mile|1 Mile|3000|5000|5K|10000|10K|DMR|4x800|4x1600)', re.IGNORECASE)
 GENDER_PATTERNS = {
-    'Men': re.compile(r"\bMen'?s?\b|Boys|\bM\b", re.IGNORECASE),
     'Women': re.compile(r"\bWomen'?s?\b|Girls|\bW\b", re.IGNORECASE),
+    'Men': re.compile(r"\bMen'?s?\b|Boys|\bM\b", re.IGNORECASE),
 }
 ROUND_RE = re.compile(r'\b(Prelim|Preliminary|Prelims|Final|Finals|Heat|Semis|Semi.Final)\b', re.IGNORECASE)
 
@@ -202,6 +202,113 @@ async def discover_events(url: str) -> list:
         })
 
     return events
+
+
+def discover_flashresults(index_url: str) -> list:
+    """Discover all events on a FlashResults meet index page (static HTML).
+
+    Parses the index.htm (or index.html) page using requests + BeautifulSoup.
+    Returns event list in the same format as discover_events().
+    """
+    import requests
+    from bs4 import BeautifulSoup
+    from urllib.parse import urljoin
+
+    print(f"[fr-discover] GET {index_url}")
+    try:
+        resp = requests.get(index_url, timeout=30)
+        resp.raise_for_status()
+    except Exception as e:
+        print(f"[fr-discover] fetch error: {e}")
+        return []
+
+    soup = BeautifulSoup(resp.text, "lxml")
+
+    # Import event_id_from_url from pace_scraper to ensure consistent IDs
+    import sys as _sys
+    import pathlib as _pathlib
+    _py_dir = _pathlib.Path(__file__).parent
+    if str(_py_dir) not in _sys.path:
+        _sys.path.insert(0, str(_py_dir))
+    try:
+        from pace_scraper import event_id_from_url as _eid_fn
+    except ImportError:
+        def _eid_fn(u):  # type: ignore[misc]
+            parts = u.rstrip("/").split("/")
+            fn = parts[-1] if parts else ""
+            meet_dir = parts[-2] if len(parts) >= 2 else "fr"
+            if "_compiled" in fn:
+                return f"{meet_dir}_{fn.split('_compiled')[0]}"
+            return fn.split(".")[0] or meet_dir
+
+    seen_hrefs: set = set()
+    events: list = []
+
+    for td in soup.select("td.fixed-column"):
+        a = td.find("a")
+        if not a:
+            continue
+        href = a.get("href", "")
+        if not href or "_compiled" not in href:
+            continue
+
+        full_href = urljoin(index_url, href)
+        if full_href in seen_hrefs:
+            continue
+        seen_hrefs.add(full_href)
+
+        event_name = a.get_text(" ", strip=True)
+        if not event_name:
+            continue
+
+        # Round: read from next sibling TD after fixed-column
+        sibling_tds = td.parent.find_all("td")
+        try:
+            td_idx = list(sibling_tds).index(td)
+            round_td = sibling_tds[td_idx + 1] if td_idx + 1 < len(sibling_tds) else None
+            round_text = round_td.get_text(strip=True).lower() if round_td else ""
+        except (ValueError, IndexError):
+            round_text = ""
+
+        if "prelim" in round_text or "heat" in round_text or "semi" in round_text:
+            page_round = "Prelim"
+        else:
+            page_round = "Final"
+
+        event_id = _eid_fn(full_href)
+        info = classify_event(event_name)
+        # Page-specified round takes precedence over classify_event's text inference
+        effective_round = page_round
+
+        # Determine type: relay if the event name contains relay keywords
+        is_relay = bool(re.search(r"\brelay\b|\bDMR\b|\b4x", event_name, re.IGNORECASE))
+        event_type = "relay" if is_relay else "individual"
+
+        events.append({
+            "id": event_id,
+            "type": event_type,
+            "name": event_name,
+            "gender": info["gender"],
+            "distance": info["distance"],
+            "category": info["category"],
+            "round": effective_round,
+            "href": full_href,
+        })
+
+    print(f"[fr-discover] found {len(events)} events")
+    return events
+
+
+def discover_meet(url: str) -> list:
+    """Provider-aware meet discovery dispatcher.
+
+    Calls discover_flashresults() for flashresults.com URLs,
+    otherwise falls back to the Playwright-based discover_events().
+    """
+    import asyncio
+    if "flashresults.com" in url.lower():
+        return discover_flashresults(url)
+    return asyncio.run(discover_events(url))
 
 
 def print_table(events: list, distance_only: bool) -> None:

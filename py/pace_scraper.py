@@ -116,6 +116,15 @@ def event_id_from_url(url: str) -> str:
             return f"{meet_id}_{ev_id}_{round_seg}"
         return f"{meet_id}_{ev_id}" if ev_id else meet_id
 
+    # FlashResults: /2026_Meets/Indoor/02-26_ACC/025-2_compiled.htm
+    if "flashresults.com" in host:
+        filename = parts[-1] if parts else ""
+        meet_dir = parts[-2] if len(parts) >= 2 else "fr"
+        if "_compiled" in filename:
+            event_code = filename.split("_compiled")[0]
+            return f"{meet_dir}_{event_code}"
+        return filename.split(".")[0] or meet_dir
+
     # Legacy SPA XC: /meets/.../events/xc/2153041
     if "events" in parts:
         return parts[-1]
@@ -163,6 +172,9 @@ def detect_provider(url: str) -> str:
 
     if "milesplit.live" in u:
         return "milesplit_live"
+
+    if "flashresults.com" in u:
+        return "flashresults"
 
     return "unknown"
 
@@ -911,6 +923,264 @@ async def capture_milesplit_live(url: str, headful: bool) -> Tuple[Dict[str,Any]
     return split_report, ind_res, {}
 
 
+# ---------------- FlashResults (static HTML) ----------------
+
+def _parse_fr_athlete(text: str) -> Dict[str, str]:
+    """Parse FlashResults athlete cell.
+
+    Format: 'Paul SPECHT 11 Wake Forest [SR]'
+    or (no bib): 'Aiden NEAL North Carolina [SR]'
+    Returns dict with keys: name, team, bib, year.
+    """
+    text = text.replace("\xa0", " ").strip()
+    # Strip trailing flag words (SB, PB, PR) that sometimes follow the year bracket
+    text = re.sub(r"\s+(SB|PB|PR)\s*$", "", text, flags=re.IGNORECASE)
+    year = ""
+    m = re.search(r"\[(\w+)\]\s*$", text)
+    if m:
+        year = m.group(1)
+        text = text[: m.start()].strip()
+    # Try to find a standalone integer (bib) in the text
+    bib_m = re.search(r"\b(\d+)\b", text)
+    if bib_m:
+        bib = bib_m.group(1)
+        name = text[: bib_m.start()].strip()
+        team = text[bib_m.end() :].strip()
+    else:
+        # No bib: separate name from school.
+        # Convention: athlete format is "FirstName LASTNAME School".
+        # The LAST NAME is ALL CAPS and immediately follows the first name.
+        # Stop at the FIRST all-caps word to avoid absorbing team abbreviations
+        # like "NC" (NC State) into the athlete name.
+        words = text.split()
+        name_end = 0
+        for i, w in enumerate(words):
+            if re.match(r"^[A-Z]{2,}$", w):
+                name_end = i + 1
+                break  # stop at first ALL CAPS word (the last name)
+        if name_end == 0:
+            name_end = min(2, len(words))
+        bib = ""
+        name = " ".join(words[:name_end])
+        team = " ".join(words[name_end:])
+    return {"name": name.strip(), "team": team.strip(), "bib": bib, "year": year}
+
+
+def _parse_fr_time(raw: str) -> Tuple[str, Dict[str, bool]]:
+    """Strip trailing flag tokens (SB, PB, PR) from a time string.
+
+    Returns (clean_time_str, flags_dict).
+    """
+    raw = raw.strip()
+    flags: Dict[str, bool] = {"pr": False, "sb": False}
+    for token in ("PR", "PB", "SB"):
+        if raw.upper().endswith(token):
+            raw = raw[: -len(token)].strip()
+            if token in ("PR", "PB"):
+                flags["pr"] = True
+            else:
+                flags["sb"] = True
+    return raw, flags
+
+
+def _parse_fr_split_cell(cell: str) -> str:
+    """Extract cumulative time from '30.28 [30.28]' split cell format."""
+    cell = cell.strip()
+    m = re.match(r"^([\d:.]+)", cell)
+    return m.group(1) if m else ""
+
+
+def _find_fr_results_table(soup: BeautifulSoup) -> Optional[Any]:
+    """Find the results table (has Pl + Athlete or Team headers)."""
+    for table in soup.find_all("table"):
+        first_tr = table.find("tr")
+        if not first_tr:
+            continue
+        cells = [c.get_text(" ", strip=True).lower() for c in first_tr.find_all(["td", "th"])]
+        if "pl" in cells and ("athlete" in cells or "team" in cells):
+            return table
+    return None
+
+
+def capture_flashresults(url: str) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    """Scrape a FlashResults compiled event page (static HTML).
+
+    URL should be the *_compiled.htm page.
+    Returns (split_report, ind_res_list) in pace.v1 spr/r format.
+    """
+    print(f"[fr] GET {url}")
+    try:
+        resp = requests.get(url, timeout=30)
+        resp.raise_for_status()
+    except Exception as e:
+        print(f"[fr] fetch error: {e}")
+        return (
+            {"_source": {"spr": []}, "_provider": "flashresults", "_note": "fetch_error"},
+            {"_source": {"r": []}, "_provider": "flashresults", "_note": "fetch_error"},
+        )
+
+    soup = BeautifulSoup(resp.text, "lxml")
+
+    # --- Find splits links (handles single-section "Splits" and multi-section "Sect NView Splits") ---
+    splits_urls: List[str] = []
+    seen_split_hrefs: set = set()
+    for a in soup.find_all("a"):
+        href = a.get("href", "")
+        txt = a.get_text(strip=True).lower()
+        if "split" in txt and href and href not in seen_split_hrefs:
+            # Only follow links that look like section split pages (e.g. 026-1-01.htm)
+            if re.search(r"-0\d+\.htm", href, re.IGNORECASE):
+                seen_split_hrefs.add(href)
+                splits_urls.append(urljoin(url, href))
+
+    # --- Parse splits pages (single-section or multi-section) ---
+    spr_rows: List[Dict[str, Any]] = []
+    res_rows: List[Dict[str, Any]] = []
+
+    def _parse_splits_table(ssoup: BeautifulSoup) -> int:
+        """Parse one splits page and append rows to spr_rows/res_rows. Returns row count added."""
+        stable = _find_fr_results_table(ssoup)
+        if not stable:
+            return 0
+        rows = stable.select("tr")
+        if not rows:
+            return 0
+        header_row = rows[0]
+        headers = [c.get_text(" ", strip=True) for c in header_row.find_all(["td", "th"])]
+        hlow = [h.lower() for h in headers]
+
+        pl_idx = next((i for i, h in enumerate(hlow) if h == "pl"), None)
+        athlete_idx = next(
+            (i for i, h in enumerate(hlow) if h in ("athlete", "team")), None
+        )
+        time_idx = next((i for i, h in enumerate(hlow) if h == "time"), None)
+
+        split_labels: List[str] = []
+        split_col_idxs: List[int] = []
+        if time_idx is not None:
+            for i in range(time_idx + 1, len(headers)):
+                lbl = headers[i].strip()
+                if lbl and re.match(r"^\d", lbl):
+                    split_labels.append(lbl)
+                    split_col_idxs.append(i)
+                elif lbl.lower() == "mile":
+                    split_labels.append("Mile")
+                    split_col_idxs.append(i)
+
+        added = 0
+        for tr in rows[1:]:
+            tds = tr.find_all(["td", "th"])
+            if len(tds) < 2:
+                continue
+
+            def cell(idx: Optional[int], _tds: Any = tds) -> str:
+                if idx is None or idx >= len(_tds):
+                    return ""
+                return _tds[idx].get_text(" ", strip=True)
+
+            place_raw = cell(pl_idx)
+            athlete_raw = cell(athlete_idx)
+            time_raw = cell(time_idx)
+            if not athlete_raw or not place_raw:
+                continue
+            try:
+                place = int(place_raw.strip())
+            except ValueError:
+                place = None
+
+            parsed = _parse_fr_athlete(athlete_raw)
+            time_str, flags = _parse_fr_time(time_raw)
+
+            splits: List[Dict[str, Any]] = []
+            for lbl, col_i in zip(split_labels, split_col_idxs):
+                elapsed = _parse_fr_split_cell(cell(col_i))
+                if elapsed:
+                    splits.append({"label": lbl, "tm": elapsed})
+
+            athlete_node: Dict[str, Any] = {
+                "n": parsed["name"],
+                "t": {"n": parsed["team"], "f": parsed["team"], "lg": ""},
+            }
+            if parsed["bib"]:
+                athlete_node["b"] = parsed["bib"]
+
+            spr_rows.append({
+                "r": {"a": athlete_node, "p": place, "tm": time_str, "splits": splits, "fl": flags}
+            })
+            res_rows.append({
+                "r": {"a": athlete_node, "p": place, "tm": time_str, "fl": flags}
+            })
+            added += 1
+        return added
+
+    for splits_url in splits_urls:
+        print(f"[fr] splits -> {splits_url}")
+        try:
+            sresp = requests.get(splits_url, timeout=30)
+            sresp.raise_for_status()
+            n = _parse_splits_table(BeautifulSoup(sresp.text, "lxml"))
+            print(f"[fr] +{n} rows from section")
+        except Exception as e:
+            print(f"[fr] splits parse error: {type(e).__name__}: {e}")
+
+    if splits_urls:
+        print(f"[fr] splits total: {len(spr_rows)} rows")
+
+    # --- If no splits page or it failed, fall back to compiled results table ---
+    if not res_rows:
+        print("[fr] falling back to compiled results table")
+        ctable = _find_fr_results_table(soup)
+        if ctable:
+            rows = ctable.select("tr")
+            header_row = rows[0]
+            headers = [c.get_text(" ", strip=True) for c in header_row.find_all(["td", "th"])]
+            hlow = [h.lower() for h in headers]
+            pl_idx = next((i for i, h in enumerate(hlow) if h == "pl"), None)
+            athlete_idx = next(
+                (i for i, h in enumerate(hlow) if h in ("athlete", "team")), None
+            )
+            time_idx = next((i for i, h in enumerate(hlow) if h == "time"), None)
+
+            for tr in rows[1:]:
+                tds = tr.find_all(["td", "th"])
+                if len(tds) < 2:
+                    continue
+                def cell(idx):
+                    if idx is None or idx >= len(tds):
+                        return ""
+                    return tds[idx].get_text(" ", strip=True)
+                place_raw = cell(pl_idx)
+                athlete_raw = cell(athlete_idx)
+                time_raw = cell(time_idx)
+                if not athlete_raw or not place_raw:
+                    continue
+                try:
+                    place = int(place_raw.strip())
+                except ValueError:
+                    place = None
+                parsed = _parse_fr_athlete(athlete_raw)
+                time_str, flags = _parse_fr_time(time_raw)
+                athlete_node = {
+                    "n": parsed["name"],
+                    "t": {"n": parsed["team"], "f": parsed["team"], "lg": ""},
+                }
+                if parsed["bib"]:
+                    athlete_node["b"] = parsed["bib"]
+                res_rows.append({
+                    "r": {"a": athlete_node, "p": place, "tm": time_str, "fl": flags}
+                })
+                spr_rows.append({
+                    "r": {"a": athlete_node, "p": place, "tm": time_str, "splits": [], "fl": flags}
+                })
+            print(f"[fr] compiled fallback: {len(res_rows)} rows")
+
+    split_report: Dict[str, Any] = {"_source": {"spr": spr_rows}, "_provider": "flashresults"}
+    ind_res: Dict[str, Any] = {"_source": {"r": res_rows}, "_provider": "flashresults"}
+    if not spr_rows:
+        split_report["_note"] = "no_data"
+    return split_report, ind_res
+
+
 # ---------------- write bundle ----------------
 
 def write_event_bundle(outdir: pathlib.Path,
@@ -1002,6 +1272,10 @@ def main():
             capture_milesplit_live(args.url, headful=args.headful)
         )
         write_event_bundle(outdir, base_eid, split_report, ind_res, logos)
+
+    elif provider == "flashresults":
+        split_report, ind_res = capture_flashresults(args.url)
+        write_event_bundle(outdir, base_eid, split_report, ind_res, {})
 
     else:
         print("[warn] unknown provider; writing empty shell")
