@@ -144,9 +144,23 @@ def guess_provider(*objs: Dict[str, Any]) -> str:
 
 # ---------- distance inference ----------
 
+_NAMED_LABEL_DISTANCES: Dict[str, float] = {
+    "mile": 1609.0,
+    "1 mile": 1609.0,
+}
+
+
 def parse_label_distance_m(label: str) -> Optional[float]:
-    """Parse a distance label like '200M', '1K', '1.6K' into meters. Returns None if not parseable."""
-    label = label.strip().upper()
+    """Parse a distance label like '200M', '1K', '1.6K', or 'Mile' into meters.
+
+    Returns None if not parseable.
+    """
+    label = label.strip()
+    # Check named labels first (e.g. "Mile")
+    named = _NAMED_LABEL_DISTANCES.get(label.lower())
+    if named is not None:
+        return named
+    label = label.upper()
     m = re.match(r'^(\d+(?:\.\d+)?)\s*(M|K|KM)$', label)
     if not m:
         return None
