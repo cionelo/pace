@@ -36,11 +36,11 @@
 **Provider notes:**
 
 - **Immediately ingestible (21):** America East, AAC, ASUN, A10, Big East, Big Sky, CAA, CUSA, Horizon League, Ivy League, MAAC, MEAC, MWC, Patriot League, SoCon, Southland, Summit League, Sun Belt, SWAC, WAC + already-ingested MEAC
-- **pttiming — splits now work (3):** Big 12 (`mid=8683` ✓), Big Ten (`mid=8715` ✓), MVC (mid unknown)
-- **milesplit_live — same finish-only issue (2):** NEC, OVC
-- **fstiming — likely no splits (1):** MAC (same provider as GLIAC which had no splits)
-- **FlashResults — needs new provider (2):** ACC, SEC (static HTML with splits on sub-pages — doable)
-- **tfmeetpro — no split data in source (1):** Big South (finish-only static HTML)
+- **pttiming — splits work ✓ (3):** Big 12 (`mid=8683` ingested), Big Ten (`mid=8715` ingested), MVC (mid unknown — find pttiming URL)
+- **milesplit_live — splits work ✓ (2):** OVC (ingested), NEC (`timers/959` is wrong URL — find `/meets/{id}/events` URL)
+- **flashresults — splits work ✓ (2):** ACC (ingested), SEC (ingested)
+- **fstiming — no splits (1):** MAC (same provider as GLIAC; finish times only)
+- **tfmeetpro — no splits (1):** Big South (finish-only static HTML)
 
 **Odd lap sizes:** ACC FlashResults shows 209m first split then 200m laps (9m start stagger). All other legacy_spa/trackscoreboard conferences use standard 200m indoor laps. Flag any 5000m with 17 splits as potential 300m-track (like G-MAC D2).
 
