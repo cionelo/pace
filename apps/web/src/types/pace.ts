@@ -14,6 +14,7 @@ export interface Event {
   gender: "Men" | "Women";
   distance: string;
   season: "indoor" | "outdoor" | "xc" | null;
+  division: "D1" | "D2" | null;
   provider: string | null;
   source_url: string | null;
 }

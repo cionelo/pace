@@ -39,6 +39,27 @@ Gap/position/time-gain-loss tooltips show ±s or rank with elapsed context. Y-ax
 
 Chart aligns athletes by `distance_m` with linear interpolation when available, falling back to ordinal position. Enables cross-conference overlays where split intervals differ (e.g. 200m vs 400m laps).
 
+### Lap Pace Overlays (SplitChart.tsx — March 9, 2026)
+
+Three toggle buttons appear below the chart mode row when **Lap Pace** mode is active:
+
+- **Athlete avg** (overlay A): dotted horizontal `ReferenceLine` per visible athlete at their mean lap_s, drawn in the athlete's own color.
+- **Field avg** (overlay B): flat gray `ReferenceLine` at the mean lap_s across all athletes in the first selected athlete's event field. Fetches full event results on demand via `getEventResults`.
+- **Field/split** (overlay C): amber `Line` showing the field's mean lap_s at each split point (non-flat — reveals collective surges/fade). Injected as `field_avg` key into chart data. Same on-demand fetch as B.
+
+Fetch is cancelled on unmount / event change. Field data is shared between B and C when both active.
+
+### D1/D2 Division Filter (AthleteSearch.tsx — March 9, 2026)
+
+- `Event` type now has `division: "D1" | "D2" | null`.
+- `EventFilters` in `db.ts` accepts `division`; passed through `getEvents()`.
+- `AthleteSearch` has an All / D1 / D2 toggle alongside the gender toggle.
+- **Backend migration required** (separate session): `004_add_division.sql` — adds `division` column, backfills existing rows as D2, updates `pace_upload.py` + `pace_ingest_meet.py` with `--division` flag.
+
+### Gender filter bug fix (AthleteSearch.tsx — March 9, 2026)
+
+`genderFilter` was missing from `doSearch` useCallback deps — athlete search results didn't re-filter when gender was toggled. Fixed by adding `genderFilter` to the dep array.
+
 ### Other UI (completed March 5–6)
 
 - Logo (nemo-favicon-2, 40px), Ko-fi link (`https://ko-fi.com/devbynemo`), ContactModal (Formspree, 3 form types)
@@ -89,6 +110,7 @@ All handled by `capture_legacy_spa()`. Known domains in `detect_provider()` (~li
 - `live.dcracetiming.com` (SIAC), `live.rapidresultstiming.com` (RMAC)
 - `snapresults.snaptiming.com` (CIAA)
 - `results.adkinstrak.com`, `live.deltatiming.com` (others)
+- `armorytrack.live` (MAAC), `results.lakeshoreathleticservices.com` (Big East)
 
 To add a new domain: add it to `detect_provider()` in `py/pace_scraper.py`.
 
@@ -175,7 +197,30 @@ docs/d2 indoor conf urls 2026.md   → Conference meet URLs with notes
 
 ---
 
+## source_url Column (March 8, 2026)
+
+Added `source_url text` column to `events` table — links each event back to its timing system results page. Status:
+
+- **Migration file:** `supabase/migrations/003_add_source_url.sql` — **applied March 8, 2026** via Supabase Dashboard SQL editor.
+- **pace_upload.py:** passes `source_url` from `event_meta` into the upsert row (no other changes).
+- **pace_ingest_meet.py:** populates `source_url = href` (the event URL) in event_meta — future ingests auto-populate it.
+- **Backfill script:** `py/pace_backfill_source_url.py` — reconstructs URLs for all 122 existing events from cached `ind_res_list.json` (`_source.mi` meet_id) + known domain map. Run after applying migration:
+  ```bash
+  python3 py/pace_backfill_source_url.py --data-root py/data
+  ```
+  **Run March 8, 2026**: 117 events updated, 5 XC events skipped (no local cache — GSC, Sun Belt, ACCC). Relay/DMR events use name-based conference inference.
+- **Migration runner:** `py/pace_migrate.py` — applies any SQL migration file using psycopg2 + DB password from Supabase Dashboard → Settings → Database.
+- **Frontend:** `Legend.tsx` already renders `event.source_url` as a clickable link (from Session 1 frontend changes). Works once column is populated.
+
+## distance_m inference (already complete)
+
+The `_infer_distances_from_count()` function in `pace_normalize.py` already handles non-standard track sizes including the 300m indoor track stagger:
+- 5000m, 17 splits → 200m first lap + 16 × 300m (verified correct in DB)
+- G-MAC Men/Women 5000m splits already have correct `distance_m` values in Supabase (200, 500, 800, ... 5000m). No re-normalization needed.
+
+---
+
 ## Next Steps
 
 1. **Outdoor season ingestion** — Separate session once outdoor conference meets are posted.
-2. **M/W gender filter bug** — In athlete search, toggling M/W doesn't immediately re-filter the "add athlete" list. Needs fix in `AthleteSearch.tsx`.
+3. **M/W gender filter bug** — In athlete search, toggling M/W doesn't immediately re-filter the "add athlete" list. Needs fix in `AthleteSearch.tsx`.

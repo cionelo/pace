@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -9,7 +9,8 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
-import type { WindowAthleteData } from "../types/pace";
+import type { WindowAthleteData, AthleteResult } from "../types/pace";
+import { getEventResults } from "../lib/db";
 import ChartFaqModal from "./ChartFaqModal";
 
 interface SplitChartProps {
@@ -134,7 +135,6 @@ function buildVirtualGapData(athletes: WindowAthleteData[]): ChartPoint[] {
   const visible = athletes.filter((a) => a.visible);
   const distances = collectDistances(athletes);
 
-  // Compute average finish time and max distance for even-pace reference
   const finishTimes: number[] = [];
   let maxDist = 0;
   for (const a of visible) {
@@ -245,7 +245,6 @@ function buildTimeGainLossData(athletes: WindowAthleteData[]): ChartPoint[] {
   return distances.map((dist, idx) => {
     const point: ChartPoint = { label: formatDistance(dist) };
 
-    // Pass 1: derive lap for each athlete (exact lap_s or interpolated elapsed diff)
     const lapsByAthlete: { id: string; lap: number }[] = [];
     for (const a of visible) {
       const splits = a.athleteResult.splits;
@@ -270,7 +269,6 @@ function buildTimeGainLossData(athletes: WindowAthleteData[]): ChartPoint[] {
 
     if (lapsByAthlete.length === 0) return point;
 
-    // Pass 2: field average then delta per athlete
     const avg = lapsByAthlete.reduce((sum, x) => sum + x.lap, 0) / lapsByAthlete.length;
     for (const { id, lap } of lapsByAthlete) {
       point[id] = lap - avg;
@@ -312,6 +310,56 @@ function buildRawLapLookup(
   return lookup;
 }
 
+/** Average lap_s for a single athlete across all their splits */
+function computeAthleteAvgLap(a: WindowAthleteData): number | null {
+  const laps = a.athleteResult.splits
+    .map((s) => s.lap_s)
+    .filter((v): v is number => v != null);
+  if (laps.length === 0) return null;
+  return laps.reduce((a, b) => a + b, 0) / laps.length;
+}
+
+/** Average lap_s across all athletes in a full field */
+function computeFieldOverallAvg(field: AthleteResult[]): number | null {
+  const laps: number[] = [];
+  for (const ar of field) {
+    for (const s of ar.splits) {
+      if (s.lap_s != null) laps.push(s.lap_s);
+    }
+  }
+  if (laps.length === 0) return null;
+  return laps.reduce((a, b) => a + b, 0) / laps.length;
+}
+
+/** Average lap_s per split point across a full field, keyed by chart label */
+function computeFieldAvgPerSplit(
+  field: AthleteResult[],
+  distances: number[]
+): Record<string, number> {
+  const result: Record<string, number> = {};
+  distances.forEach((dist, idx) => {
+    const laps: number[] = [];
+    for (const ar of field) {
+      const exact = ar.splits.find((s) => s.distance_m === dist);
+      if (exact?.lap_s != null) {
+        laps.push(exact.lap_s);
+      } else {
+        const prevDist = idx > 0 ? distances[idx - 1] : null;
+        const elapsedHere = interpolateElapsed(ar.splits, dist);
+        const elapsedPrev =
+          prevDist != null ? interpolateElapsed(ar.splits, prevDist) : null;
+        if (elapsedHere != null && elapsedPrev != null) {
+          laps.push(elapsedHere - elapsedPrev);
+        }
+      }
+    }
+    if (laps.length > 0) {
+      result[formatDistance(dist)] = laps.reduce((a, b) => a + b, 0) / laps.length;
+    }
+  });
+  return result;
+}
+
 function CustomTooltip({
   active,
   payload,
@@ -328,9 +376,12 @@ function CustomTooltip({
       <p className="text-xs text-zinc-400 mb-1">{label}</p>
       {payload.map((entry: any) => {
         const athleteId = entry.dataKey;
+        const isFieldAvgSplit = athleteId === "field_avg";
         const elapsed = elapsedLookup?.[athleteId]?.[label];
         const rawLap = rawLapLookup?.[athleteId]?.[label];
-        const name = athleteNames?.[athleteId] ?? athleteId;
+        const name = isFieldAvgSplit
+          ? "Field avg/split"
+          : (athleteNames?.[athleteId] ?? athleteId);
         const isGapModeTooltip = mode === "virtual" || mode === "time_gain_loss";
         const isPositionModeTooltip = mode === "position";
         return (
@@ -401,6 +452,27 @@ const Y_ZOOM_LEVELS = [
 export default function SplitChart({ athletes }: SplitChartProps) {
   const [mode, setMode] = useState<ChartMode>("virtual");
   const [yZoom, setYZoom] = useState(1);
+  const [overlayA, setOverlayA] = useState(false);
+  const [overlayB, setOverlayB] = useState(false);
+  const [overlayC, setOverlayC] = useState(false);
+  const [fieldAthletes, setFieldAthletes] = useState<AthleteResult[]>([]);
+  const [fieldLoading, setFieldLoading] = useState(false);
+
+  const firstEventId = athletes[0]?.athleteResult.event.id ?? null;
+
+  useEffect(() => {
+    if (!firstEventId || (!overlayB && !overlayC)) {
+      setFieldAthletes([]);
+      return;
+    }
+    let cancelled = false;
+    setFieldLoading(true);
+    getEventResults(firstEventId)
+      .then((results) => { if (!cancelled) setFieldAthletes(results); })
+      .catch(console.error)
+      .finally(() => { if (!cancelled) setFieldLoading(false); });
+    return () => { cancelled = true; };
+  }, [firstEventId, overlayB, overlayC]);
 
   const visibleAthletes = athletes.filter((a) => a.visible);
   const data = buildChartData(athletes);
@@ -413,14 +485,29 @@ export default function SplitChart({ athletes }: SplitChartProps) {
     );
   }
 
-  const chartData =
+  const baseChartData =
     mode === "virtual"
       ? buildVirtualGapData(athletes)
       : mode === "position"
         ? buildPositionData(athletes)
         : mode === "time_gain_loss"
           ? buildTimeGainLossData(athletes)
-          : data; // "raw" uses buildChartData result already in `data`
+          : data;
+
+  // Inject field_avg per split into chartData for overlay C (raw mode only)
+  const activeDistances = collectDistances(athletes);
+  const fieldAvgMap =
+    mode === "raw" && overlayC && fieldAthletes.length > 0 && activeDistances.length > 0
+      ? computeFieldAvgPerSplit(fieldAthletes, activeDistances)
+      : {};
+  const displayChartData =
+    mode === "raw" && overlayC && Object.keys(fieldAvgMap).length > 0
+      ? baseChartData.map((point) => ({
+          ...point,
+          ...(fieldAvgMap[point.label] != null ? { field_avg: fieldAvgMap[point.label] } : {}),
+        }))
+      : baseChartData;
+
   const elapsedLookup = buildElapsedLookup(athletes);
   const rawLapLookup = buildRawLapLookup(athletes);
   const athleteNames: Record<string, string> = {};
@@ -430,18 +517,38 @@ export default function SplitChart({ athletes }: SplitChartProps) {
 
   const zoomLevel = Y_ZOOM_LEVELS[yZoom];
 
-  const allValues = chartData
-    .flatMap((d) =>
-      visibleAthletes.map((a) => d[a.athleteResult.athlete.id])
-    )
+  // Y domain: include athlete data + all active overlay values
+  const mainValues = displayChartData
+    .flatMap((d) => visibleAthletes.map((a) => d[a.athleteResult.athlete.id]))
     .filter((v): v is number => typeof v === "number");
+  const overlayValues: number[] = [];
+  if (mode === "raw") {
+    if (overlayA) {
+      for (const a of visibleAthletes) {
+        const avg = computeAthleteAvgLap(a);
+        if (avg != null) overlayValues.push(avg);
+      }
+    }
+    if (overlayB && fieldAthletes.length > 0) {
+      const avg = computeFieldOverallAvg(fieldAthletes);
+      if (avg != null) overlayValues.push(avg);
+    }
+    if (overlayC) {
+      overlayValues.push(...Object.values(fieldAvgMap));
+    }
+  }
+  const allValues = [...mainValues, ...overlayValues];
   const yMin = allValues.length > 0 ? Math.min(...allValues) : 0;
   const yMax = allValues.length > 0 ? Math.max(...allValues) : 1;
   const padding = (yMax - yMin) * zoomLevel.paddingFactor || 0.5;
 
-  const xInterval = chartData.length > 12 ? Math.floor(chartData.length / 8) : 0;
+  const xInterval = displayChartData.length > 12 ? Math.floor(displayChartData.length / 8) : 0;
   const isGapMode = mode === "virtual" || mode === "time_gain_loss";
   const isPositionMode = mode === "position";
+
+  const fieldOverallAvg = overlayB && fieldAthletes.length > 0
+    ? computeFieldOverallAvg(fieldAthletes)
+    : null;
 
   return (
     <div className="flex flex-col gap-2">
@@ -488,6 +595,35 @@ export default function SplitChart({ athletes }: SplitChartProps) {
         </div>
       </div>
 
+      {/* Overlay toggles — Lap Pace mode only */}
+      {mode === "raw" && (
+        <div className="flex items-center justify-end gap-2 px-2">
+          <span className="text-xs text-zinc-600">Overlays:</span>
+          {(
+            [
+              ["A", "Athlete avg", overlayA, () => setOverlayA((v) => !v)],
+              ["B", "Field avg", overlayB, () => setOverlayB((v) => !v)],
+              ["C", "Field/split", overlayC, () => setOverlayC((v) => !v)],
+            ] as [string, string, boolean, () => void][]
+          ).map(([key, label, active, toggle]) => (
+            <button
+              key={key}
+              onClick={toggle}
+              className={`text-xs px-2 py-0.5 rounded border transition-colors ${
+                active
+                  ? "border-zinc-500 bg-zinc-700 text-white"
+                  : "border-zinc-700 text-zinc-500 hover:text-zinc-300"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+          {fieldLoading && (
+            <span className="text-xs text-zinc-600 italic">loading...</span>
+          )}
+        </div>
+      )}
+
       <div className="w-full">
         {mode === "time_gain_loss" && visibleAthletes.length < 2 ? (
           <div className="flex items-center justify-center h-48 text-zinc-500 text-sm">
@@ -496,7 +632,7 @@ export default function SplitChart({ athletes }: SplitChartProps) {
         ) : (
           <ResponsiveContainer width="100%" height={zoomLevel.height}>
             <LineChart
-              data={chartData}
+              data={displayChartData}
               margin={{ top: 8, right: 16, left: 8, bottom: 8 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#333" />
@@ -546,6 +682,42 @@ export default function SplitChart({ athletes }: SplitChartProps) {
                   connectNulls
                 />
               ))}
+              {/* Overlay C: field avg lap pace per split (non-flat line) */}
+              {mode === "raw" && overlayC && fieldAthletes.length > 0 && (
+                <Line
+                  dataKey="field_avg"
+                  stroke="#f59e0b"
+                  strokeWidth={2}
+                  strokeOpacity={0.75}
+                  dot={false}
+                  connectNulls
+                />
+              )}
+              {/* Overlay A: per-athlete avg lap pace (dotted flat reference line) */}
+              {mode === "raw" && overlayA &&
+                visibleAthletes.map((a) => {
+                  const avg = computeAthleteAvgLap(a);
+                  if (avg == null) return null;
+                  return (
+                    <ReferenceLine
+                      key={`overlay-a-${a.athleteResult.athlete.id}`}
+                      y={avg}
+                      stroke={a.color}
+                      strokeDasharray="5 3"
+                      strokeWidth={1.5}
+                      strokeOpacity={0.8}
+                    />
+                  );
+                })}
+              {/* Overlay B: full field overall avg lap pace (flat reference line, gray) */}
+              {mode === "raw" && overlayB && fieldOverallAvg != null && (
+                <ReferenceLine
+                  y={fieldOverallAvg}
+                  stroke="#9ca3af"
+                  strokeWidth={2}
+                  strokeOpacity={0.7}
+                />
+              )}
             </LineChart>
           </ResponsiveContainer>
         )}

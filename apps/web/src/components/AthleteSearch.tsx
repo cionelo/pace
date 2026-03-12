@@ -24,18 +24,23 @@ export default function AthleteSearch({
   const [results, setResults] = useState<AthleteResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [genderFilter, setGenderFilter] = useState<"" | "Men" | "Women">("");
+  const [divisionFilter, setDivisionFilter] = useState<"" | "D1" | "D2">("");
   const [yearFilter, setYearFilter] = useState("");
   const [eventSearch, setEventSearch] = useState("");
 
-  // Load events for this distance + gender
+  // Load events for this distance + gender + division
   useEffect(() => {
-    getEvents({ distance, gender: genderFilter || undefined })
+    getEvents({
+      distance,
+      gender: genderFilter || undefined,
+      division: divisionFilter || undefined,
+    })
       .then(setEvents)
       .catch(console.error);
     setSelectedEventId("");
     setYearFilter("");
     setEventSearch("");
-  }, [distance, genderFilter]);
+  }, [distance, genderFilter, divisionFilter]);
 
   // Load teams when event is selected
   useEffect(() => {
@@ -65,7 +70,7 @@ export default function AthleteSearch({
     } finally {
       setLoading(false);
     }
-  }, [nameQuery, selectedEventId, selectedTeam, distance]);
+  }, [nameQuery, selectedEventId, selectedTeam, distance, genderFilter]);
 
   useEffect(() => {
     const timer = setTimeout(doSearch, 300);
@@ -99,8 +104,8 @@ export default function AthleteSearch({
 
       {open && (
         <div className="px-3 pb-3 space-y-2">
-          {/* Gender + Year filter row */}
-          <div className="flex items-center gap-2">
+          {/* Gender + Division + Year filter row */}
+          <div className="flex items-center gap-2 flex-wrap">
             <div className="flex rounded overflow-hidden border border-zinc-700 text-xs">
               {(["", "Men", "Women"] as const).map((g) => (
                 <button
@@ -113,6 +118,21 @@ export default function AthleteSearch({
                   onClick={() => setGenderFilter(g)}
                 >
                   {g === "" ? "All" : g === "Men" ? "M" : "W"}
+                </button>
+              ))}
+            </div>
+            <div className="flex rounded overflow-hidden border border-zinc-700 text-xs">
+              {(["", "D1", "D2"] as const).map((d) => (
+                <button
+                  key={d}
+                  className={`px-2 py-1 transition-colors ${
+                    divisionFilter === d
+                      ? "bg-zinc-700 text-white"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                  onClick={() => setDivisionFilter(d)}
+                >
+                  {d === "" ? "All" : d}
                 </button>
               ))}
             </div>

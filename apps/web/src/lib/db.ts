@@ -5,6 +5,7 @@ interface EventFilters {
   gender?: string;
   distance?: string;
   season?: string;
+  division?: string;
 }
 
 export async function getEvents(filters?: EventFilters): Promise<Event[]> {
@@ -13,6 +14,7 @@ export async function getEvents(filters?: EventFilters): Promise<Event[]> {
   if (filters?.gender) query = query.eq("gender", filters.gender);
   if (filters?.distance) query = query.eq("distance", filters.distance);
   if (filters?.season) query = query.eq("season", filters.season);
+  if (filters?.division) query = query.eq("division", filters.division);
 
   const { data, error } = await query;
   if (error) throw error;
