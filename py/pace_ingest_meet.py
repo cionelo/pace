@@ -56,6 +56,7 @@ def ingest_event(event: dict, data_root: pathlib.Path, extra_meta: dict) -> bool
         "season": extra_meta.get("season", "indoor"),
         "date": extra_meta.get("date", ""),
         "location": extra_meta.get("location", ""),
+        "source_url": href,
     }
     meta_json = json.dumps(event_meta)
 

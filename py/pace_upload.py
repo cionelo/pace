@@ -69,6 +69,7 @@ def upload_event(data: Dict[str, Any], event_meta: Optional[Dict[str, str]] = No
         "distance": meta.get("distance", ""),
         "season": meta.get("season") or None,
         "provider": ev.get("provider"),
+        "source_url": meta.get("source_url") or None,
     }
 
     result = (

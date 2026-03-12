@@ -132,6 +132,17 @@ def safe_int(v: Any) -> Optional[int]:
         return None
 
 
+def parse_place(v: Any) -> Optional[int]:
+    """Parse place value to int; handles ordinal strings like '4th', '1st', '12th'."""
+    if v is None:
+        return None
+    if isinstance(v, int):
+        return v
+    import re as _re
+    m = _re.match(r"(\d+)", str(v).strip())
+    return int(m.group(1)) if m else None
+
+
 def guess_provider(*objs: Dict[str, Any]) -> str:
     for o in objs:
         if not isinstance(o, dict):
@@ -284,6 +295,10 @@ def normalize_event(event_id: str,
             if label:
                 split_defs.append(label)
 
+    # Case: pttiming Firebase style: _source.sl = list of distance strings (e.g. "209m","409m",...)
+    if not split_defs and isinstance(sr_src, dict) and isinstance(sr_src.get("sl"), list):
+        split_defs = [s for s in sr_src["sl"] if isinstance(s, str) and s]
+
     # Fallback: collect labels seen in any row's splits arrays
     if not split_defs:
         labels_seen = []
@@ -326,6 +341,11 @@ def normalize_event(event_id: str,
         if not isinstance(rt, dict):
             rt = {}
 
+        # pttiming Firebase: athlete info nested under uppercase "A" key
+        fb_a = r.get("A", {})
+        if not isinstance(fb_a, dict):
+            fb_a = {}
+
         name = best_str(
             a.get("n"),
             f"{a.get('fn','')} {a.get('ln','')}",
@@ -333,12 +353,14 @@ def normalize_event(event_id: str,
             r.get("Athlete"),
             r.get("Runner"),
             r.get("name"),
+            fb_a.get("N"),
         )
         team = best_str(
             t.get("f"), t.get("n"),
             rt.get("f"), rt.get("n"),
             r.get("Team"), r.get("School"),
-            r.get("team")
+            r.get("team"),
+            r.get("TN"),  # pttiming Firebase
         )
 
         # Relay: no athlete name, but team is on r.t — construct name from team + designation
@@ -347,15 +369,18 @@ def normalize_event(event_id: str,
             name = f"{team} {rd}".strip() if rd else team
         bib = best_str(
             a.get("b"), a.get("bib"),
-            r.get("bib"), r.get("Bib")
+            r.get("bib"), r.get("Bib"),
+            r.get("BIB"),  # pttiming Firebase
         )
         place = safe_int(
             r.get("p") or r.get("place") or r.get("Place") or r.get("Pl") or r.get("PL")
+            or r.get("P")  # pttiming Firebase
         )
         time_str = best_str(
             r.get("m"), r.get("tm"),
             r.get("Time"), r.get("Final"),
-            r.get("time")
+            r.get("time"),
+            r.get("M"),  # pttiming Firebase finish time string
         )
 
         flags_raw = r.get("fl") or r.get("flags") or {}
@@ -418,6 +443,11 @@ def normalize_event(event_id: str,
         if not isinstance(rt, dict):
             rt = {}
 
+        # pttiming Firebase: athlete info under uppercase "A", team under "TN"
+        fb_a = r.get("A", {})
+        if not isinstance(fb_a, dict):
+            fb_a = {}
+
         name = best_str(
             a.get("n"),
             f"{a.get('fn','')} {a.get('ln','')}",
@@ -425,12 +455,14 @@ def normalize_event(event_id: str,
             r.get("Athlete"),
             r.get("Runner"),
             r.get("name"),
+            fb_a.get("N"),
         )
         team = best_str(
             t.get("f"), t.get("n"),
             rt.get("f"), rt.get("n"),
             r.get("Team"), r.get("School"),
-            r.get("team")
+            r.get("team"),
+            r.get("TN"),  # pttiming Firebase
         )
         # Relay: construct name from team + designation
         if not name and team and rt:
@@ -439,7 +471,8 @@ def normalize_event(event_id: str,
 
         bib = best_str(
             a.get("b"), a.get("bib"),
-            r.get("bib"), r.get("Bib")
+            r.get("bib"), r.get("Bib"),
+            r.get("BIB"),  # pttiming Firebase
         )
         key = (name.lower(), team.lower(), bib)
 
@@ -497,12 +530,45 @@ def normalize_event(event_id: str,
                     "elapsed_str": elapsed_str or "",
                     "elapsed_s": elapsed_s,
                     "lap_s": lap_s,
-                    "place": sp.get("place_at_split") or sp.get("p"),
+                    "place": parse_place(sp.get("place_at_split") or sp.get("p")),
                 })
 
-        # Other providers (trackscoreboard_raw, pttiming, milesplit_live)
-        # can be tightened later once we see their exact shapes. For now, we
-        # leave splits empty; they still normalize as finish-only results.
+        # Case C: pttiming Firebase style: r.SPD = [null, {CS, CSM, L, P, LS}, ...]
+        # CSM is the cumulative time in seconds (float); CS is the formatted string.
+        # LS is the lap split string (may be "33.52" or "All|31.84*400 Splits|1:04.17").
+        if not splits and isinstance(r.get("SPD"), list):
+            spd_list = [s for s in r["SPD"] if isinstance(s, dict)]
+            prev_cs = None
+            for i, sp in enumerate(spd_list):
+                cs_str = best_str(sp.get("CS"))
+                cs_s = sp.get("CSM")  # float seconds, already computed by pttiming
+                if cs_s is None:
+                    cs_s = time_to_seconds(cs_str)
+                label = split_defs[i] if i < len(split_defs) else f"S{i+1}"
+                lap_s = None
+                if cs_s is not None:
+                    if prev_cs is not None:
+                        lap_s = round(cs_s - prev_cs, 3)
+                    else:
+                        lap_s = cs_s
+                prev_cs = cs_s if cs_s is not None else prev_cs
+                splits.append({
+                    "label": label,
+                    "elapsed_str": cs_str or "",
+                    "elapsed_s": cs_s,
+                    "lap_s": lap_s,
+                    "place": sp.get("P"),
+                })
+
+        # Sanitize: discard all splits for this athlete if any lap is impossibly fast
+        # (< 5s). Catches DOM misalignment in combined multi-section tables (milesplit_live).
+        if splits:
+            bad = any(
+                s["lap_s"] is not None and s["lap_s"] < 5.0
+                for s in splits
+            )
+            if bad:
+                splits = []
 
         return key, splits
 
@@ -651,10 +717,13 @@ def normalize_event(event_id: str,
                     labels.append(lbl)
         split_defs = labels
 
+    # Pick up event name captured by the scraper (e.g. milesplit_live _event_name)
+    ev_name = (ir.get("_event_name") or "") if isinstance(ir, dict) else ""
+
     event_meta = {
         "id": event_id,
         "provider": provider,
-        "name": "",          # can be filled later if upstream adds it
+        "name": ev_name,
         "splits": split_defs
     }
 

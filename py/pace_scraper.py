@@ -152,7 +152,9 @@ def detect_provider(url: str) -> str:
         or "live.herostiming.com" in u
         or "live.athletic.net" in u
         or "live.dcracetiming.com" in u
-        or "snapresults.snaptiming.com" in u):
+        or "snapresults.snaptiming.com" in u
+        or "armorytrack.live" in u
+        or "results.lakeshoreathleticservices.com" in u):
         return "legacy_spa"
 
     if "results.leonetiming.com" in u and "xc.html" in u:
@@ -681,208 +683,225 @@ async def capture_trackscoreboard_html(url: str, headful: bool) -> Tuple[Dict[st
     return split_report, ind_res, logos
 
 
-# ---------------- PT Timing (single or multi-race) ----------------
+# ---------------- PT Timing (Firebase RTDB) ----------------
 
-def _looks_like_pt_json(u: str) -> bool:
-    ul = u.lower()
-    return ("pttiming.com" in ul) and ("json" in ul or "result" in ul or "xc" in ul)
-
-def _safe_json_attempt(txt: str) -> Optional[Any]:
-    try:
-        return json.loads(txt)
-    except Exception:
-        return None
-
-async def capture_pttiming(url: str, headful: bool) -> Dict[str, Tuple[Dict[str,Any], Dict[str,Any], Dict[str,str]]]:
+def capture_pttiming(url: str, headful: bool) -> Dict[str, Tuple[Dict[str,Any], Dict[str,Any], Dict[str,str]]]:
     """
+    Fetches pttiming data directly from Firebase Realtime Database REST API.
+    pttiming pages use Firebase RTDB (not XHR), so Playwright XHR interception
+    cannot capture the data. The RTDB is publicly readable.
+
     Returns mapping: event_id -> (split_report, ind_res_list, logos)
-    For multi-race pages, attempts to separate by race metadata.
+    Each event_id corresponds to one race (ENR key from MeetEvents).
     """
-    from playwright.async_api import async_playwright
+    import urllib.request as _req
 
-    results_payloads: List[Any] = []
-    splits_payloads: List[Any] = []
-
-    async def on_response(resp):
+    def _fb_fetch(fb_url: str) -> Any:
         try:
-            u = resp.url
-            if not _looks_like_pt_json(u):
-                return
-            try:
-                data = await resp.json()
-            except Exception:
-                txt = await resp.text()
-                data = _safe_json_attempt(txt)
-                if data is None:
-                    print(f"[pt json-miss] {u}")
-                    return
-            if "split" in u.lower():
-                splits_payloads.append(data)
-                print(f"[pt] saw split-like {u}")
-            else:
-                results_payloads.append(data)
-                print(f"[pt] saw result-like {u}")
+            with _req.urlopen(fb_url, timeout=30) as resp:
+                return json.loads(resp.read().decode())
         except Exception as e:
-            print(f"[pt resp err] {type(e).__name__}")
+            print(f"[pt] Firebase fetch error {fb_url}: {e}")
+            return None
 
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(
-            headless=not headful,
-            args=["--no-sandbox", "--disable-dev-shm-usage"],
-        )
-        ctx = await browser.new_context(viewport={"width": 1600, "height": 950})
-        page = await ctx.new_page()
-        page.on("response", on_response)
-
-        print(f"[pt nav] {url}")
-        await page.goto(url, wait_until="domcontentloaded", timeout=60000)
-        await page.wait_for_timeout(1200)
-
-        deadline = time.time() + 45
-        while time.time() < deadline:
-            await page.mouse.wheel(0, 800)
-            await page.wait_for_timeout(300)
-
-        await browser.close()
-
-    events: Dict[str, Tuple[Dict[str,Any], Dict[str,Any], Dict[str,str]]] = {}
-
-    def make_id_from_meta(meta: Dict[str,Any], fallback_prefix: str, idx: int) -> str:
-        name = (
-            meta.get("EventName")
-            or meta.get("RaceName")
-            or meta.get("Name")
-            or meta.get("Gender")
-            or f"{fallback_prefix}_{idx+1}"
-        )
-        slug = re.sub(r"[^A-Za-z0-9]+", "_", str(name)).strip("_")
-        return slug or f"{fallback_prefix}_{idx+1}"
-
-    if not results_payloads and not splits_payloads:
+    def _empty_events(note: str) -> Dict[str, Tuple[Dict,Dict,Dict]]:
         base_id = event_id_from_url(url)
-        events[base_id] = (
-            {"_source": {"spr": []}, "_provider": "pttiming", "_note": "no_payload"},
-            {"_source": {"r": []}, "_provider": "pttiming", "_note": "no_payload"},
+        return {base_id: (
+            {"_source": {"spr": []}, "_provider": "pttiming", "_note": note},
+            {"_source": {"r": []}, "_provider": "pttiming", "_note": note},
             {}
-        )
-        print("[pt] no JSON captured; wrote empty shells")
-        return events
+        )}
 
-    if len(results_payloads) <= 1 and len(splits_payloads) <= 1:
-        base_id = event_id_from_url(url)
-        split_report = {"_source": {"spr": []}, "_provider": "pttiming"}
-        ind_res = {"_source": {"r": []}, "_provider": "pttiming"}
+    # Extract meet ID from ?mid=XXXX
+    mid_m = re.search(r"mid=(\d+)", url, re.IGNORECASE)
+    if not mid_m:
+        print(f"[pt] no mid= in URL: {url}")
+        return _empty_events("no_mid_param")
+    mid = mid_m.group(1)
 
-        if results_payloads:
-            rp = results_payloads[0]
-            ind_res["_source"]["r"] = rp if isinstance(rp, list) else [rp]
-        if splits_payloads:
-            sp = splits_payloads[0]
-            split_report["_source"]["spr"] = sp if isinstance(sp, list) else [sp]
+    # Get Firebase base URL from page HTML (default to known URL)
+    fb_base = "https://ptt-franklin.firebaseio.com/"
+    try:
+        page_req = _req.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with _req.urlopen(page_req, timeout=10) as resp:
+            html = resp.read().decode("utf-8", errors="replace")
+        m = re.search(r'fbURL\s*=\s*["\']([^"\']+)["\']', html)
+        if m:
+            fb_base = m.group(1).rstrip("/") + "/"
+    except Exception as e:
+        print(f"[pt] HTML fetch failed ({e}); using default fbURL")
 
-        events[base_id] = (split_report, ind_res, {})
-        print(f"[pt] single-race mapped -> {base_id}")
-        return events
+    print(f"[pt] Firebase base: {fb_base}  mid: {mid}")
+    fb_data = _fb_fetch(fb_base + mid + ".json")
+    if not isinstance(fb_data, dict):
+        print(f"[pt] Firebase returned no data for mid={mid}")
+        return _empty_events("firebase_null")
 
-    base_prefix = event_id_from_url(url) or "pt"
+    # Extract meet logo
+    logos: Dict[str, str] = {}
+    meta = fb_data.get("Meta") or {}
+    logo_file = meta.get("logo") if isinstance(meta, dict) else None
+    if logo_file:
+        logos["primary"] = f"https://live.pttiming.com/img/{logo_file}"
 
-    for idx, payload in enumerate(results_payloads):
-        if isinstance(payload, dict):
-            meta = payload.get("Meta") or payload.get("Race") or payload
-        else:
-            meta = {}
-        eid = make_id_from_meta(meta, base_prefix, idx)
-        ind = {
+    meet_events = fb_data.get("MeetEvents") or {}
+    if not isinstance(meet_events, dict):
+        print(f"[pt] no MeetEvents in Firebase data for mid={mid}")
+        return _empty_events("no_meet_events")
+
+    events: Dict[str, Tuple[Dict,Dict,Dict]] = {}
+
+    for enr, evt in meet_events.items():
+        if not isinstance(evt, dict):
+            continue
+        # Skip events with no entry data
+        ed = evt.get("ED") or {}
+        if not isinstance(ed, dict) or not ed:
+            continue
+        # Only include completed/official events
+        status = evt.get("S", "")
+        if status not in ("Complete", "Official", "InProgress"):
+            continue
+
+        entries = list(ed.values())
+
+        # Split distance labels from SL (comma-sep meters, e.g. "209,409,609,809,1009,1209,1409,1609")
+        sl_raw = evt.get("SL") or ""
+        sl_labels = [s.strip() + "m" for s in str(sl_raw).split(",") if s.strip()] if sl_raw else []
+
+        eid = f"{mid}_{enr.replace('-', '_')}"
+        split_report = {
             "_source": {
-                "r": payload if isinstance(payload, list) else [payload]
+                "spr": entries,
+                "sl": sl_labels,
             },
-            "_provider": "pttiming"
+            "_provider": "pttiming",
+            "_event_name": evt.get("N", ""),
+            "_enr": enr,
         }
-        if idx < len(splits_payloads):
-            spr_data = splits_payloads[idx]
-            split = {
-                "_source": {
-                    "spr": spr_data if isinstance(spr_data, list) else [spr_data]
-                },
-                "_provider": "pttiming"
-            }
-        else:
-            split = {"_source": {"spr": []}, "_provider": "pttiming"}
-        events[eid] = (split, ind, {})
-        print(f"[pt] multi-race mapped -> {eid}")
+        ind_res = {
+            "_source": {"r": entries},
+            "_provider": "pttiming",
+            "_event_name": evt.get("N", ""),
+        }
+        events[eid] = (split_report, ind_res, logos)
+        has_spd = any(isinstance(e, dict) and isinstance(e.get("SPD"), list) for e in entries)
+        print(f"[pt] {eid} -> {evt.get('N','')} ({len(entries)} athletes, has_spd={has_spd})")
+
+    if not events:
+        print(f"[pt] no complete events found for mid={mid}")
+        return _empty_events("no_complete_events")
 
     return events
 
 
 # ---------------- MileSplit Live ----------------
 
-def _looks_like_ms_json(u: str) -> bool:
-    ul = u.lower()
-    return ("milesplit.live" in ul) and ("/api/" in ul or "results" in ul or "meets" in ul)
+async def capture_milesplit_live(url: str, headful: bool) -> Dict[str, Tuple[Dict[str,Any], Dict[str,Any], Dict[str,str]]]:
+    """
+    DOM-based scraper for milesplit.live. Uses Playwright to render the Angular
+    SPA, then clicks each distance event to load Firestore data and extracts
+    athlete names/times/splits from the rendered table DOM.
 
-def _is_ms_results(u: str) -> bool:
-    ul = u.lower()
-    return "result" in ul or "results" in ul
+    milesplit.live uses Firebase Firestore (authenticated) for data, so XHR
+    interception cannot capture it. Instead we extract from the rendered DOM
+    after the Angular app has fetched and rendered the event results.
 
-def _is_ms_splits(u: str) -> bool:
-    ul = u.lower()
-    return "split" in ul or "lap" in ul or "checkpoint" in ul
-
-async def capture_milesplit_live(url: str, headful: bool) -> Tuple[Dict[str,Any], Dict[str,Any], Dict[str,str]]:
+    Returns mapping: event_id -> (split_report, ind_res_list, logos)
+    """
     from playwright.async_api import async_playwright
 
-    ind_res: Optional[Dict[str, Any]] = None
-    split_report: Optional[Dict[str, Any]] = None
+    DISTANCE_KWS = [
+        "800", "1000", "1500", "mile", "3000", "5000", "10000",
+        "steeplechase", "steeple", "dmr", "smr", "distance medley",
+        "sprint medley", "600y", "600 y", "1000m", "1000 m",
+    ]
 
-    async def on_response(resp):
-        nonlocal ind_res, split_report
-        try:
-            u = resp.url
-            if not _looks_like_ms_json(u):
-                return
+    def _is_distance_event(name: str) -> bool:
+        nl = name.lower()
+        return any(kw in nl for kw in DISTANCE_KWS)
 
-            try:
-                data = await resp.json()
-            except Exception:
-                try:
-                    txt = await resp.text()
-                    data = json.loads(txt)
-                except Exception:
-                    print(f"[ms json-miss] {u}")
-                    return
+    def _empty_events(note: str) -> Dict[str, Tuple[Dict,Dict,Dict]]:
+        base_id = event_id_from_url(url)
+        return {base_id: (
+            {"_source": {"spr": []}, "_provider": "milesplit_live", "_note": note},
+            {"_source": {"r": []}, "_provider": "milesplit_live", "_note": note},
+            {}
+        )}
 
-            if isinstance(data, dict):
-                if "results" in data and ind_res is None:
-                    rows = data["results"]
-                    if not isinstance(rows, list):
-                        rows = [rows]
-                    ind_res = {"_source": {"r": rows}, "_provider": "milesplit_live"}
-                    print(f"[ms] captured results from {u}")
+    # Normalise URL to events-list page
+    meet_m = re.search(r"/meets/(\d+)", url)
+    if not meet_m:
+        print(f"[ms] no /meets/ID in URL: {url}")
+        return _empty_events("no_meet_id")
+    meet_id = meet_m.group(1)
+    events_url = f"https://milesplit.live/meets/{meet_id}/events"
 
-                if split_report is None:
-                    for k in ("splits", "laps", "checkpoint_splits"):
-                        if k in data:
-                            val = data[k]
-                            if not isinstance(val, list):
-                                val = [val]
-                            split_report = {
-                                "_source": {"spr": val},
-                                "_provider": "milesplit_live"
-                            }
-                            print(f"[ms] captured splits from {u} via key '{k}'")
-                            break
+    all_events: Dict[str, Tuple[Dict,Dict,Dict]] = {}
 
-            elif isinstance(data, list):
-                if data and isinstance(data[0], dict) and ind_res is None and _is_ms_results(u):
-                    ind_res = {"_source": {"r": data}, "_provider": "milesplit_live"}
-                    print(f"[ms] captured list-style results from {u}")
+    # JS snippet: extract athletes + splits from main (largest) results table.
+    _EXTRACT_JS = """
+    () => {
+        const tables = Array.from(document.querySelectorAll('table'));
+        let mainTable = null, maxRows = 0;
+        for (const t of tables) {
+            const r = t.querySelectorAll('tr').length;
+            if (r > maxRows) { maxRows = r; mainTable = t; }
+        }
+        if (!mainTable || maxRows < 3) return {headers: [], athletes: []};
 
-                if data and isinstance(data[0], dict) and split_report is None and _is_ms_splits(u):
-                    split_report = {"_source": {"spr": data}, "_provider": "milesplit_live"}
-                    print(f"[ms] captured list-style splits from {u}")
+        const ths = Array.from(mainTable.querySelectorAll('th.splits'));
+        const headers = ths.map(th => th.textContent.trim());
 
-        except Exception as e:
-            print(f"[ms resp err] {type(e).__name__}")
+        const rows = Array.from(mainTable.querySelectorAll('tbody tr, tr')).slice(1);
+        const athletes = [];
+        for (const row of rows) {
+            const nameTd  = row.querySelector('td.name, td[class*="name"]');
+            const timeTd  = row.querySelector('td.time, td[class*="time"]');
+            const teamTd  = row.querySelector('td.team, td[class*="team"]');
+            const placeTd = row.querySelector('td.place, td[class*="place"]');
+            const splitTds = Array.from(row.querySelectorAll('td.split'));
+
+            // Extract athlete name from first text node only (excludes smallTeam sub-div)
+            let rawName = '';
+            if (nameTd) {
+                for (const node of nameTd.childNodes) {
+                    if (node.nodeType === 3) {  // TEXT_NODE
+                        const t = node.textContent.replace(/\\s+/g,' ').trim();
+                        if (t.length > 1) { rawName = t; break; }
+                    }
+                }
+                if (!rawName) rawName = nameTd.textContent.replace(/\\s+/g,' ').trim();
+            }
+            const rawTeam = teamTd ? teamTd.textContent.replace(/\\s+/g,' ').trim() : '';
+            // Team cell may include grade / bullet — keep text before the bullet
+            const team = rawTeam.split('\\u2022')[0].trim();
+            const rawTime = timeTd ? timeTd.textContent.replace(/\\s+/g,' ').trim() : '';
+            // Extract first m:ss.d pattern
+            const timeM = rawTime.match(/\\d{1,2}:\\d{2}\\.\\d{1,2}|\\d{2,3}\\.\\d{1,2}/);
+            const time = timeM ? timeM[0] : '';
+            const placeRaw = placeTd ? placeTd.textContent.trim() : '';
+            const placeM = placeRaw.match(/^\\d+/);
+            const place = placeM ? parseInt(placeM[0]) : null;
+
+            const splits = splitTds.map(td => {
+                const timeEl  = td.querySelector('.split-right-content .time, .time');
+                const lapEl   = td.querySelector('.split-right-content .lap,  .lap');
+                const placeEl = td.querySelector('.split-left-content .place, .place');
+                return {
+                    cs:   timeEl  ? timeEl.textContent.trim()  : '',
+                    lap:  lapEl   ? lapEl.textContent.trim()   : '',
+                    p:    placeEl ? placeEl.textContent.trim() : '',
+                };
+            }).filter(s => s.cs.length > 0);
+
+            if (rawName.length > 2 && time.length > 0) {
+                athletes.push({name: rawName, team, place, m: time, splits});
+            }
+        }
+        return {headers, athletes};
+    }
+    """
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(
@@ -891,36 +910,81 @@ async def capture_milesplit_live(url: str, headful: bool) -> Tuple[Dict[str,Any]
         )
         ctx = await browser.new_context(viewport={"width": 1400, "height": 900})
         page = await ctx.new_page()
-        page.on("response", on_response)
 
-        print(f"[ms nav] {url}")
-        await page.goto(url, wait_until="domcontentloaded", timeout=60000)
-        await page.wait_for_timeout(1200)
+        print(f"[ms nav] {events_url}")
+        await page.goto(events_url, wait_until="domcontentloaded", timeout=60000)
+        await page.wait_for_timeout(10000)
 
-        deadline = time.time() + 45
-        while time.time() < deadline and (ind_res is None or split_report is None):
-            await page.mouse.wheel(0, 800)
-            await page.wait_for_timeout(300)
+        # Collect sidebar items (li.pointer) and filter to completed distance events
+        items = await page.query_selector_all("li.pointer")
+        event_list: List[Tuple[Any, str]] = []
+        for item in items:
+            txt = await item.inner_text()
+            clean = " ".join(txt.strip().split())
+            if "Completed" in clean and _is_distance_event(clean):
+                event_list.append((item, clean))
+
+        print(f"[ms] {len(event_list)} distance events to scrape from {events_url}")
+
+        for item, evt_name in event_list:
+            print(f"[ms] scraping: {evt_name[:60]}")
+            try:
+                await item.click()
+                # Wait up to 25s for split cells to appear; fall back to 5s delay
+                try:
+                    await page.wait_for_function(
+                        "() => document.querySelectorAll('td.split .split-right-content .time').length > 3",
+                        timeout=25000,
+                    )
+                except Exception:
+                    await page.wait_for_timeout(5000)
+
+                current_url = page.url
+                evt_id_m = re.search(r"/events/(\d+)/results/([A-Z])/([MF])", current_url)
+                if evt_id_m:
+                    raw_id = f"{meet_id}_{evt_id_m.group(1)}_{evt_id_m.group(2)}_{evt_id_m.group(3)}"
+                else:
+                    slug = re.sub(r"[^A-Za-z0-9]+", "_", evt_name.split("•")[0].strip())
+                    raw_id = f"{meet_id}_{slug[:40]}"
+
+                data = await page.evaluate(_EXTRACT_JS)
+                headers: List[str] = data.get("headers", [])
+                athletes: List[Dict[str, Any]] = data.get("athletes", [])
+
+                if not athletes:
+                    print(f"[ms] no athletes for {evt_name[:40]}")
+                    continue
+
+                # Attach split distance labels from table headers
+                for ath in athletes:
+                    for i, sp in enumerate(ath.get("splits", [])):
+                        lbl = headers[i] if i < len(headers) else f"S{i+1}"
+                        sp["label"] = lbl
+
+                sl_labels = list(headers)
+                split_report = {
+                    "_source": {"spr": athletes, "sl": sl_labels},
+                    "_provider": "milesplit_live",
+                    "_event_name": evt_name,
+                }
+                ind_res = {
+                    "_source": {"r": athletes},
+                    "_provider": "milesplit_live",
+                    "_event_name": evt_name,
+                }
+                has_spd = any(a.get("splits") for a in athletes)
+                all_events[raw_id] = (split_report, ind_res, {})
+                print(f"[ms] {raw_id}: {len(athletes)} athletes, has_splits={has_spd}")
+
+            except Exception as e:
+                print(f"[ms] error on {evt_name[:40]}: {type(e).__name__}: {e}")
+                continue
 
         await browser.close()
 
-    if ind_res is None:
-        ind_res = {
-            "_source": {"r": []},
-            "_provider": "milesplit_live",
-            "_note": "no_results_detected"
-        }
-        print("[ms] no results JSON; using empty r")
-
-    if split_report is None:
-        split_report = {
-            "_source": {"spr": []},
-            "_provider": "milesplit_live",
-            "_note": "no_splits_detected"
-        }
-        print("[ms] no splits JSON; using empty spr")
-
-    return split_report, ind_res, {}
+    if not all_events:
+        return _empty_events("no_events_scraped")
+    return all_events
 
 
 # ---------------- FlashResults (static HTML) ----------------
@@ -1261,17 +1325,16 @@ def main():
         write_event_bundle(outdir, base_eid, split_report, ind_res, logos)
 
     elif provider == "pttiming":
-        events = asyncio.run(
-            capture_pttiming(args.url, headful=args.headful)
-        )
+        events = capture_pttiming(args.url, headful=args.headful)
         for eid, (split_report, ind_res, logos) in events.items():
             write_event_bundle(outdir, eid, split_report, ind_res, logos)
 
     elif provider == "milesplit_live":
-        split_report, ind_res, logos = asyncio.run(
+        events = asyncio.run(
             capture_milesplit_live(args.url, headful=args.headful)
         )
-        write_event_bundle(outdir, base_eid, split_report, ind_res, logos)
+        for eid, (split_report, ind_res, logos) in events.items():
+            write_event_bundle(outdir, eid, split_report, ind_res, logos)
 
     elif provider == "flashresults":
         split_report, ind_res = capture_flashresults(args.url)

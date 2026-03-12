@@ -4,18 +4,18 @@
 
 | Conference | Live Results Link |
 |---|---|
-| **America East** | https://lancer.trackscoreboard.com/meets/461/events *(note: need to double-check — 461 came up for CAA; America East is likely a nearby meet number on lancertiming.com — see note below)* |
-| **American Athletic (AAC)** | https://live.xpresstiming.com/meets/ *(the main AAC meet page — I saw individual event URLs but didn't capture the root meet ID; search "2026 American Conference Indoor" on live.xpresstiming.com)* |
+| **America East** | https://lancer.trackscoreboard.com/meets/459/events |
+| **American Athletic (AAC)** | https://live.xpresstiming.com/meets/60861 |
 | **Atlantic Coast (ACC)** | https://flashresults.com/2026_Meets/Indoor/02-26_ACC/index.htm |
-| **ASUN (Atlantic Sun)** | https://live.dcracetiming.com/meet-list (the ASUN 2026 meet is listed there; direct: search "ASUN Conference Indoor TF Championships 2026" on live.dcracetiming.com) |
+| **ASUN (Atlantic Sun)** | https://live.dcracetiming.com/meets/61390 |
 | **Atlantic 10 (A10)** | https://blueridgetiming.live/meets/60148 |
 | **Big 12** | https://live.pttiming.com/?mid=8683 |
-| **Big East** | https://big-east-indoor-championships.runnerspace.com *(RunnerSpace hub — 2026 results are there)* |
+| **Big East** | https://results.lakeshoreathleticservices.com/meets/61998 
 | **Big Sky** | https://live.athletic.net/meets/62234 |
-| **Big South** | http://results.tfmeetpro.com/Mitchell_Timing/Big_South_Conference_Indoor_Track_and_Field_Championships_2026/ |
-| **Big Ten** | https://live.pttiming.com/?mid=7943 |
+| **Big South** | http://results.tfmeetpro.com/Mitchell_Timing/Big_South_Conference_Indoor_Track_and_Field_Championships_2026/ *(tfmeetpro — static HTML, no splits)* |
+| **Big Ten** | https://live.pttiming.com/?mid=8715 |
 | **CAA (Coastal Athletic)** | https://lancer.trackscoreboard.com/meets/461/events |
-| **Conference USA (CUSA)** | https://conference-usa-indoor-championships.runnerspace.com *(RunnerSpace hub — 2026 results are there)* |
+| **Conference USA (CUSA)** | https://blueridgetiming.live/meets/60993 |
 | **Horizon League** | https://live.deltatiming.com/meets/62071 |
 | **Ivy League** | https://live.athletic.net/meets/44649 |
 | **MAAC (Metro Atlantic)** | https://armorytrack.live/meets/54991 |
@@ -23,9 +23,9 @@
 | **MEAC (Mid-Eastern)** | https://blueridgetiming.live/meets/60633 |
 | **Mountain West (MWC)** | https://www.rtspt.com/events/mw/2026-Indoor/ |
 | **NEC (Northeast)** | https://milesplit.live/timers/959 |
-| **OVC (Ohio Valley)** | http://www.cfpitiming.com/2026_Indoor_Season/OVC_ITF_2026/OVC_ITF_2026.html |
+| **OVC (Ohio Valley)** | https://www.milesplit.live/meets/731447 *(linked from cfpitiming.com as "Nearly live MileSplit Live Results")* |
 | **Patriot League** | https://live.athletic.net/meets/62258 |
-| **SEC (Southeastern)** | https://flashresults.com/2026_Meets/Indoor/02-26_SEC/index.htm |
+| **SEC (Southeastern)** | https://flashresults.com/2026_Meets/Indoor/02-26_SEC/index.htm|
 | **SoCon (Southern)** | https://snapresults.snaptiming.com/meets/62366 |
 | **Southland** | https://live.xpresstiming.com/meets/62106 |
 | **SWAC (Southwestern)** | https://results.adkinstrak.com/meets/57061 |
@@ -33,14 +33,16 @@
 | **Sun Belt** | https://live.xpresstiming.com/meets/61288/events |
 | **WAC (Western Athletic)** | https://live.athletictiming.net/meets/62104 |
 
-**Still need to verify / couldn't find live interactive results for:**
+**Provider notes:**
 
-- **Missouri Valley (MVC)** — only found TFRRS and athletic.net non-live pages
-- **America East** — I believe the lancer.trackscoreboard.com URL for it is different from the CAA one (meet 461 is CAA); the America East meet number on that system needs verification
+- **Immediately ingestible (21):** America East, AAC, ASUN, A10, Big East, Big Sky, CAA, CUSA, Horizon League, Ivy League, MAAC, MEAC, MWC, Patriot League, SoCon, Southland, Summit League, Sun Belt, SWAC, WAC + already-ingested MEAC
+- **pttiming — splits now work (3):** Big 12 (`mid=8683` ✓), Big Ten (`mid=8715` ✓), MVC (mid unknown)
+- **milesplit_live — same finish-only issue (2):** NEC, OVC
+- **fstiming — likely no splits (1):** MAC (same provider as GLIAC which had no splits)
+- **FlashResults — needs new provider (2):** ACC, SEC (static HTML with splits on sub-pages — doable)
+- **tfmeetpro — no split data in source (1):** Big South (finish-only static HTML)
 
-A couple of notes:
-- The AAC root meet URL on XpressTiming: you can find it by searching `live.xpresstiming.com` for "2026 American Conference Indoor"
-- The Big East and CUSA RunnerSpace pages are interactive live results hubs (they include live splits, results by event, etc.) — they qualify as interactive live results sites
+**Odd lap sizes:** ACC FlashResults shows 209m first split then 200m laps (9m start stagger). All other legacy_spa/trackscoreboard conferences use standard 200m indoor laps. Flag any 5000m with 17 splits as potential 300m-track (like G-MAC D2).
 
 
 America East

@@ -121,8 +121,8 @@ def validate_pace_v1(data: Dict[str, Any]) -> List[ValidationError]:
                 if lap < 0:
                     errors.append(ValidationError(name, team, f"Negative lap at {label}: {lap:.1f}s", "BLOCK"))
 
-                # Impossibly fast lap
-                if lap < MIN_LAP_PACE_PER_KM * 0.15:  # sub-22s per ~200m
+                # Impossibly fast lap (absolute minimum: 10s covers sprint splits like 200m ~21s)
+                if lap < 10.0:
                     errors.append(ValidationError(
                         name, team,
                         f"Impossibly fast lap at {label}: {lap:.1f}s",
