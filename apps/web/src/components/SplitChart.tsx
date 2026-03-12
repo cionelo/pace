@@ -500,12 +500,12 @@ export default function SplitChart({ athletes }: SplitChartProps) {
     mode === "raw" && overlayC && fieldAthletes.length > 0 && activeDistances.length > 0
       ? computeFieldAvgPerSplit(fieldAthletes, activeDistances)
       : {};
-  const displayChartData =
+  const displayChartData: ChartPoint[] =
     mode === "raw" && overlayC && Object.keys(fieldAvgMap).length > 0
       ? baseChartData.map((point) => ({
           ...point,
           ...(fieldAvgMap[point.label] != null ? { field_avg: fieldAvgMap[point.label] } : {}),
-        }))
+        })) as ChartPoint[]
       : baseChartData;
 
   const elapsedLookup = buildElapsedLookup(athletes);
