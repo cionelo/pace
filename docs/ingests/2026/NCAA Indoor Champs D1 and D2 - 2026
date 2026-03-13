@@ -1,0 +1,56 @@
+# NCAA Indoor Championships Data Ingestion
+
+## Event Sources
+
+### NCAA D1 Indoor Championships
+- **Location:** Fayetteville, AR  
+- **Dates:** March 13–14, 2026  
+- **Estimated Altitude:** TBD  
+- **Results URL:**  
+  https://www.flashresults.com/2026_Meets/Indoor/03-13_NCAA/index.htm  
+
+**Ingestion Pipeline Supported:** Y/N  
+
+**Notes:**
+- FlashResults site structure
+- Likely HTML table scraping
+- Verify lap split availability
+- Confirm athlete ID consistency across rounds
+
+
+---
+
+### NCAA D2 Indoor Championships
+- **Venue:** Virginia Beach Sports Center  
+- **Location:** Virginia Beach, VA  
+- **Dates:** March 13–14, 2026  
+- **Estimated Altitude:** TBD  
+- **Results URL:**  
+  https://results.leonetiming.com/?mid=8658  
+
+**Ingestion Pipeline Supported:** Y/N  
+
+**Notes:**
+- Leone Timing platform
+- API or structured HTML likely available
+- Confirm if lap splits exist
+- Check event/heat URL patterns
+
+
+---
+
+# Ingestion Agent Template
+
+## Required Fields
+
+```yaml
+event_name:
+location:
+venue:
+start_date:
+end_date:
+altitude_estimate:
+results_url:
+timing_provider:
+supported_by_pipeline:
+notes:

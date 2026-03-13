@@ -2,7 +2,7 @@
 
 > Context document for the next AI session to pick up where we left off.
 
-## Current State (March 12, 2026)
+## Current State (March 13, 2026)
 
 Full stack live and deployed. End-to-end pipeline verified:
 
@@ -14,18 +14,20 @@ Full stack live and deployed. End-to-end pipeline verified:
 6. **Meet Ingest** (`py/pace_ingest_meet.py`) — Orchestrates discover → scrape → normalize → validate → upload.
 7. **Frontend** (`apps/web/`) — React + Vite + TypeScript + Zustand + Recharts, Supabase anon key.
 
-### Data in Supabase (March 12, 2026)
+### Data in Supabase (March 13, 2026)
 
-- **~375 events** across D2 + D1 conferences
+- **~400+ events** across D2 + D1 conferences
 - **D2 Indoor 2026 (all complete):** NSIC, GNAC, SIAC, RMAC, MEAC, Conference Carolinas, Gulf South, G-MAC, CIAA, Peach Belt, NE10
-- **D1 Indoor 2026 (ingested, 24/27):** AAC, ASUN, A10, ACC, Big East, Big Sky, CAA, CUSA, Horizon League, MAAC, MAC, MEAC (D1), MWC, Patriot League, SEC, SoCon, Southland, Summit League, Sun Belt, SWAC, WAC, America East, Big 12, Big Ten, OVC
+- **D1 Indoor 2026 (27/29 ingested):** AAC, ASUN, A10, ACC, Big East, Big Sky, CAA, CUSA, Horizon League, Ivy League, MAAC, MAC, MEAC (D1), MVC, MWC, Patriot League, SEC, SoCon, Southland, Summit League, Sun Belt, SWAC, WAC, America East, Big 12, Big Ten, OVC
+- **Not ingested (no splits available):** NEC, Big South
 - **5 XC events from Fall 2025:** Sun Belt, GSC, ACCC
+- **Division column:** Applied `004_add_division.sql` — all events classified as D1/D2. Frontend filter works.
 
 ---
 
-## ⚠️ INCOMPLETE: Remaining D1 Indoor 2026 Ingestion
+## ✅ D1 Indoor 2026 Ingestion — COMPLETE (March 13, 2026)
 
-**New session must complete these conferences.** Run from `cd /Users/ncionelo/Downloads/JOBS/FOR\ GITHUB/PACE/pace`.
+Ivy League and MVC ingested via parallel sessions. NEC and Big South skipped (no split data available).
 
 ### CRITICAL: Always use `/usr/bin/python3`, NOT bare `python3`
 
@@ -397,8 +399,13 @@ The `_infer_distances_from_count()` function in `pace_normalize.py` already hand
 
 ## Next Steps (priority order)
 
-1. **Complete D1 Indoor 2026** — Ivy League, Mountain West, MVC, NEC (see "INCOMPLETE" section above)
-2. **D1/D2 division backfill** — Apply `004_add_division.sql` migration, backfill existing D2 rows, add `--division` flag to ingest scripts
-3. **Outdoor season ingestion** — Separate session once outdoor conference meets are posted
-4. **M/W gender filter bug** — In athlete search, toggling M/W doesn't immediately re-filter the "add athlete" list. Needs fix in `AthleteSearch.tsx` (already noted but not yet fixed as of March 12).
-5. **Source URL link UX** — `source_url` links exist in the Legend tooltip (`Legend.tsx:44-51`) but are effectively unclickable: the tooltip is triggered by `onMouseEnter`/`onMouseLeave` on the athlete button, so it disappears when the user moves the cursor toward the link. Needs rework — either make the tooltip persist on hover (with a delay before hiding), move the link to a click-triggered popover, or surface source links in a more accessible location (e.g. event header, dedicated "View Results" button).
+1. ~~**Complete D1 Indoor 2026**~~ ✅ Done March 13 — Ivy League + MVC ingested. NEC/Big South skipped (no splits).
+2. ~~**D1/D2 division backfill**~~ ✅ Done March 13 — `004_add_division.sql` applied, all events classified.
+3. **Data enrichment** — See `docs/plans/2026-03-13-data-enrichment-and-completion.md` for full plan:
+   - Add `--division` flag to ingest pipeline (Phase 2)
+   - Backfill location for all events (Phase 3)
+   - Add altitude field + lookup (Phases 2-3)
+   - Optional: year filter, altitude display in frontend (Phase 4)
+4. **NCAA Indoor Championships ingestion** — D1 (flashresults) + D2 (leone_xc) results from March 13-14. See `docs/ingests/2026/NCAA Indoor Champs D1 and D2 - 2026`.
+5. **Outdoor season ingestion** — Separate session once outdoor conference meets are posted.
+6. **Source URL link UX** — Tooltip disappears before user can click link. Needs rework.
