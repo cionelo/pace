@@ -10,3 +10,6 @@ venv/
 data/
 .DS_Store
 .worktrees/
+docs/pace revamp spec notes.md
+.vite/
+supabase/.temp/

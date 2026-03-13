@@ -72,7 +72,7 @@ ingest --url "https://live.deltatiming.com/meets/62071" \
   --meet-name "2026 Horizon League Indoor Championships" --date "2026-02-22"
 
 echo "[11/27] Ivy League (legacy_spa)"
-ingest --url "https://live.athletic.net/meets/44649" \
+ingest --url "https://armorytrack.live/meets/58419" \
   --meet-name "2026 Ivy League Indoor Championships" --date "2026-02-22"
 
 echo "[12/27] MAAC (legacy_spa)"

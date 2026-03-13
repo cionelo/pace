@@ -17,7 +17,7 @@
 | **CAA (Coastal Athletic)** | https://lancer.trackscoreboard.com/meets/461/events |
 | **Conference USA (CUSA)** | https://blueridgetiming.live/meets/60993 |
 | **Horizon League** | https://live.deltatiming.com/meets/62071 |
-| **Ivy League** | https://live.athletic.net/meets/44649 |
+| **Ivy League** | https://armorytrack.live/meets/58419 |
 | **MAAC (Metro Atlantic)** | https://armorytrack.live/meets/54991 |
 | **MAC (Mid-American)** | https://live.fstiming.com/meets/62244 |
 | **MEAC (Mid-Eastern)** | https://blueridgetiming.live/meets/60633 |
