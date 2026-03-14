@@ -163,10 +163,7 @@ def detect_provider(url: str) -> str:
     if "rtspt.com" in u:
         return "rtspt_html"
 
-    if "rt.trackscoreboard.com" in u:
-        return "trackscoreboard"
-
-    if "lancer.trackscoreboard.com" in u or "live.halfmiletiming.com" in u:
+    if "rt.trackscoreboard.com" in u or "lancer.trackscoreboard.com" in u or "live.halfmiletiming.com" in u:
         return "trackscoreboard_html"
 
     if "live.pttiming.com" in u:

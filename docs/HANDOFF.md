@@ -16,9 +16,9 @@ Full stack live and deployed. End-to-end pipeline verified:
 
 ### Data in Supabase (March 13, 2026)
 
-- **~400+ events** across D2 + D1 conferences
+- **~415+ events** across D2 + D1 conferences
 - **D2 Indoor 2026 (all complete):** NSIC, GNAC, SIAC, RMAC, MEAC, Conference Carolinas, Gulf South, G-MAC, CIAA, Peach Belt, NE10
-- **D1 Indoor 2026 (27/29 ingested):** AAC, ASUN, A10, ACC, Big East, Big Sky, CAA, CUSA, Horizon League, Ivy League, MAAC, MAC, MEAC (D1), MVC, MWC, Patriot League, SEC, SoCon, Southland, Summit League, Sun Belt, SWAC, WAC, America East, Big 12, Big Ten, OVC
+- **D1 Indoor 2026 (28/29 ingested — effectively COMPLETE):** AAC, ASUN, A10, ACC, Big East, Big Sky, CAA, CUSA, Horizon League, Ivy League, MAAC, MAC, MEAC (D1), MVC, MWC, Patriot League, SEC, SoCon, Southland, Summit League, Sun Belt, SWAC, WAC, America East, Big 12, Big Ten, OVC
 - **Not ingested (no splits available):** NEC, Big South
 - **5 XC events from Fall 2025:** Sun Belt, GSC, ACCC
 - **Division column:** Applied `004_add_division.sql` — all events classified as D1/D2. Frontend filter works.
@@ -27,7 +27,7 @@ Full stack live and deployed. End-to-end pipeline verified:
 
 ## ✅ D1 Indoor 2026 Ingestion — COMPLETE (March 13, 2026)
 
-Ivy League and MVC ingested via parallel sessions. NEC and Big South skipped (no split data available).
+Ivy League and MVC ingested via parallel sessions. Mountain West ingested March 13 (see below). NEC and Big South skipped (no split data available).
 
 ### CRITICAL: Always use `/usr/bin/python3`, NOT bare `python3`
 
@@ -51,14 +51,19 @@ URL was updated — use `armorytrack.live` not `live.athletic.net`:
   --date "2026-02-22" --data-root py/data
 ```
 
-### 2. Mountain West (rtspt_html)
-Provider `rtspt_html` exists but this specific meet URL is untested:
-```bash
-/usr/bin/python3 py/pace_ingest_meet.py \
-  --url "https://www.rtspt.com/events/mw/2026-Indoor/" \
-  --auto --season indoor \
-  --meet-name "2026 Mountain West Indoor Championships" \
-  --date "2026-02-27" --data-root py/data
+### 2. Mountain West ✅ DONE (March 13, 2026)
+
+**12 events ingested (800m prelim/final, Mile prelim/final, 3000m, 5000m — men & women).**
+
+The rtspt.com page (`https://www.rtspt.com/events/mw/2026-Indoor/`) is just a landing page that links to trackscoreboard. The actual results live at `https://rt.trackscoreboard.com/meets/22626/events`.
+
+**Key fixes made (already committed):**
+1. `detect_provider()` in `pace_scraper.py` — `rt.trackscoreboard.com` now routes to `trackscoreboard_html` (Angular SSR, same as `lancer.trackscoreboard.com`), not the old XHR-based `trackscoreboard` provider.
+2. `pace_discover.py` — added `discover_trackscoreboard()` which uses Playwright to scrape event links from `rt.trackscoreboard.com/meets/{id}/events`.
+
+**Division SQL to run (if not already applied):**
+```sql
+UPDATE events SET division = 'D1' WHERE division IS NULL AND name ILIKE '%Mountain West%';
 ```
 
 ### 3. MVC / Missouri Valley (pttiming — two-step process)
@@ -148,14 +153,11 @@ All handled by `capture_legacy_spa()`. Known domains in `detect_provider()` (~li
 
 To add a new domain: add it to `detect_provider()` in `py/pace_scraper.py`.
 
-### trackscoreboard
-
-`rt.trackscoreboard.com` — XHR interception via `capture_trackscoreboard()`.
-
 ### trackscoreboard_html
 
-DOM scraper for TrackScoreboard v4.1.187 Angular SSR sites (no XHR — data is server-rendered):
+DOM scraper for TrackScoreboard Angular SSR sites (no XHR — data is server-rendered into DOM). Clicks "Splits" tab to capture per-athlete split data.
 
+- `rt.trackscoreboard.com` (Mountain West — meet 22626) — **now routes here, not to old XHR provider**
 - `lancer.trackscoreboard.com` (NE10, America East, CAA), `live.halfmiletiming.com` (Indoor Peach Belt)
 
 URL pattern: `/meets/{meet_id}/events/{event_id}/{round}`. Scraper dir = `{meet_id}_{event_id}_{round}`. `pace_ingest_meet.py` uses `event_id_from_url(href)` as secondary lookup to handle the ID mismatch between discover output and scraper dir names.
@@ -399,7 +401,7 @@ The `_infer_distances_from_count()` function in `pace_normalize.py` already hand
 
 ## Next Steps (priority order)
 
-1. ~~**Complete D1 Indoor 2026**~~ ✅ Done March 13 — Ivy League + MVC ingested. NEC/Big South skipped (no splits).
+1. ~~**Complete D1 Indoor 2026**~~ ✅ Done March 13 — Ivy League + MVC + Mountain West ingested. NEC/Big South skipped (no splits). **Run division SQL for MWC (see above).**
 2. ~~**D1/D2 division backfill**~~ ✅ Done March 13 — `004_add_division.sql` applied, all events classified.
 3. **Data enrichment** — See `docs/plans/2026-03-13-data-enrichment-and-completion.md` for full plan:
    - Add `--division` flag to ingest pipeline (Phase 2)

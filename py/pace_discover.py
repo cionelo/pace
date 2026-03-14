@@ -299,15 +299,98 @@ def discover_flashresults(index_url: str) -> list:
     return events
 
 
+async def discover_trackscoreboard(url: str) -> list:
+    """Use Playwright to discover events on a rt.trackscoreboard.com meet page."""
+    from playwright.async_api import async_playwright
+    import sys as _sys
+    import pathlib as _pathlib
+
+    # Ensure /events suffix
+    events_url = url.rstrip("/")
+    if not events_url.endswith("/events"):
+        events_url += "/events"
+
+    # Import event_id_from_url for consistent IDs
+    _py_dir = _pathlib.Path(__file__).parent
+    if str(_py_dir) not in _sys.path:
+        _sys.path.insert(0, str(_py_dir))
+    try:
+        from pace_scraper import event_id_from_url as _eid_fn
+    except ImportError:
+        def _eid_fn(u):  # type: ignore[misc]
+            return u.rstrip("/").split("/")[-1]
+
+    events: list = []
+    seen_hrefs: set = set()
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True, args=["--no-sandbox"])
+        ctx = await browser.new_context()
+        page = await ctx.new_page()
+        print(f"[ts-discover] {events_url}")
+        await page.goto(events_url, wait_until="networkidle", timeout=30000)
+        await page.wait_for_timeout(3000)
+
+        links = await page.query_selector_all("a[href]")
+        for link in links:
+            href = await link.get_attribute("href")
+            text = await link.inner_text()
+            if not href or "/events/" not in href:
+                continue
+
+            full_href = ("https://rt.trackscoreboard.com" + href) if href.startswith("/") else href
+            if full_href in seen_hrefs:
+                continue
+            seen_hrefs.add(full_href)
+
+            # Skip pentathlon sub-events: /meets/N/events/N/Round/N
+            path_parts = href.rstrip("/").split("/")
+            try:
+                ev_idx = path_parts.index("events")
+                if len(path_parts) - ev_idx > 3:
+                    continue
+            except ValueError:
+                pass
+
+            round_ = "Prelim" if "/Prelim" in href else "Final"
+            # Clean event name (strip trailing status tokens like Scored/Done/JO)
+            event_name = re.sub(r'\s*(Scored|Done|JO)\s*$', '', text.strip()).strip()
+            if not event_name:
+                continue
+
+            info = classify_event(event_name)
+            is_relay = bool(re.search(r"\brelay\b|\bDMR\b|\b4x", event_name, re.IGNORECASE))
+            event_type = "relay" if is_relay else "individual"
+
+            events.append({
+                "id": _eid_fn(full_href),
+                "type": event_type,
+                "name": event_name,
+                "gender": info["gender"],
+                "distance": info["distance"],
+                "category": info["category"],
+                "round": round_,
+                "href": full_href,
+            })
+
+        await browser.close()
+
+    print(f"[ts-discover] found {len(events)} events")
+    return events
+
+
 def discover_meet(url: str) -> list:
     """Provider-aware meet discovery dispatcher.
 
     Calls discover_flashresults() for flashresults.com URLs,
+    calls discover_trackscoreboard() for rt.trackscoreboard.com URLs,
     otherwise falls back to the Playwright-based discover_events().
     """
     import asyncio
     if "flashresults.com" in url.lower():
         return discover_flashresults(url)
+    if "rt.trackscoreboard.com" in url.lower():
+        return asyncio.run(discover_trackscoreboard(url))
     return asyncio.run(discover_events(url))
 
 
