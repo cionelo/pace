@@ -13,7 +13,7 @@ export default function WindowGrid() {
 
   if (windows.length === 0) {
     return (
-      <div className="flex items-center justify-center h-96 text-zinc-500">
+      <div className="flex items-center justify-center h-96 text-zinc-400 dark:text-zinc-500">
         Click &quot;+ New Window&quot; to start comparing athletes
       </div>
     );

@@ -12,6 +12,7 @@ import {
 import type { WindowAthleteData, AthleteResult } from "../types/pace";
 import { getEventResults } from "../lib/db";
 import ChartFaqModal from "./ChartFaqModal";
+import { useThemeStore } from "../stores/theme-store";
 
 interface SplitChartProps {
   athletes: WindowAthleteData[];
@@ -368,12 +369,23 @@ function CustomTooltip({
   athleteNames,
   mode,
   rawLapLookup,
+  theme,
 }: any) {
   if (!active || !payload?.length) return null;
 
+  const isDark = theme === "dark";
+  const wrapperStyle = {
+    backgroundColor: isDark ? "#18181b" : "#ffffff",
+    border: isDark ? "1px solid #3f3f46" : "1px solid #e4e4e7",
+  };
+  const labelColor = isDark ? "#a1a1aa" : "#71717a";
+  const nameColor = isDark ? "#a1a1aa" : "#71717a";
+  const primaryColor = isDark ? "#ffffff" : "#18181b";
+  const secondaryColor = isDark ? "#71717a" : "#a1a1aa";
+
   return (
-    <div className="bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 shadow-lg">
-      <p className="text-xs text-zinc-400 mb-1">{label}</p>
+    <div style={wrapperStyle} className="rounded-lg px-3 py-2 shadow-lg">
+      <p className="text-xs mb-1" style={{ color: labelColor }}>{label}</p>
       {payload.map((entry: any) => {
         const athleteId = entry.dataKey;
         const isFieldAvgSplit = athleteId === "field_avg";
@@ -391,44 +403,44 @@ function CustomTooltip({
                 className="w-2 h-2 rounded-full flex-shrink-0"
                 style={{ backgroundColor: entry.color }}
               />
-              <span className="text-xs text-zinc-400">{name}</span>
+              <span className="text-xs" style={{ color: nameColor }}>{name}</span>
             </div>
             <div className="ml-4">
               {isGapModeTooltip ? (
                 <>
-                  <span className="text-sm font-medium text-white">
+                  <span className="text-sm font-medium" style={{ color: primaryColor }}>
                     {entry.value >= 0 ? "+" : ""}
                     {entry.value.toFixed(2)}s
                   </span>
                   {elapsed != null && (
-                    <span className="text-xs text-zinc-500 italic ml-2">
+                    <span className="text-xs italic ml-2" style={{ color: secondaryColor }}>
                       ({formatSeconds(elapsed)})
                     </span>
                   )}
                   {rawLap != null && (
-                    <span className="text-xs text-zinc-500 italic ml-2">
+                    <span className="text-xs italic ml-2" style={{ color: secondaryColor }}>
                       lap: {formatSeconds(rawLap)}
                     </span>
                   )}
                 </>
               ) : isPositionModeTooltip ? (
                 <>
-                  <span className="text-sm font-medium text-white">
+                  <span className="text-sm font-medium" style={{ color: primaryColor }}>
                     P{Math.round(entry.value)}
                   </span>
                   {elapsed != null && (
-                    <span className="text-xs text-zinc-500 italic ml-2">
+                    <span className="text-xs italic ml-2" style={{ color: secondaryColor }}>
                       ({formatSeconds(elapsed)})
                     </span>
                   )}
                 </>
               ) : (
                 <>
-                  <span className="text-sm font-medium text-white">
+                  <span className="text-sm font-medium" style={{ color: primaryColor }}>
                     {formatSeconds(entry.value)}
                   </span>
                   {elapsed != null && (
-                    <span className="text-xs text-zinc-500 italic ml-2">
+                    <span className="text-xs italic ml-2" style={{ color: secondaryColor }}>
                       ({formatSeconds(elapsed)})
                     </span>
                   )}
@@ -457,6 +469,10 @@ export default function SplitChart({ athletes }: SplitChartProps) {
   const [overlayC, setOverlayC] = useState(false);
   const [fieldAthletes, setFieldAthletes] = useState<AthleteResult[]>([]);
   const [fieldLoading, setFieldLoading] = useState(false);
+  const theme = useThemeStore((s) => s.theme);
+  const gridColor = theme === "dark" ? "#333" : "#e4e4e7";
+  const axisColor = theme === "dark" ? "#999" : "#71717a";
+  const refLineColor = theme === "dark" ? "#666" : "#a1a1aa";
 
   const firstEventId = athletes[0]?.athleteResult.event.id ?? null;
 
@@ -479,7 +495,7 @@ export default function SplitChart({ athletes }: SplitChartProps) {
 
   if (data.length === 0 || visibleAthletes.length === 0) {
     return (
-      <div className="flex items-center justify-center h-48 text-zinc-500 text-sm">
+      <div className="flex items-center justify-center h-48 text-zinc-400 dark:text-zinc-500 text-sm">
         Add athletes to see split data
       </div>
     );
@@ -553,16 +569,16 @@ export default function SplitChart({ athletes }: SplitChartProps) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between px-2">
-        <div className="flex items-center gap-1 text-xs text-zinc-400">
+        <div className="flex items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400">
           <span>Y</span>
           <button
-            className="w-6 h-6 flex items-center justify-center rounded border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="w-6 h-6 flex items-center justify-center rounded border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-500 disabled:opacity-30 disabled:cursor-not-allowed"
             onClick={() => setYZoom((z) => Math.min(z + 1, Y_ZOOM_LEVELS.length - 1))}
             disabled={yZoom === Y_ZOOM_LEVELS.length - 1}
             title="Zoom in Y axis"
           >+</button>
           <button
-            className="w-6 h-6 flex items-center justify-center rounded border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="w-6 h-6 flex items-center justify-center rounded border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-500 disabled:opacity-30 disabled:cursor-not-allowed"
             onClick={() => setYZoom((z) => Math.max(z - 1, 0))}
             disabled={yZoom === 0}
             title="Zoom out Y axis"
@@ -570,7 +586,7 @@ export default function SplitChart({ athletes }: SplitChartProps) {
         </div>
         <div className="flex items-center gap-2">
           <ChartFaqModal />
-          <div className="flex rounded overflow-hidden border border-zinc-700 text-xs">
+          <div className="flex rounded overflow-hidden border border-zinc-300 dark:border-zinc-700 text-xs">
             {(
               [
                 ["virtual", "Virtual Gap"],
@@ -583,8 +599,8 @@ export default function SplitChart({ athletes }: SplitChartProps) {
                 key={key}
                 className={`px-3 py-1 transition-colors ${
                   mode === key
-                    ? "bg-zinc-700 text-white"
-                    : "text-zinc-400 hover:text-white"
+                    ? "bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-white"
+                    : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
                 }`}
                 onClick={() => setMode(key)}
               >
@@ -598,7 +614,7 @@ export default function SplitChart({ athletes }: SplitChartProps) {
       {/* Overlay toggles — Lap Pace mode only */}
       {mode === "raw" && (
         <div className="flex items-center justify-end gap-2 px-2">
-          <span className="text-xs text-zinc-600">Overlays:</span>
+          <span className="text-xs text-zinc-400 dark:text-zinc-600">Overlays:</span>
           {(
             [
               ["A", "Athlete avg", overlayA, () => setOverlayA((v) => !v)],
@@ -611,22 +627,22 @@ export default function SplitChart({ athletes }: SplitChartProps) {
               onClick={toggle}
               className={`text-xs px-2 py-0.5 rounded border transition-colors ${
                 active
-                  ? "border-zinc-500 bg-zinc-700 text-white"
-                  : "border-zinc-700 text-zinc-500 hover:text-zinc-300"
+                  ? "border-zinc-400 dark:border-zinc-500 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-white"
+                  : "border-zinc-300 dark:border-zinc-700 text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
               }`}
             >
               {label}
             </button>
           ))}
           {fieldLoading && (
-            <span className="text-xs text-zinc-600 italic">loading...</span>
+            <span className="text-xs text-zinc-400 dark:text-zinc-600 italic">loading...</span>
           )}
         </div>
       )}
 
       <div className="w-full">
         {mode === "time_gain_loss" && visibleAthletes.length < 2 ? (
-          <div className="flex items-center justify-center h-48 text-zinc-500 text-sm">
+          <div className="flex items-center justify-center h-48 text-zinc-400 dark:text-zinc-500 text-sm">
             Time Gain/Loss requires at least 2 athletes
           </div>
         ) : (
@@ -635,14 +651,14 @@ export default function SplitChart({ athletes }: SplitChartProps) {
               data={displayChartData}
               margin={{ top: 8, right: 16, left: 8, bottom: 8 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+              <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
               <XAxis
                 dataKey="label"
-                tick={{ fill: "#999", fontSize: 12 }}
+                tick={{ fill: axisColor, fontSize: 12 }}
                 interval={xInterval}
               />
               <YAxis
-                tick={{ fill: "#999", fontSize: 12 }}
+                tick={{ fill: axisColor, fontSize: 12 }}
                 tickFormatter={
                   isGapMode
                     ? (v: number) => `${v >= 0 ? "+" : ""}${v.toFixed(1)}s`
@@ -658,7 +674,7 @@ export default function SplitChart({ athletes }: SplitChartProps) {
                 reversed={isPositionMode}
               />
               {isGapMode && (
-                <ReferenceLine y={0} stroke="#666" strokeDasharray="4 4" />
+                <ReferenceLine y={0} stroke={refLineColor} strokeDasharray="4 4" />
               )}
               <Tooltip
                 content={
@@ -667,6 +683,7 @@ export default function SplitChart({ athletes }: SplitChartProps) {
                     athleteNames={athleteNames}
                     mode={mode}
                     rawLapLookup={rawLapLookup}
+                    theme={theme}
                   />
                 }
               />
