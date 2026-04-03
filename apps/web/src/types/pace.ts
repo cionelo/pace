@@ -1,3 +1,16 @@
+export interface Conference {
+  id: string;
+  name: string;
+  short_name: string | null;
+  division: "D1" | "D2" | "D3";
+}
+
+export interface ConferenceAlias {
+  id: string;
+  conference_id: string;
+  alias: string;
+}
+
 export interface Team {
   id: string;
   name: string;
@@ -15,6 +28,7 @@ export interface Event {
   distance: string;
   season: "indoor" | "outdoor" | "xc" | null;
   division: "D1" | "D2" | null;
+  conference_id: string | null;
   provider: string | null;
   source_url: string | null;
 }
