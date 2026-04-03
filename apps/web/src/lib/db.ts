@@ -1,5 +1,5 @@
 import { supabase } from "./supabase";
-import type { Event, AthleteResult } from "../types/pace";
+import type { Event, AthleteResult, Conference } from "../types/pace";
 
 interface EventFilters {
   gender?: string;
@@ -8,8 +8,11 @@ interface EventFilters {
   division?: string;
 }
 
-export async function getEvents(filters?: EventFilters): Promise<Event[]> {
-  let query = supabase.from("events").select("*").order("date", { ascending: false });
+export async function getEvents(filters?: EventFilters): Promise<(Event & { conference?: Conference })[]> {
+  let query = supabase
+    .from("events")
+    .select("*, conference:conferences(*)")
+    .order("date", { ascending: false });
 
   if (filters?.gender) query = query.eq("gender", filters.gender);
   if (filters?.distance) query = query.eq("distance", filters.distance);
@@ -18,7 +21,10 @@ export async function getEvents(filters?: EventFilters): Promise<Event[]> {
 
   const { data, error } = await query;
   if (error) throw error;
-  return data ?? [];
+  return (data ?? []).map((row: any) => ({
+    ...row,
+    conference: row.conference ?? undefined,
+  }));
 }
 
 export async function getEventResults(eventId: string): Promise<AthleteResult[]> {
@@ -115,4 +121,44 @@ export async function getDistances(): Promise<string[]> {
   if (error) throw error;
 
   return [...new Set((data ?? []).map((e: any) => e.distance))];
+}
+
+export async function searchConferencesByAlias(query: string): Promise<string[]> {
+  const { data, error } = await supabase
+    .from("conference_aliases")
+    .select("conference_id")
+    .ilike("alias", `%${query}%`)
+    .limit(10);
+  if (error) throw error;
+  return [...new Set((data ?? []).map((row: any) => row.conference_id as string))];
+}
+
+export async function searchRaces(
+  query: string,
+  filters?: { gender?: string; division?: string }
+): Promise<(Event & { conference?: Conference })[]> {
+  const conferenceIds = query ? await searchConferencesByAlias(query) : [];
+
+  let dbQuery = supabase
+    .from("events")
+    .select("*, conference:conferences(*)")
+    .order("date", { ascending: false })
+    .limit(20);
+
+  if (filters?.gender) dbQuery = dbQuery.eq("gender", filters.gender);
+
+  if (query && conferenceIds.length > 0) {
+    dbQuery = dbQuery.or(
+      `name.ilike.%${query}%,conference_id.in.(${conferenceIds.join(",")})`
+    );
+  } else if (query) {
+    dbQuery = dbQuery.ilike("name", `%${query}%`);
+  }
+
+  const { data, error } = await dbQuery;
+  if (error) throw error;
+  return (data ?? []).map((row: any) => ({
+    ...row,
+    conference: row.conference ?? undefined,
+  }));
 }
