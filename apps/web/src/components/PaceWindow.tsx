@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useWindowStore } from "../stores/window-store";
 import UnifiedSearch from "./UnifiedSearch";
 import SplitChart from "./SplitChart";
 import Legend from "./Legend";
+import CustomAthleteModal from "./CustomAthleteModal";
 import { MAX_ATHLETES_PER_WINDOW } from "../lib/constants";
 
 interface PaceWindowProps {
@@ -15,6 +17,8 @@ export default function PaceWindow({ windowId }: PaceWindowProps) {
   const removeWindow = useWindowStore((s) => s.removeWindow);
   const resetWindow = useWindowStore((s) => s.resetWindow);
   const toggleVisibility = useWindowStore((s) => s.toggleAthleteVisibility);
+
+  const [customOpen, setCustomOpen] = useState(false);
 
   if (!paceWindow) return null;
 
@@ -49,6 +53,27 @@ export default function PaceWindow({ windowId }: PaceWindowProps) {
         maxAthletes={MAX_ATHLETES_PER_WINDOW}
         onAdd={(ar) => addAthlete(windowId, ar)}
       />
+
+      {/* Custom athlete button */}
+      <div className="px-3 pb-2 border-b border-zinc-200 dark:border-zinc-800">
+        <button
+          onClick={() => setCustomOpen(true)}
+          className="text-xs px-2 py-1 rounded border border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+        >
+          + Custom
+        </button>
+      </div>
+
+      {/* Custom athlete modal */}
+      {customOpen && (
+        <CustomAthleteModal
+          onAdd={(ar) => {
+            addAthlete(windowId, ar);
+            setCustomOpen(false);
+          }}
+          onClose={() => setCustomOpen(false)}
+        />
+      )}
 
       {/* Selected athletes chips */}
       {paceWindow.athletes.length > 0 && (

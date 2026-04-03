@@ -687,18 +687,22 @@ export default function SplitChart({ athletes }: SplitChartProps) {
                   />
                 }
               />
-              {visibleAthletes.map((a) => (
-                <Line
-                  key={a.athleteResult.athlete.id}
-                  type="monotone"
-                  dataKey={a.athleteResult.athlete.id}
-                  stroke={a.color}
-                  strokeWidth={2}
-                  dot={{ r: 5, fill: a.color }}
-                  activeDot={{ r: 7, stroke: "#fff", strokeWidth: 2 }}
-                  connectNulls
-                />
-              ))}
+              {visibleAthletes.map((a) => {
+                const isCustom = a.athleteResult.athlete.id.startsWith("custom_");
+                return (
+                  <Line
+                    key={a.athleteResult.athlete.id}
+                    type="monotone"
+                    dataKey={a.athleteResult.athlete.id}
+                    stroke={a.color}
+                    strokeWidth={2}
+                    strokeDasharray={isCustom ? "8 4" : undefined}
+                    dot={{ r: 5, fill: a.color }}
+                    activeDot={{ r: 7, stroke: "#fff", strokeWidth: 2 }}
+                    connectNulls
+                  />
+                );
+              })}
               {/* Overlay C: field avg lap pace per split (non-flat line) */}
               {mode === "raw" && overlayC && fieldAthletes.length > 0 && (
                 <Line
