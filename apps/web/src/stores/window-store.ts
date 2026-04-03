@@ -4,7 +4,6 @@ import { ATHLETE_COLORS, MAX_ATHLETES_PER_WINDOW, MAX_WINDOWS } from "../lib/con
 
 export interface PaceWindow {
   id: string;
-  distance: string | null;
   athletes: WindowAthleteData[];
 }
 
@@ -13,7 +12,6 @@ interface WindowStore {
   addWindow: () => string | null;
   removeWindow: (windowId: string) => void;
   resetWindow: (windowId: string) => void;
-  setDistance: (windowId: string, distance: string) => void;
   addAthlete: (windowId: string, athleteResult: AthleteResult) => boolean;
   removeAthlete: (windowId: string, athleteId: string) => void;
   toggleAthleteVisibility: (windowId: string, athleteId: string) => void;
@@ -31,7 +29,7 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
     const { windows } = get();
     if (windows.length >= MAX_WINDOWS) return null;
     const id = genId();
-    set({ windows: [...windows, { id, distance: null, athletes: [] }] });
+    set({ windows: [...windows, { id, athletes: [] }] });
     return id;
   },
 
@@ -42,15 +40,7 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
   resetWindow: (windowId) => {
     set({
       windows: get().windows.map((w) =>
-        w.id === windowId ? { ...w, distance: null, athletes: [] } : w
-      ),
-    });
-  },
-
-  setDistance: (windowId, distance) => {
-    set({
-      windows: get().windows.map((w) =>
-        w.id === windowId ? { ...w, distance, athletes: [] } : w
+        w.id === windowId ? { ...w, athletes: [] } : w
       ),
     });
   },
