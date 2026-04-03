@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { useWindowStore } from "../stores/window-store";
 import PaceWindow from "./PaceWindow";
+import MobileTabBar from "./MobileTabBar";
 
 function gridClass(count: number): string {
   if (count <= 1) return "grid-cols-1";
-  if (count <= 2) return "grid-cols-2";
-  if (count <= 4) return "grid-cols-2";
-  return "grid-cols-3";
+  if (count <= 2) return "sm:grid-cols-2";
+  if (count <= 4) return "sm:grid-cols-2";
+  return "sm:grid-cols-2 lg:grid-cols-3";
 }
 
 export default function WindowGrid() {
   const windows = useWindowStore((s) => s.windows);
+  const [activeTab, setActiveTab] = useState<string | null>(null);
 
   if (windows.length === 0) {
     return (
@@ -19,11 +22,31 @@ export default function WindowGrid() {
     );
   }
 
+  const activeId =
+    activeTab && windows.some((w) => w.id === activeTab)
+      ? activeTab
+      : windows[0].id;
+
   return (
-    <div className={`grid ${gridClass(windows.length)} gap-4 p-4`}>
-      {windows.map((w) => (
-        <PaceWindow key={w.id} windowId={w.id} />
-      ))}
-    </div>
+    <>
+      {/* Desktop grid */}
+      <div className={`hidden sm:grid ${gridClass(windows.length)} gap-4 p-4`}>
+        {windows.map((w) => (
+          <PaceWindow key={w.id} windowId={w.id} />
+        ))}
+      </div>
+
+      {/* Mobile: single window + tab bar */}
+      <div className="sm:hidden p-3 pb-16">
+        <PaceWindow windowId={activeId} />
+      </div>
+      {windows.length > 1 && (
+        <MobileTabBar
+          windowIds={windows.map((w) => w.id)}
+          activeId={activeId}
+          onSelect={setActiveTab}
+        />
+      )}
+    </>
   );
 }

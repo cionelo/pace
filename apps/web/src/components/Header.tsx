@@ -13,12 +13,12 @@ export default function Header() {
   const toggle = useThemeStore((s) => s.toggle);
 
   return (
-    <header className="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
+    <header className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
       {/* Left: logo + title + attribution */}
       <div className="flex items-center gap-2">
         <img src="/favicon.png" alt="PACE logo" className="w-10 h-10" />
         <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">PACE</h1>
-        <span className="text-xs font-thin italic text-zinc-400 dark:text-zinc-500">
+        <span className="hidden sm:inline text-xs font-thin italic text-zinc-400 dark:text-zinc-500">
           built by{" "}
           <a
             href="https://itsnemo.dev"
@@ -67,7 +67,8 @@ export default function Header() {
           disabled={atCapacity}
           className="text-sm px-4 py-1.5 rounded-md bg-blue-600 text-white hover:bg-blue-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
         >
-          + New Window {windowCount > 0 && `(${windowCount}/${MAX_WINDOWS})`}
+          <span className="sm:hidden">+</span>
+          <span className="hidden sm:inline">+ New Window {windowCount > 0 && `(${windowCount}/${MAX_WINDOWS})`}</span>
         </button>
       </div>
 
