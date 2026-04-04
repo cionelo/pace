@@ -1,8 +1,17 @@
+const DISTANCES = [
+  "800m", "1500m", "Mile", "3000m", "5000m", "10,000m",
+  "5K", "8K", "10K", "DMR", "4xMile",
+] as const;
+
+export type Distance = typeof DISTANCES[number];
+
 interface FilterPillsProps {
   gender: "" | "Men" | "Women";
   division: "" | "D1" | "D2";
+  distance: "" | Distance;
   onGenderChange: (g: "" | "Men" | "Women") => void;
   onDivisionChange: (d: "" | "D1" | "D2") => void;
+  onDistanceChange: (d: "" | Distance) => void;
 }
 
 const GENDER_OPTIONS = [
@@ -27,14 +36,14 @@ function PillGroup<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div className="flex rounded-md overflow-hidden border border-zinc-200 dark:border-zinc-700 text-xs">
+    <div className="flex rounded-full overflow-hidden border border-pace-border text-xs">
       {options.map((opt) => (
         <button
           key={opt.value}
-          className={`px-2 py-1 transition-colors ${
+          className={`px-3.5 py-1.5 font-medium transition-all duration-300 ${
             selected === opt.value
-              ? "bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-white"
-              : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              ? "bg-pace-text text-pace-bg"
+              : "text-pace-text-muted hover:text-pace-text"
           }`}
           onClick={() => onChange(opt.value)}
         >
@@ -48,13 +57,25 @@ function PillGroup<T extends string>({
 export default function FilterPills({
   gender,
   division,
+  distance,
   onGenderChange,
   onDivisionChange,
+  onDistanceChange,
 }: FilterPillsProps) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 flex-wrap">
       <PillGroup options={GENDER_OPTIONS} selected={gender} onChange={onGenderChange} />
       <PillGroup options={DIVISION_OPTIONS} selected={division} onChange={onDivisionChange} />
+      <select
+        value={distance}
+        onChange={(e) => onDistanceChange(e.target.value as "" | Distance)}
+        className="text-xs font-medium bg-pace-card border border-pace-border text-pace-text-muted rounded-full px-3 py-1.5 focus:outline-none focus:border-pace-accent transition-all duration-300 appearance-none cursor-pointer"
+      >
+        <option value="">All distances</option>
+        {DISTANCES.map((d) => (
+          <option key={d} value={d}>{d}</option>
+        ))}
+      </select>
     </div>
   );
 }

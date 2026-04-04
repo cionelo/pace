@@ -73,7 +73,11 @@ export async function searchAthletes(
     .limit(50);
 
   if (query) {
-    dbQuery = dbQuery.ilike("athlete.name", `%${query}%`);
+    // Multi-word: all words must appear in name (order-agnostic, e.g. "Jane Smith")
+    const words = query.trim().split(/\s+/);
+    for (const word of words) {
+      dbQuery = dbQuery.ilike("athlete.name", `%${word}%`);
+    }
   }
   if (filters?.eventId) {
     dbQuery = dbQuery.eq("event_id", filters.eventId);
@@ -133,11 +137,58 @@ export async function searchConferencesByAlias(query: string): Promise<string[]>
   return [...new Set((data ?? []).map((row: any) => row.conference_id as string))];
 }
 
+const SEARCH_SYNONYMS: Record<string, string[]> = {
+  nationals: ["national", "championship", "championships", "champs"],
+  national: ["nationals", "championship", "championships", "champs"],
+  championship: ["nationals", "national", "championships", "champs"],
+  championships: ["nationals", "national", "championship", "champs"],
+  champs: ["nationals", "national", "championship", "championships"],
+  indoors: ["indoor"],
+  indoor: ["indoors"],
+  outdoors: ["outdoor"],
+  outdoor: ["outdoors"],
+  invite: ["invitational"],
+  invitational: ["invite"],
+  conference: ["conf"],
+  conf: ["conference"],
+};
+
+// Normalize common abbreviations before searching
+function normalizeQuery(query: string): string {
+  return query
+    .replace(/\bd1\b/gi, "D1")
+    .replace(/\bd2\b/gi, "D2")
+    .trim();
+}
+
+function expandQueryTerms(query: string): string[] {
+  const lower = normalizeQuery(query).toLowerCase();
+  const terms = new Set<string>([lower]);
+  // Single-term synonyms
+  const direct = SEARCH_SYNONYMS[lower];
+  if (direct) direct.forEach((s) => terms.add(s));
+  // Word-level expansion for multi-word queries
+  const words = lower.split(/\s+/);
+  if (words.length > 1) {
+    words.forEach((w) => {
+      const syn = SEARCH_SYNONYMS[w];
+      if (syn) {
+        syn.forEach((s) => {
+          const expanded = lower.replace(w, s);
+          terms.add(expanded);
+        });
+      }
+    });
+  }
+  return [...terms];
+}
+
 export async function searchRaces(
   query: string,
-  filters?: { gender?: string; division?: string }
+  filters?: { gender?: string; division?: string; distance?: string }
 ): Promise<(Event & { conference?: Conference })[]> {
   const conferenceIds = query ? await searchConferencesByAlias(query) : [];
+  const terms = query ? expandQueryTerms(query) : [];
 
   let dbQuery = supabase
     .from("events")
@@ -146,19 +197,41 @@ export async function searchRaces(
     .limit(20);
 
   if (filters?.gender) dbQuery = dbQuery.eq("gender", filters.gender);
+  if (filters?.distance) dbQuery = dbQuery.eq("distance", filters.distance);
 
-  if (query && conferenceIds.length > 0) {
-    dbQuery = dbQuery.or(
-      `name.ilike.%${query}%,conference_id.in.(${conferenceIds.join(",")})`
-    );
-  } else if (query) {
-    dbQuery = dbQuery.ilike("name", `%${query}%`);
+  if (query) {
+    const nameFilters = terms.map((t) => `name.ilike.%${t}%`).join(",");
+    const confFilter = conferenceIds.length > 0
+      ? `,conference_id.in.(${conferenceIds.join(",")})`
+      : "";
+    dbQuery = dbQuery.or(`${nameFilters}${confFilter}`);
   }
 
   const { data, error } = await dbQuery;
   if (error) throw error;
-  return (data ?? []).map((row: any) => ({
+
+  const results = (data ?? []).map((row: any) => ({
     ...row,
     conference: row.conference ?? undefined,
   }));
+
+  // Client-side relevance sort when there's a query:
+  // 1. Name starts with query term → top
+  // 2. Name contains query term → next
+  // 3. Conference match → after
+  // Within each tier, sort by date descending
+  if (query) {
+    const lower = query.toLowerCase();
+    results.sort((a: any, b: any) => {
+      const aName = (a.name ?? "").toLowerCase();
+      const bName = (b.name ?? "").toLowerCase();
+      const aScore = aName.startsWith(lower) ? 0 : aName.includes(lower) ? 1 : 2;
+      const bScore = bName.startsWith(lower) ? 0 : bName.includes(lower) ? 1 : 2;
+      if (aScore !== bScore) return aScore - bScore;
+      // Same tier: newer first
+      return (b.date ?? "").localeCompare(a.date ?? "");
+    });
+  }
+
+  return results;
 }

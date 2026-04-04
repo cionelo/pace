@@ -1,5 +1,5 @@
 import type { Event, Conference, AthleteResult } from "../types/pace";
-import { formatRaceDisplay } from "../lib/format";
+import { formatRaceDisplay, extractRound } from "../lib/format";
 
 type RaceWithConference = Event & { conference?: Conference };
 
@@ -26,16 +26,16 @@ export default function SearchResults({
 
   if (loading) {
     return (
-      <div className="absolute left-0 right-0 top-full z-50 mt-1 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-lg p-3">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">Searching...</p>
+      <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-2xl border border-pace-border bg-pace-card shadow-pace-lg p-4">
+        <p className="text-xs text-pace-text-muted">Searching...</p>
       </div>
     );
   }
 
   if (!hasResults && query) {
     return (
-      <div className="absolute left-0 right-0 top-full z-50 mt-1 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-lg p-3">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+      <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-2xl border border-pace-border bg-pace-card shadow-pace-lg p-4">
+        <p className="text-xs text-pace-text-muted">
           No results for &ldquo;{query}&rdquo;
         </p>
       </div>
@@ -45,61 +45,75 @@ export default function SearchResults({
   if (!hasResults) return null;
 
   return (
-    <div className="absolute left-0 right-0 top-full z-50 mt-1 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 shadow-lg max-h-72 overflow-y-auto">
+    <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-2xl border border-pace-border bg-pace-card shadow-pace-lg max-h-72 overflow-y-auto overflow-x-hidden">
       {/* Races section */}
       {races.length > 0 && (
         <div>
-          <div className="sticky top-0 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 bg-zinc-50 dark:bg-zinc-800/60 border-b border-zinc-100 dark:border-zinc-800">
+          <div className="sticky top-0 px-4 py-2 text-[10px] font-medium uppercase tracking-widest text-pace-text-muted bg-pace-card-inner border-b border-pace-border-subtle">
             Races
           </div>
-          {races.map((race) => (
-            <button
-              key={race.id}
-              className="w-full text-left px-3 py-2 text-xs text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-              onClick={() => onSelectRace(race)}
-            >
-              {formatRaceDisplay({
-                conferenceName: race.conference?.name,
-                eventName: race.name,
-                season: race.season,
-                gender: race.gender,
-                distance: race.distance,
-                date: race.date,
-              })}
-            </button>
-          ))}
+          {races.map((race) => {
+            const round = extractRound(race.name);
+            return (
+              <button
+                key={race.id}
+                className="w-full text-left px-4 py-2.5 text-sm text-pace-text-secondary hover:bg-pace-card-inner transition-colors duration-200 flex items-center gap-2"
+                onClick={() => onSelectRace(race)}
+              >
+                <span className="flex-1 truncate">
+                  {formatRaceDisplay({
+                    conferenceName: race.conference?.name,
+                    eventName: race.name,
+                    season: race.season,
+                    gender: race.gender,
+                    distance: race.distance,
+                    date: race.date,
+                  })}
+                </span>
+                {round && (
+                  <span className={`shrink-0 text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full ${
+                    round === "Final"
+                      ? "bg-pace-accent/10 text-pace-accent"
+                      : "bg-pace-card-inner text-pace-text-muted border border-pace-border-subtle"
+                  }`}>
+                    {round}
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
       )}
 
       {/* Athletes section */}
       {athletes.length > 0 && (
         <div>
-          <div className="sticky top-0 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 bg-zinc-50 dark:bg-zinc-800/60 border-b border-zinc-100 dark:border-zinc-800">
+          <div className="sticky top-0 px-4 py-2 text-[10px] font-medium uppercase tracking-widest text-pace-text-muted bg-pace-card-inner border-b border-pace-border-subtle">
             Athletes
           </div>
           {athletes.map((ar) => (
             <div
               key={`${ar.athlete.id}-${ar.result.id}`}
-              className="flex items-center justify-between px-3 py-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+              className="flex items-center justify-between px-4 py-2.5 hover:bg-pace-card-inner transition-colors duration-200"
             >
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 truncate">
+                <p className="text-sm font-medium text-pace-text truncate">
                   {ar.athlete.name}
                   {ar.team && (
-                    <span className="text-zinc-400 dark:text-zinc-500">
+                    <span className="text-pace-text-muted">
                       {" "}
                       &middot; {ar.team.name}
                     </span>
                   )}
                 </p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-500 truncate">
-                  {ar.result.time_str} &middot;{" "}
+                <p className="text-xs text-pace-text-muted truncate">
+                  <span className="font-mono">{ar.result.time_str}</span> &middot;{" "}
                   {ar.event.source_url ? (
                     <a
                       href={ar.event.source_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-0.5"
+                      className="text-pace-accent hover:underline inline-flex items-center gap-0.5"
                       onClick={(e) => e.stopPropagation()}
                     >
                       {ar.event.name}
@@ -131,7 +145,7 @@ export default function SearchResults({
               <button
                 onClick={() => onSelectAthlete(ar)}
                 disabled={atCapacity}
-                className="ml-2 shrink-0 text-xs px-2 py-0.5 rounded bg-blue-600 text-white hover:bg-blue-500 disabled:opacity-30 disabled:cursor-not-allowed"
+                className="ml-2 shrink-0 text-xs font-medium px-3.5 py-1 rounded-full bg-pace-accent text-white hover:bg-pace-accent-hover disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
               >
                 +
               </button>
