@@ -173,7 +173,6 @@
   function timeline(steps) {
     let t = 0;
     steps.forEach(([delay, fn]) => { t += delay; setTimeout(fn, t); });
-    return t;
   }
 
   const searchText = document.getElementById('searchText');
