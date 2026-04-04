@@ -78,14 +78,14 @@ chart-grid:   rgb(231,229,228)
 
 | Time | Action |
 |------|--------|
-| 0.0s | App shows PaceWindow header + filter pills (Men selected, orange) + empty rounded-full search bar, cursor blinking |
-| 0.5s | Typewriter: "ingebrigtsen" at ~60ms/char |
-| 1.5s | Dropdown opens: sticky "RACES" header → 2 race rows ("Big 10 Championships · Men · 1500m · 2024", "NCAA Nationals · Men · 1500m · 2024"). Sticky "ATHLETES" header → 1 row: "Jakob Ingebrigtsen · Kristiansen IL · 3:29.18 · NCAA 1500m 2024 · +" |
-| 3.0s | Tap race row → dropdown closes, orange pill appears: "Big 10 Championships · Men · 1500m · 2024 ×" |
+| 0.0s | App shows PaceWindow header + filter pills (Women selected, orange) + empty rounded-full search bar, cursor blinking |
+| 0.5s | Typewriter: "hedengren" at ~60ms/char |
+| 1.5s | Dropdown opens: sticky "RACES" header → 2 race rows ("Big 10 Championships · Women · 1500m · 2024", "NCAA Nationals · Women · 1500m · 2024"). Sticky "ATHLETES" header → 1 row: "Jane Hedengren · BYU · 4:02.31 · NCAA 1500m 2024 · +" |
+| 3.0s | Tap race row → dropdown closes, orange pill appears: "Big 10 Championships · Women · 1500m · 2024 ×" |
 | 3.5s | Search bar clears, placeholder becomes "Search athletes in this race..." |
-| 4.0s | Typewriter: "jakob" |
-| 4.6s | Dropdown opens: "ATHLETES" only → "Jakob Ingebrigtsen · Kristiansen IL · 3:29.18 · +" |
-| 5.5s | Tap "+" → chip appears: orange dot + "Jakob Ingebrigtsen ×". "0/6 athletes" counter updates to "1/6 athletes" |
+| 4.0s | Typewriter: "jane" |
+| 4.6s | Dropdown opens: "ATHLETES" only → "Jane Hedengren · BYU · 4:02.31 · +" |
+| 5.5s | Tap "+" → chip appears: orange dot + "Jane Hedengren ×". "0/6 athletes" counter updates to "1/6 athletes" |
 | 6.5s | Freeze 0.5s |
 | 7.0s | Fade to black → restart |
 
