@@ -64,6 +64,9 @@ function buildAthleteResult(name: string, splits: Split[], timeSeconds: number):
   };
 }
 
+const inputClass = "w-full bg-pace-input border border-pace-border text-pace-text text-sm rounded-xl px-4 py-2.5 placeholder-pace-text-muted focus:border-pace-accent focus:outline-none focus:ring-2 focus:ring-pace-accent/10 transition-all duration-300";
+const smallInputClass = "bg-pace-input border border-pace-border text-pace-text text-xs rounded-lg px-3 py-2 focus:border-pace-accent focus:outline-none focus:ring-2 focus:ring-pace-accent/10 transition-all duration-300";
+
 function ManualSplitsTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" | "onClose">) {
   const [name, setName] = useState("");
   const [rows, setRows] = useState<ManualRow[]>([
@@ -136,9 +139,8 @@ function ManualSplitsTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAd
 
   return (
     <div className="space-y-4">
-      {/* Name */}
       <div>
-        <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
+        <label className="block text-xs font-medium text-pace-text-secondary mb-1.5">
           Name
         </label>
         <input
@@ -146,13 +148,12 @@ function ManualSplitsTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAd
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="e.g. My Athlete"
-          className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-200 text-sm rounded-md px-3 py-2 placeholder-zinc-400 dark:placeholder-zinc-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className={inputClass}
         />
       </div>
 
-      {/* Split rows */}
       <div className="space-y-2">
-        <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+        <label className="block text-xs font-medium text-pace-text-secondary">
           Splits (elapsed time, mm:ss.ss)
         </label>
         {rows.map((row, i) => (
@@ -161,28 +162,28 @@ function ManualSplitsTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAd
               type="text"
               value={row.label}
               onChange={(e) => updateRow(i, "label", e.target.value)}
-              className="w-16 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-200 text-xs rounded px-2 py-1.5 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+              className={`w-16 ${smallInputClass}`}
             />
             <input
               type="text"
               value={row.elapsedStr}
               onChange={(e) => updateRow(i, "elapsedStr", e.target.value)}
               placeholder="0:00.00"
-              className="flex-1 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-200 text-sm rounded px-2 py-1.5 placeholder-zinc-400 dark:placeholder-zinc-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+              className={`flex-1 ${smallInputClass}`}
             />
           </div>
         ))}
         <div className="flex gap-2">
           <button
             onClick={addRow}
-            className="text-xs px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+            className="text-xs font-medium px-3 py-1.5 rounded-full border border-pace-border text-pace-text-secondary hover:text-pace-text hover:border-pace-text-secondary transition-all duration-300"
           >
             + Add row
           </button>
           <button
             onClick={removeRow}
             disabled={rows.length <= 1}
-            className="text-xs px-2 py-1 rounded border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="text-xs font-medium px-3 py-1.5 rounded-full border border-pace-border text-pace-text-secondary hover:text-pace-text hover:border-pace-text-secondary transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
           >
             - Remove row
           </button>
@@ -190,12 +191,12 @@ function ManualSplitsTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAd
       </div>
 
       {error && (
-        <p className="text-xs text-red-500 dark:text-red-400">{error}</p>
+        <p className="text-xs text-red-500">{error}</p>
       )}
 
       <button
         onClick={handleAdd}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md px-4 py-2 transition-colors"
+        className="w-full bg-pace-accent hover:bg-pace-accent-hover text-white text-sm font-medium rounded-full px-4 py-2.5 transition-all duration-300"
       >
         Add to Window
       </button>
@@ -266,9 +267,8 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
 
   return (
     <div className="space-y-4">
-      {/* Target time */}
       <div>
-        <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
+        <label className="block text-xs font-medium text-pace-text-secondary mb-1.5">
           Target time (mm:ss.ss)
         </label>
         <input
@@ -276,13 +276,12 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
           value={targetTimeStr}
           onChange={(e) => setTargetTimeStr(e.target.value)}
           placeholder="4:00.00"
-          className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-200 text-sm rounded-md px-3 py-2 placeholder-zinc-400 dark:placeholder-zinc-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className={inputClass}
         />
       </div>
 
-      {/* Number of splits */}
       <div>
-        <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
+        <label className="block text-xs font-medium text-pace-text-secondary mb-1.5">
           Number of splits
         </label>
         <input
@@ -291,19 +290,18 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
           max={50}
           value={numSplits}
           onChange={(e) => setNumSplits(Math.max(1, parseInt(e.target.value, 10) || 1))}
-          className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-200 text-sm rounded-md px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className={inputClass}
         />
       </div>
 
-      {/* Strategy */}
       <div>
-        <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
+        <label className="block text-xs font-medium text-pace-text-secondary mb-1.5">
           Strategy
         </label>
         <select
           value={strategy}
           onChange={(e) => setStrategy(e.target.value as Strategy)}
-          className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-200 text-sm rounded-md px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className={inputClass}
         >
           <option value="even">Even</option>
           <option value="negative">Negative Split</option>
@@ -311,10 +309,9 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
         </select>
       </div>
 
-      {/* Percentage (only for negative/positive) */}
       {strategy !== "even" && (
         <div>
-          <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
+          <label className="block text-xs font-medium text-pace-text-secondary mb-1.5">
             {strategy === "negative" ? "% faster (2nd half)" : "% slower (2nd half)"}
           </label>
           <input
@@ -323,34 +320,33 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
             max={50}
             value={pct}
             onChange={(e) => setPct(Math.max(1, parseInt(e.target.value, 10) || 1))}
-            className="w-full bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-200 text-sm rounded-md px-3 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+            className={inputClass}
           />
         </div>
       )}
 
-      {/* Preview */}
       {preview.length > 0 && (
         <div>
-          <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-1">
+          <label className="block text-xs font-medium text-pace-text-secondary mb-1.5">
             Preview
           </label>
-          <div className="bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-md overflow-hidden">
+          <div className="bg-pace-card-inner border border-pace-border rounded-xl overflow-hidden">
             <table className="w-full text-xs">
               <thead>
-                <tr className="border-b border-zinc-200 dark:border-zinc-700">
-                  <th className="text-left px-2 py-1 text-zinc-500 dark:text-zinc-400 font-medium">Split</th>
-                  <th className="text-right px-2 py-1 text-zinc-500 dark:text-zinc-400 font-medium">Lap</th>
-                  <th className="text-right px-2 py-1 text-zinc-500 dark:text-zinc-400 font-medium">Elapsed</th>
+                <tr className="border-b border-pace-border">
+                  <th className="text-left px-3 py-2 text-pace-text-muted font-medium">Split</th>
+                  <th className="text-right px-3 py-2 text-pace-text-muted font-medium">Lap</th>
+                  <th className="text-right px-3 py-2 text-pace-text-muted font-medium">Elapsed</th>
                 </tr>
               </thead>
               <tbody>
                 {preview.map((s) => (
-                  <tr key={s.id} className="border-b border-zinc-100 dark:border-zinc-700/50 last:border-0">
-                    <td className="px-2 py-1 text-zinc-700 dark:text-zinc-300">{s.label}</td>
-                    <td className="text-right px-2 py-1 text-zinc-700 dark:text-zinc-300">
+                  <tr key={s.id} className="border-b border-pace-border-subtle last:border-0">
+                    <td className="px-3 py-2 text-pace-text">{s.label}</td>
+                    <td className="text-right px-3 py-2 text-pace-text font-mono">
                       {s.lap_s != null ? formatSecondsToStr(s.lap_s) : "-"}
                     </td>
-                    <td className="text-right px-2 py-1 text-zinc-700 dark:text-zinc-300">
+                    <td className="text-right px-3 py-2 text-pace-text font-mono">
                       {s.elapsed_s != null ? formatSecondsToStr(s.elapsed_s) : "-"}
                     </td>
                   </tr>
@@ -362,12 +358,12 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
       )}
 
       {error && (
-        <p className="text-xs text-red-500 dark:text-red-400">{error}</p>
+        <p className="text-xs text-red-500">{error}</p>
       )}
 
       <button
         onClick={handleAdd}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md px-4 py-2 transition-colors"
+        className="w-full bg-pace-accent hover:bg-pace-accent-hover text-white text-sm font-medium rounded-full px-4 py-2.5 transition-all duration-300"
       >
         Add to Window
       </button>
@@ -378,7 +374,6 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
 export default function CustomAthleteModal({ onAdd, onClose }: CustomAthleteModalProps) {
   const [tab, setTab] = useState<Tab>("generator");
 
-  // Close on Escape
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
@@ -396,22 +391,22 @@ export default function CustomAthleteModal({ onAdd, onClose }: CustomAthleteModa
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
       onClick={handleBackdropClick}
     >
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="bg-pace-card border border-pace-border rounded-2xl shadow-pace-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-200 dark:border-zinc-800">
-          <h2 className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-pace-border">
+          <h2 className="font-display text-lg text-pace-text">
             Custom Athlete
           </h2>
           <button
             onClick={onClose}
-            className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 text-lg leading-none"
+            className="text-pace-text-muted hover:text-pace-text text-xl leading-none transition-colors duration-300"
           >
             &times;
           </button>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-zinc-200 dark:border-zinc-800">
+        <div className="flex border-b border-pace-border">
           {(
             [
               ["generator", "Pace Line"],
@@ -421,10 +416,10 @@ export default function CustomAthleteModal({ onAdd, onClose }: CustomAthleteModa
             <button
               key={key}
               onClick={() => setTab(key)}
-              className={`flex-1 px-4 py-2 text-xs font-medium transition-colors ${
+              className={`flex-1 px-4 py-3 text-sm font-medium transition-all duration-300 ${
                 tab === key
-                  ? "text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400"
-                  : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+                  ? "text-pace-accent border-b-2 border-pace-accent"
+                  : "text-pace-text-muted hover:text-pace-text"
               }`}
             >
               {label}
@@ -433,7 +428,7 @@ export default function CustomAthleteModal({ onAdd, onClose }: CustomAthleteModa
         </div>
 
         {/* Content */}
-        <div className="p-4">
+        <div className="p-5">
           {tab === "manual" ? (
             <ManualSplitsTab onAdd={onAdd} onClose={onClose} />
           ) : (

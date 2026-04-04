@@ -11,7 +11,7 @@ export default function App() {
   }, [theme]);
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 dark:bg-zinc-950 dark:text-white transition-colors">
+    <div className="min-h-screen bg-pace-bg text-pace-text transition-colors duration-300">
       <Header />
       <WindowGrid />
     </div>

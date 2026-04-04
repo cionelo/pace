@@ -1,14 +1,14 @@
 export const ATHLETE_COLORS = [
-  "#2563EB", // blue
-  "#DC2626", // red
-  "#16A34A", // green
-  "#9333EA", // purple
-  "#EA580C", // orange
-  "#0891B2", // cyan
-  "#CA8A04", // yellow
-  "#DB2777", // pink
-  "#4F46E5", // indigo
+  "#DC2626", // crimson
+  "#0369A1", // ocean
   "#059669", // emerald
+  "#D97706", // amber
+  "#7C3AED", // violet
+  "#E11D48", // rose
+  "#0D9488", // teal
+  "#EA580C", // tangerine
+  "#4F46E5", // indigo
+  "#C026D3", // fuchsia
 ] as const;
 
 export const MAX_ATHLETES_PER_WINDOW = 10;

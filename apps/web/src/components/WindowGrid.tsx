@@ -16,7 +16,7 @@ export default function WindowGrid() {
 
   if (windows.length === 0) {
     return (
-      <div className="flex items-center justify-center h-96 text-zinc-400 dark:text-zinc-500">
+      <div className="flex items-center justify-center h-96 text-pace-text-muted font-light">
         Click &quot;+ New Window&quot; to start comparing athletes
       </div>
     );
@@ -30,14 +30,14 @@ export default function WindowGrid() {
   return (
     <>
       {/* Desktop grid */}
-      <div className={`hidden sm:grid ${gridClass(windows.length)} gap-4 p-4`}>
+      <div className={`hidden sm:grid ${gridClass(windows.length)} gap-5 p-5`}>
         {windows.map((w) => (
           <PaceWindow key={w.id} windowId={w.id} />
         ))}
       </div>
 
       {/* Mobile: single window + tab bar */}
-      <div className="sm:hidden p-3 pb-16">
+      <div className="sm:hidden p-4 pb-20">
         <PaceWindow windowId={activeId} />
       </div>
       {windows.length > 1 && (

@@ -30,7 +30,7 @@ export default function ChartFaqModal() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="w-5 h-5 flex items-center justify-center rounded-full border border-zinc-600 text-zinc-500 hover:text-zinc-300 hover:border-zinc-400 text-xs leading-none transition-colors flex-shrink-0"
+        className="w-6 h-6 flex items-center justify-center rounded-full border border-pace-border text-pace-text-muted hover:text-pace-text hover:border-pace-text-secondary text-xs leading-none transition-all duration-300 flex-shrink-0"
         title="Chart view explanations"
         aria-label="Chart FAQ"
       >
@@ -39,30 +39,30 @@ export default function ChartFaqModal() {
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
           onClick={() => setOpen(false)}
         >
           <div
-            className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 max-w-lg w-full mx-4 shadow-2xl"
+            className="bg-pace-card border border-pace-border rounded-2xl p-6 max-w-lg w-full mx-4 shadow-pace-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-semibold text-white">Chart Views</h2>
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="font-display text-lg text-pace-text">Chart Views</h2>
               <button
                 onClick={() => setOpen(false)}
-                className="text-zinc-500 hover:text-white transition-colors text-lg leading-none"
+                className="text-pace-text-muted hover:text-pace-text transition-colors duration-300 text-xl leading-none"
                 aria-label="Close"
               >
-                ×
+                &times;
               </button>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-5">
               {CHART_FAQS.map((faq) => (
                 <div key={faq.name}>
-                  <p className="text-xs font-semibold text-zinc-200 mb-1">
+                  <p className="text-sm font-medium text-pace-text mb-1">
                     {faq.name}
                   </p>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
+                  <p className="text-xs text-pace-text-secondary leading-relaxed">
                     {faq.description}
                   </p>
                 </div>

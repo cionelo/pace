@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --pace-bg: 255 255 255;
+    --pace-card: 255 255 255;
+    --pace-card-inner: 245 245 244;
+    --pace-input: 245 245 244;
+    --pace-border: 231 229 228;
+    --pace-border-subtle: 240 239 237;
+    --pace-text: 28 25 23;
+    --pace-text-secondary: 120 113 108;
+    --pace-text-muted: 168 162 158;
+    --pace-accent: 194 65 12;
+    --pace-accent-hover: 154 52 18;
+    --pace-accent-subtle: 255 247 237;
+    --pace-chart-grid: 231 229 228;
+    --pace-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+    --pace-shadow-lg: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .dark {
+    --pace-bg: 23 20 18;
+    --pace-card: 30 27 24;
+    --pace-card-inner: 37 34 32;
+    --pace-input: 37 34 32;
+    --pace-border: 42 37 32;
+    --pace-border-subtle: 34 31 28;
+    --pace-text: 250 249 247;
+    --pace-text-secondary: 168 162 158;
+    --pace-text-muted: 107 101 96;
+    --pace-accent: 234 88 12;
+    --pace-accent-hover: 251 146 60;
+    --pace-accent-subtle: 30 21 16;
+    --pace-chart-grid: 42 37 32;
+    --pace-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    --pace-shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  body {
+    font-family: 'Work Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

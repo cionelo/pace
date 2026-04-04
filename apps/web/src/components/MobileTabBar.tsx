@@ -8,15 +8,15 @@ export default function MobileTabBar({ windowIds, activeId, onSelect }: MobileTa
   if (windowIds.length < 2) return null;
 
   return (
-    <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-2 px-4 py-3 backdrop-blur-md bg-white/80 dark:bg-zinc-900/80 border-t border-zinc-200 dark:border-zinc-800">
+    <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-2 px-4 py-3 backdrop-blur-md bg-pace-bg/80 border-t border-pace-border">
       {windowIds.map((id, index) => (
         <button
           key={id}
           onClick={() => onSelect(id)}
-          className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
+          className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
             id === activeId
-              ? "bg-blue-600 text-white"
-              : "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+              ? "bg-pace-accent text-white shadow-lg"
+              : "bg-pace-card-inner text-pace-text-secondary hover:bg-pace-border"
           }`}
         >
           W{index + 1}

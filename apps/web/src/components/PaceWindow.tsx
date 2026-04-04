@@ -23,23 +23,23 @@ export default function PaceWindow({ windowId }: PaceWindowProps) {
   if (!paceWindow) return null;
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden flex flex-col">
+    <div className="bg-pace-card border border-pace-border rounded-2xl overflow-hidden flex flex-col shadow-pace transition-shadow duration-300 hover:shadow-pace-lg">
       {/* Header */}
-      <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/80">
-        <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-pace-border">
+        <span className="text-sm font-medium text-pace-text-secondary">
           Pace Window
         </span>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => resetWindow(windowId)}
-            className="text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 text-xs px-1.5 py-0.5 rounded border border-zinc-200 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+            className="text-pace-text-muted hover:text-pace-text-secondary text-xs px-3 py-1 rounded-full border border-pace-border hover:border-pace-text-secondary transition-all duration-300"
             title="Reset window"
           >
             Reset
           </button>
           <button
             onClick={() => removeWindow(windowId)}
-            className="text-zinc-400 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 text-lg leading-none px-1"
+            className="text-pace-text-muted hover:text-red-500 text-xl leading-none px-1 transition-colors duration-300"
             title="Close window"
           >
             &times;
@@ -55,10 +55,10 @@ export default function PaceWindow({ windowId }: PaceWindowProps) {
       />
 
       {/* Custom athlete button */}
-      <div className="px-3 pb-2 border-b border-zinc-200 dark:border-zinc-800">
+      <div className="px-4 pb-3 border-b border-pace-border-subtle">
         <button
           onClick={() => setCustomOpen(true)}
-          className="text-xs px-2 py-1 rounded border border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+          className="text-xs font-medium px-3.5 py-1.5 rounded-full border border-dashed border-pace-border text-pace-text-muted hover:text-pace-accent hover:border-pace-accent transition-all duration-300"
         >
           + Custom
         </button>
@@ -77,20 +77,20 @@ export default function PaceWindow({ windowId }: PaceWindowProps) {
 
       {/* Selected athletes chips */}
       {paceWindow.athletes.length > 0 && (
-        <div className="px-3 py-1 flex flex-wrap gap-1 border-b border-zinc-200 dark:border-zinc-800">
+        <div className="px-4 py-2 flex flex-wrap gap-1.5 border-b border-pace-border-subtle">
           {paceWindow.athletes.map((a) => (
             <span
               key={a.athleteResult.athlete.id}
-              className="inline-flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 text-xs text-zinc-700 dark:text-zinc-300 rounded px-2 py-0.5"
+              className="inline-flex items-center gap-1.5 bg-pace-card-inner text-xs text-pace-text-secondary rounded-full px-3 py-1"
             >
               <span
-                className="w-1.5 h-1.5 rounded-full"
+                className="w-2 h-2 rounded-full"
                 style={{ backgroundColor: a.color }}
               />
               {a.athleteResult.athlete.name}
               <button
                 onClick={() => removeAthlete(windowId, a.athleteResult.athlete.id)}
-                className="text-zinc-400 dark:text-zinc-500 hover:text-red-500 dark:hover:text-red-400 ml-0.5"
+                className="text-pace-text-muted hover:text-red-500 ml-0.5 transition-colors duration-200"
               >
                 &times;
               </button>
@@ -100,9 +100,9 @@ export default function PaceWindow({ windowId }: PaceWindowProps) {
       )}
 
       {/* Chart */}
-      <div className="flex-1 p-2 min-h-[200px]">
+      <div className="flex-1 p-3 min-h-[200px]">
         {paceWindow.athletes.length === 0 ? (
-          <div className="flex items-center justify-center h-full text-zinc-400 dark:text-zinc-500 text-sm">
+          <div className="flex items-center justify-center h-full text-pace-text-muted text-sm font-light">
             Search for a race or athlete to get started
           </div>
         ) : (
