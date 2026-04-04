@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>PACE — Search</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:rgb(23,20,18);--card:rgb(30,27,24);--card-inner:rgb(37,34,32);
+      --input:rgb(37,34,32);--border:rgb(42,37,32);--border-subtle:rgb(34,31,28);
+      --text:rgb(250,249,247);--text-secondary:rgb(168,162,158);--text-muted:rgb(107,101,96);
+      --accent:rgb(234,88,12);--accent-subtle:rgb(30,21,16);
+    }
+    html,body{
+      width:430px;height:940px;background:#080604;
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;font-family:'Work Sans',system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+    .phone{
+      width:414px;height:896px;background:var(--bg);
+      border-radius:50px;border:9px solid #1c1814;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05),0 0 0 1.5px #080604,0 30px 80px rgba(0,0,0,0.8);
+      position:relative;overflow:hidden;
+    }
+    .phone::before{content:'';position:absolute;right:-11px;top:160px;width:4px;height:72px;background:#1c1814;border-radius:0 2px 2px 0}
+    .phone::after{content:'';position:absolute;left:-11px;top:140px;width:4px;height:38px;background:#1c1814;border-radius:2px 0 0 2px}
+    .island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#000;border-radius:20px;z-index:100}
+    .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+    .pace-header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:56px 16px 12px;border-bottom:1px solid var(--border);
+      background:var(--bg);flex-shrink:0;
+    }
+    .logo{display:flex;align-items:center;gap:7px}
+    .logo-mark{width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
+    .logo-name{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+    .header-right{display:flex;align-items:center;gap:6px}
+    .icon-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .new-win-btn{font-size:10px;font-weight:600;padding:6px 12px;border-radius:9999px;background:var(--accent);color:#fff;border:none;cursor:pointer}
+    .window-card{margin:10px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:visible;flex-shrink:0}
+    .window-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border)}
+    .window-header span{font-size:10px;color:var(--text-secondary);font-weight:500}
+    .wh-right{display:flex;align-items:center;gap:4px}
+    .reset-btn{font-size:8px;color:var(--text-muted);border:1px solid var(--border);border-radius:9999px;padding:2px 7px;background:transparent}
+    .close-btn{color:var(--text-muted);font-size:14px;background:transparent;border:none;line-height:1;cursor:pointer}
+    .search-area{padding:8px 12px 6px;border-bottom:1px solid var(--border)}
+    .filter-pills{display:flex;gap:4px;margin-bottom:7px}
+    .pill{font-size:9px;padding:2px 9px;border-radius:9999px;border:1px solid var(--border);color:var(--text-muted);background:transparent;cursor:pointer}
+    .pill.active{border-color:var(--accent);color:var(--accent);background:var(--accent-subtle)}
+    .race-pill-wrap{margin-bottom:6px;display:none}
+    .race-pill-wrap.show{display:block}
+    .race-pill{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:500;background:var(--accent-subtle);color:var(--accent);border:1px solid var(--accent);border-radius:9999px;padding:4px 10px;max-width:100%}
+    .race-pill span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .search-wrap{position:relative}
+    .search-input{
+      width:100%;background:var(--input);border:1px solid var(--border);
+      border-radius:9999px;padding:7px 14px;font-size:11px;color:var(--text);
+      font-family:'Work Sans',sans-serif;outline:none;
+    }
+    .search-input.focused{border-color:var(--accent)}
+    .cursor{display:inline-block;width:1px;height:12px;background:var(--accent);vertical-align:middle;animation:blink 1s step-end infinite;margin-left:1px}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    .counter{font-size:9px;color:var(--text-muted);margin-top:4px;font-weight:300}
+    .dropdown{
+      position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:50;
+      background:var(--card);border:1px solid var(--border);border-radius:12px;
+      box-shadow:0 4px 16px rgba(0,0,0,0.4);overflow:hidden;display:none;
+    }
+    .dropdown.show{display:block}
+    .dd-section-hd{
+      padding:5px 12px;font-size:8px;font-weight:600;text-transform:uppercase;
+      letter-spacing:0.1em;color:var(--text-muted);background:var(--card-inner);
+      border-bottom:1px solid var(--border-subtle);position:sticky;top:0;
+    }
+    .dd-item{
+      padding:7px 12px;border-bottom:1px solid var(--border-subtle);
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .dd-item:last-child{border-bottom:none}
+    .dd-item-left .name{font-size:10px;color:var(--text);font-weight:500}
+    .dd-item-left .sub{font-size:8px;color:var(--text-muted);margin-top:1px}
+    .dd-item-left .sub .mono{font-family:'JetBrains Mono',monospace}
+    .dd-item-left .sub .link{color:var(--accent)}
+    .add-btn{font-size:9px;font-weight:600;padding:3px 9px;border-radius:9999px;background:var(--accent);color:#fff;border:none;cursor:pointer;flex-shrink:0}
+    .chips-area{
+      padding:5px 12px 7px;border-bottom:1px solid var(--border-subtle);
+      display:none;flex-wrap:wrap;gap:4px;
+    }
+    .chips-area.show{display:flex}
+    .chip{display:inline-flex;align-items:center;gap:4px;background:var(--card-inner);border-radius:9999px;padding:3px 8px;font-size:9px;color:var(--text-secondary)}
+    .chip-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+    .fade-overlay{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:500;transition:opacity 500ms}
+    .fade-overlay.show{opacity:1}
+  </style>
+</head>
+<body>
+<div class="phone">
+  <div class="island"></div>
+  <div class="screen">
+    <header class="pace-header">
+      <div class="logo">
+        <div class="logo-mark">P</div>
+        <span class="logo-name">PACE</span>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn">☽</button>
+        <button class="icon-btn">♥</button>
+        <button class="icon-btn">✉</button>
+        <button class="new-win-btn">+ New Window</button>
+      </div>
+    </header>
+
+    <div style="overflow-y:auto;overflow-x:hidden;flex:1;scrollbar-width:none">
+      <div class="window-card">
+        <div class="window-header">
+          <span>Pace Window</span>
+          <div class="wh-right">
+            <button class="reset-btn">Reset</button>
+            <button class="close-btn">&times;</button>
+          </div>
+        </div>
+
+        <div class="search-area">
+          <div class="filter-pills">
+            <button class="pill">Men</button>
+            <button class="pill active">Women</button>
+            <button class="pill">D1</button>
+          </div>
+          <div class="race-pill-wrap" id="racePillWrap">
+            <div class="race-pill">
+              <span id="racePillText"></span>
+              <span style="opacity:.5;cursor:pointer">&times;</span>
+            </div>
+          </div>
+          <div class="search-wrap">
+            <div class="search-input" id="searchDisplay" style="color:var(--text-muted)">
+              <span id="searchText">Search races or athletes...</span><span class="cursor" id="cursor"></span>
+            </div>
+            <div class="dropdown" id="dropdown"></div>
+          </div>
+          <div class="counter" id="counter">0/6 athletes</div>
+        </div>
+
+        <div style="padding:4px 12px 8px;border-bottom:1px solid var(--border-subtle)">
+          <button style="font-size:9px;font-weight:500;padding:4px 10px;border-radius:9999px;border:1px dashed var(--border);color:var(--text-muted);background:transparent">+ Custom</button>
+        </div>
+
+        <div class="chips-area" id="chips"></div>
+
+        <div style="padding:16px;display:flex;align-items:center;justify-content:center;min-height:100px">
+          <span style="font-size:11px;color:var(--text-muted);font-weight:300">Search for a race or athlete to get started</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fade-overlay" id="fadeOverlay"></div>
+</div>
+
+<script>
+  function typewriter(el, text, charDelay, cb) {
+    let i = 0;
+    const tick = () => {
+      el.textContent = text.slice(0, ++i);
+      if (i < text.length) setTimeout(tick, charDelay);
+      else if (cb) cb();
+    };
+    setTimeout(tick, charDelay);
+  }
+
+  function timeline(steps) {
+    let t = 0;
+    steps.forEach(([delay, fn]) => { t += delay; setTimeout(fn, t); });
+    return t;
+  }
+
+  const searchText = document.getElementById('searchText');
+  const searchDisplay = document.getElementById('searchDisplay');
+  const dropdown = document.getElementById('dropdown');
+  const racePillWrap = document.getElementById('racePillWrap');
+  const racePillText = document.getElementById('racePillText');
+  const chips = document.getElementById('chips');
+  const counter = document.getElementById('counter');
+  const cursor = document.getElementById('cursor');
+  const fadeOverlay = document.getElementById('fadeOverlay');
+
+  function reset() {
+    searchText.textContent = 'Search races or athletes...';
+    searchText.style.color = 'var(--text-muted)';
+    searchDisplay.classList.remove('focused');
+    dropdown.classList.remove('show');
+    dropdown.innerHTML = '';
+    racePillWrap.classList.remove('show');
+    chips.classList.remove('show');
+    chips.innerHTML = '';
+    counter.textContent = '0/6 athletes';
+    cursor.style.display = 'none';
+    fadeOverlay.classList.remove('show');
+  }
+
+  function showRacesDropdown() {
+    dropdown.innerHTML = `
+      <div class="dd-section-hd">Races</div>
+      <div class="dd-item" id="raceRow">
+        <div class="dd-item-left">
+          <div class="name">Big 10 Championships · Women · 1500m</div>
+          <div class="sub">2024 Season</div>
+        </div>
+      </div>
+      <div class="dd-item">
+        <div class="dd-item-left">
+          <div class="name">NCAA Nationals · Women · 1500m</div>
+          <div class="sub">2024 Season</div>
+        </div>
+      </div>
+      <div class="dd-section-hd">Athletes</div>
+      <div class="dd-item">
+        <div class="dd-item-left">
+          <div class="name">Jane Hedengren <span style="color:var(--text-muted)">· BYU</span></div>
+          <div class="sub"><span class="mono">4:02.31</span> · <span class="link">NCAA 1500m 2024</span></div>
+        </div>
+        <button class="add-btn">+</button>
+      </div>`;
+    dropdown.classList.add('show');
+  }
+
+  function showAthletesDropdown() {
+    dropdown.innerHTML = `
+      <div class="dd-section-hd">Athletes</div>
+      <div class="dd-item" id="addRow">
+        <div class="dd-item-left">
+          <div class="name">Jane Hedengren <span style="color:var(--text-muted)">· BYU</span></div>
+          <div class="sub"><span class="mono">4:02.31</span> · <span class="link">Big 10 Championships</span></div>
+        </div>
+        <button class="add-btn">+</button>
+      </div>`;
+    dropdown.classList.add('show');
+  }
+
+  function run() {
+    reset();
+    timeline([
+      [300, () => {
+        cursor.style.display = 'inline-block';
+        searchText.style.color = 'var(--text)';
+        searchText.textContent = '';
+        searchDisplay.classList.add('focused');
+      }],
+      [200, () => typewriter(searchText, 'hedengren', 65, null)],
+      [900, () => showRacesDropdown()],
+      [1500, () => {
+        dropdown.classList.remove('show');
+        racePillText.textContent = 'Big 10 Champs · Women · 1500m · 2024';
+        racePillWrap.classList.add('show');
+        searchText.textContent = '';
+        cursor.style.display = 'inline-block';
+        setTimeout(() => {
+          searchText.style.color = 'var(--text-muted)';
+          searchText.textContent = 'Search athletes in this race...';
+          cursor.style.display = 'none';
+        }, 300);
+      }],
+      [800, () => {
+        searchText.style.color = 'var(--text)';
+        searchText.textContent = '';
+        cursor.style.display = 'inline-block';
+        typewriter(searchText, 'jane', 80, null);
+      }],
+      [700, () => showAthletesDropdown()],
+      [900, () => {
+        dropdown.classList.remove('show');
+        chips.innerHTML = `
+          <div class="chip">
+            <span class="chip-dot" style="background:var(--accent)"></span>
+            Jane Hedengren
+            <span style="color:var(--text-muted);cursor:pointer">&times;</span>
+          </div>`;
+        chips.classList.add('show');
+        counter.textContent = '1/6 athletes';
+        cursor.style.display = 'none';
+      }],
+      [2000, () => {
+        fadeOverlay.classList.add('show');
+      }],
+      [700, () => {
+        setTimeout(run, 200);
+      }],
+    ]);
+  }
+
+  run();
+</script>
+</body>
+</html>
