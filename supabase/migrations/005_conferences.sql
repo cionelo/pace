@@ -18,7 +18,7 @@ CREATE TABLE conference_aliases (
 );
 
 -- Indexes
-CREATE INDEX idx_conference_aliases_alias ON conference_aliases USING gin(alias gin_trgm_ops);
+CREATE INDEX idx_conference_aliases_alias ON conference_aliases(alias);
 CREATE INDEX idx_conferences_division ON conferences(division);
 
 -- Add conference_id to events

@@ -160,6 +160,9 @@ def detect_provider(url: str) -> str:
     if "results.leonetiming.com" in u and "xc.html" in u:
         return "leone_xc"
 
+    if "results.leonetiming.com" in u and "xc.html" not in u:
+        return "pttiming"
+
     if "rtspt.com" in u:
         return "rtspt_html"
 

@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PACE — Concept B: Performance Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-card-inner: #F5F5F4;
+    --bg-input: #F5F5F4;
+    --border: #E7E5E4;
+    --border-subtle: #F0EFED;
+    --text: #1C1917;
+    --text-secondary: #78716C;
+    --text-muted: #A8A29E;
+    --accent: #C2410C;
+    --accent-light: #FFF7ED;
+    --accent-hover: #9A3412;
+    --control-bg: #F5F5F4;
+    --control-active: #1C1917;
+    --control-active-text: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+    --shadow-lg: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+    --chart-grid: #E7E5E4;
+    --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .dark {
+    --bg: #171412;
+    --bg-card: #1E1B18;
+    --bg-card-inner: #252220;
+    --bg-input: #252220;
+    --border: #2A2520;
+    --border-subtle: #221F1C;
+    --text: #FAF9F7;
+    --text-secondary: #A8A29E;
+    --text-muted: #6B6560;
+    --accent: #EA580C;
+    --accent-light: #1E1510;
+    --accent-hover: #FB923C;
+    --control-bg: #252220;
+    --control-active: #FAF9F7;
+    --control-active-text: #171412;
+    --shadow: 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-lg: 0 4px 16px rgba(0,0,0,0.3);
+    --chart-grid: #2A2520;
+  }
+
+  body {
+    font-family: 'Work Sans', system-ui, sans-serif;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3 { font-family: 'Archivo Black', sans-serif; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; font-variant-numeric: tabular-nums; }
+
+  /* ── Theme toggle ── */
+  .theme-bar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+  }
+  .theme-bar button {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .theme-bar button.active {
+    background: var(--control-active);
+    color: var(--control-active-text);
+    border-color: var(--control-active);
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--noise);
+    background-repeat: repeat;
+    background-size: 256px;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  .header-left {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .wordmark {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1;
+  }
+  .attribution {
+    font-size: 12px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+  .attribution a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .attribution a:hover { color: var(--accent); }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .icon-btn:hover {
+    color: var(--text);
+    border-color: var(--text-secondary);
+    transform: scale(1.05);
+  }
+  .btn-primary {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 24px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(194, 65, 12, 0.25);
+  }
+
+  /* ── Layout ── */
+  .concept-label {
+    text-align: center;
+    padding: 32px 16px 12px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px 32px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── Window card ── */
+  .window-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s ease;
+  }
+  .window-card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+  .window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .window-title {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .window-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .window-controls button {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .window-controls button:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+  }
+  .close-btn {
+    border: none !important;
+    font-size: 20px !important;
+    padding: 0 4px !important;
+    border-radius: 0 !important;
+  }
+  .close-btn:hover { color: var(--accent) !important; }
+
+  /* ── Filters ── */
+  .filters {
+    padding: 12px 16px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .pill-group {
+    display: flex;
+    border-radius: 100px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .pill {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 5px 14px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .pill.active {
+    background: var(--control-active);
+    color: var(--control-active-text);
+  }
+
+  /* ── Search ── */
+  .search-area {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .search-input {
+    width: 100%;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: var(--bg-input);
+    color: var(--text);
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: var(--shadow);
+  }
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.1);
+  }
+
+  .capacity {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-weight: 300;
+  }
+
+  /* ── Race chip ── */
+  .race-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding: 6px 14px;
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .race-chip .x {
+    cursor: pointer;
+    opacity: 0.5;
+    font-size: 15px;
+    transition: opacity 0.2s;
+  }
+  .race-chip .x:hover { opacity: 1; }
+
+  /* ── Custom button ── */
+  .custom-btn-row {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .custom-btn {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    padding: 5px 14px;
+    border: 1px dashed var(--border);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .custom-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── Athlete chips ── */
+  .athlete-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .athlete-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: var(--bg-card-inner);
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+  .athlete-chip .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .athlete-chip .x {
+    font-size: 14px;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-left: 2px;
+    transition: color 0.2s;
+  }
+  .athlete-chip .x:hover { color: var(--accent); }
+
+  /* ── Chart controls ── */
+  .chart-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+  }
+  .zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .zoom-controls .lbl {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-right: 4px;
+  }
+  .zoom-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .zoom-btn:hover {
+    border-color: var(--text-secondary);
+    color: var(--text);
+    transform: scale(1.1);
+  }
+
+  .mode-btns {
+    display: flex;
+    border-radius: 100px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .mode-btn {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .mode-btn.active {
+    background: var(--control-active);
+    color: var(--control-active-text);
+  }
+
+  /* ── Chart ── */
+  .chart-area {
+    padding: 12px 16px;
+    height: 280px;
+    position: relative;
+  }
+  .chart-area svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 14px 16px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .legend-item:hover { opacity: 0.6; }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .legend-name {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .legend-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* ── Tooltip mock ── */
+  .tooltip-mock {
+    position: absolute;
+    top: 50px;
+    right: 70px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    min-width: 200px;
+    z-index: 10;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(8px);
+  }
+  .tooltip-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .tooltip-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .tooltip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tooltip-name {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+  .tooltip-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: auto;
+    color: var(--text);
+  }
+
+  /* ── Search dropdown ── */
+  .search-dropdown {
+    margin-top: 8px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-card);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .dropdown-section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    background: var(--bg-card-inner);
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .dropdown-item:hover { background: var(--bg-card-inner); }
+  .dropdown-item:last-child { border-bottom: none; }
+  .dropdown-add {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 4px 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dropdown-add:hover { background: var(--accent-hover); }
+
+  /* ── SVG ── */
+  .chart-line { fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .chart-dot { stroke: var(--bg-card); stroke-width: 2; }
+  .grid-line { stroke: var(--chart-grid); stroke-width: 1; }
+  .axis-text { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--text-muted); }
+  .ref-line { stroke: var(--text-muted); stroke-width: 1; stroke-dasharray: 6 4; opacity: 0.4; }
+
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="theme-bar">
+    <button class="active" onclick="setTheme('light')">Light</button>
+    <button onclick="setTheme('dark')">Dark</button>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <span class="wordmark">PACE</span>
+      <span class="attribution">built by <a href="#">itsnemo.dev</a></span>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" title="Toggle theme">&#9789;</button>
+      <button class="icon-btn" title="Support">&#9829;</button>
+      <button class="icon-btn" title="Contact">&#9993;</button>
+      <button class="btn-primary">+ New Window</button>
+    </div>
+  </header>
+
+  <p class="concept-label">Concept B &mdash; Performance Editorial</p>
+
+  <div class="grid">
+
+    <!-- Window 1: Full state -->
+    <div class="window-card">
+      <div class="window-header">
+        <span class="window-title">Pace Window</span>
+        <div class="window-controls">
+          <button>Reset</button>
+          <button class="close-btn">&times;</button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="pill-group">
+          <button class="pill active">All</button>
+          <button class="pill">M</button>
+          <button class="pill">W</button>
+        </div>
+        <div class="pill-group">
+          <button class="pill active">All</button>
+          <button class="pill">D1</button>
+          <button class="pill">D2</button>
+        </div>
+      </div>
+
+      <div class="search-area">
+        <div class="race-chip">
+          Big 12 Indoor &middot; W 800m &middot; Feb 28, 2026
+          <span class="x">&times;</span>
+        </div>
+        <input class="search-input" placeholder="Search athletes in this race..." />
+        <p class="capacity">3 / 10 athletes</p>
+      </div>
+
+      <div class="custom-btn-row">
+        <button class="custom-btn">+ Custom</button>
+      </div>
+
+      <div class="athlete-chips">
+        <span class="athlete-chip">
+          <span class="dot" style="background:#DC2626"></span>
+          J. Martinez
+          <span class="x">&times;</span>
+        </span>
+        <span class="athlete-chip">
+          <span class="dot" style="background:#0369A1"></span>
+          A. Thompson
+          <span class="x">&times;</span>
+        </span>
+        <span class="athlete-chip">
+          <span class="dot" style="background:#059669"></span>
+          K. Williams
+          <span class="x">&times;</span>
+        </span>
+      </div>
+
+      <div class="chart-controls">
+        <div class="zoom-controls">
+          <span class="lbl">Y</span>
+          <button class="zoom-btn">+</button>
+          <button class="zoom-btn">&minus;</button>
+        </div>
+        <div class="mode-btns">
+          <button class="mode-btn active">Virtual Gap</button>
+          <button class="mode-btn">Lap Pace</button>
+          <button class="mode-btn">Position</button>
+          <button class="mode-btn">Gain/Loss</button>
+        </div>
+      </div>
+
+      <div class="chart-area">
+        <svg viewBox="0 0 500 220" preserveAspectRatio="none">
+          <line class="grid-line" x1="60" y1="30" x2="480" y2="30" />
+          <line class="grid-line" x1="60" y1="70" x2="480" y2="70" />
+          <line class="grid-line" x1="60" y1="110" x2="480" y2="110" />
+          <line class="grid-line" x1="60" y1="150" x2="480" y2="150" />
+          <line class="grid-line" x1="60" y1="190" x2="480" y2="190" />
+          <line class="ref-line" x1="60" y1="110" x2="480" y2="110" />
+          <text class="axis-text" x="10" y="34">+2.0s</text>
+          <text class="axis-text" x="10" y="74">+1.0s</text>
+          <text class="axis-text" x="14" y="114">0.0s</text>
+          <text class="axis-text" x="10" y="154">-1.0s</text>
+          <text class="axis-text" x="10" y="194">-2.0s</text>
+          <text class="axis-text" x="100" y="210">200m</text>
+          <text class="axis-text" x="200" y="210">400m</text>
+          <text class="axis-text" x="300" y="210">600m</text>
+          <text class="axis-text" x="400" y="210">800m</text>
+          <!-- Lines -->
+          <polyline class="chart-line" stroke="#DC2626" points="100,105 200,88 300,82 400,65" />
+          <circle cx="100" cy="105" r="5" fill="#DC2626" class="chart-dot" />
+          <circle cx="200" cy="88" r="5" fill="#DC2626" class="chart-dot" />
+          <circle cx="300" cy="82" r="5" fill="#DC2626" class="chart-dot" />
+          <circle cx="400" cy="65" r="5" fill="#DC2626" class="chart-dot" />
+          <polyline class="chart-line" stroke="#0369A1" points="100,115 200,118 300,110 400,100" />
+          <circle cx="100" cy="115" r="5" fill="#0369A1" class="chart-dot" />
+          <circle cx="200" cy="118" r="5" fill="#0369A1" class="chart-dot" />
+          <circle cx="300" cy="110" r="5" fill="#0369A1" class="chart-dot" />
+          <circle cx="400" cy="100" r="5" fill="#0369A1" class="chart-dot" />
+          <polyline class="chart-line" stroke="#059669" points="100,100 200,105 300,125 400,140" />
+          <circle cx="100" cy="100" r="5" fill="#059669" class="chart-dot" />
+          <circle cx="200" cy="105" r="5" fill="#059669" class="chart-dot" />
+          <circle cx="300" cy="125" r="5" fill="#059669" class="chart-dot" />
+          <circle cx="400" cy="140" r="5" fill="#059669" class="chart-dot" />
+        </svg>
+
+        <div class="tooltip-mock">
+          <div class="tooltip-label">600m</div>
+          <div class="tooltip-row">
+            <span class="tooltip-dot" style="background:#DC2626"></span>
+            <span class="tooltip-name">J. Martinez</span>
+            <span class="tooltip-value">-0.62s</span>
+          </div>
+          <div class="tooltip-row">
+            <span class="tooltip-dot" style="background:#0369A1"></span>
+            <span class="tooltip-name">A. Thompson</span>
+            <span class="tooltip-value">+0.00s</span>
+          </div>
+          <div class="tooltip-row">
+            <span class="tooltip-dot" style="background:#059669"></span>
+            <span class="tooltip-name">K. Williams</span>
+            <span class="tooltip-value">+0.38s</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-dot" style="background:#DC2626"></span>
+          <span class="legend-name">J. Martinez</span>
+          <span class="legend-time">2:04.31</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background:#0369A1"></span>
+          <span class="legend-name">A. Thompson</span>
+          <span class="legend-time">2:05.88</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background:#059669"></span>
+          <span class="legend-name">K. Williams</span>
+          <span class="legend-time">2:06.42</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Window 2: Empty + search -->
+    <div class="window-card">
+      <div class="window-header">
+        <span class="window-title">Pace Window</span>
+        <div class="window-controls">
+          <button>Reset</button>
+          <button class="close-btn">&times;</button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="pill-group">
+          <button class="pill active">All</button>
+          <button class="pill">M</button>
+          <button class="pill">W</button>
+        </div>
+        <div class="pill-group">
+          <button class="pill active">All</button>
+          <button class="pill">D1</button>
+          <button class="pill">D2</button>
+        </div>
+      </div>
+
+      <div class="search-area">
+        <input class="search-input" value="big 12 800" />
+        <div class="search-dropdown">
+          <div class="dropdown-section-label">Races</div>
+          <div class="dropdown-item">
+            Big 12 Indoor &middot; W 800m &middot; Feb 28, 2026
+          </div>
+          <div class="dropdown-item">
+            Big 12 Indoor &middot; M 800m &middot; Feb 28, 2026
+          </div>
+          <div class="dropdown-section-label">Athletes</div>
+          <div class="dropdown-item">
+            <div>
+              <div style="font-weight:500; color:var(--text)">Jane Smith <span style="color:var(--text-muted)">&middot; Houston</span></div>
+              <div style="font-size:12px; margin-top:3px; color:var(--text-muted)"><span class="mono">2:04.31</span> &middot; Big 12 Indoor</div>
+            </div>
+            <button class="dropdown-add">+</button>
+          </div>
+          <div class="dropdown-item">
+            <div>
+              <div style="font-weight:500; color:var(--text)">Maria Lopez <span style="color:var(--text-muted)">&middot; Kansas</span></div>
+              <div style="font-size:12px; margin-top:3px; color:var(--text-muted)"><span class="mono">2:05.88</span> &middot; Big 12 Indoor</div>
+            </div>
+            <button class="dropdown-add">+</button>
+          </div>
+        </div>
+        <p class="capacity" style="margin-top:12px">0 / 10 athletes</p>
+      </div>
+
+      <div class="custom-btn-row">
+        <button class="custom-btn">+ Custom</button>
+      </div>
+
+      <div style="flex:1; display:flex; align-items:center; justify-content:center; min-height:220px; color:var(--text-muted); font-size:14px; font-weight:300;">
+        Search for a race or athlete to get started
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setTheme(t) {
+      document.body.classList.toggle('dark', t === 'dark');
+      document.querySelectorAll('.theme-bar button').forEach(b => {
+        b.classList.toggle('active', b.textContent.trim().toLowerCase() === t);
+      });
+    }
+  </script>
+</body>
+</html>
