@@ -375,17 +375,18 @@ function CustomTooltip({
 
   const isDark = theme === "dark";
   const wrapperStyle = {
-    backgroundColor: isDark ? "#18181b" : "#ffffff",
-    border: isDark ? "1px solid #3f3f46" : "1px solid #e4e4e7",
+    backgroundColor: isDark ? "rgba(30,27,24,0.95)" : "rgba(255,255,255,0.95)",
+    border: isDark ? "1px solid #2A2520" : "1px solid #E7E5E4",
+    backdropFilter: "blur(8px)",
   };
-  const labelColor = isDark ? "#a1a1aa" : "#71717a";
-  const nameColor = isDark ? "#a1a1aa" : "#71717a";
-  const primaryColor = isDark ? "#ffffff" : "#18181b";
-  const secondaryColor = isDark ? "#71717a" : "#a1a1aa";
+  const labelColor = isDark ? "#6B6560" : "#78716C";
+  const nameColor = isDark ? "#A8A29E" : "#78716C";
+  const primaryColor = isDark ? "#FAF9F7" : "#1C1917";
+  const secondaryColor = isDark ? "#6B6560" : "#A8A29E";
 
   return (
-    <div style={wrapperStyle} className="rounded-lg px-3 py-2 shadow-lg">
-      <p className="text-xs mb-1" style={{ color: labelColor }}>{label}</p>
+    <div style={wrapperStyle} className="rounded-xl px-4 py-3 shadow-lg">
+      <p className="text-xs font-medium uppercase tracking-wide mb-2" style={{ color: labelColor }}>{label}</p>
       {payload.map((entry: any) => {
         const athleteId = entry.dataKey;
         const isFieldAvgSplit = athleteId === "field_avg";
@@ -397,7 +398,7 @@ function CustomTooltip({
         const isGapModeTooltip = mode === "virtual" || mode === "time_gain_loss";
         const isPositionModeTooltip = mode === "position";
         return (
-          <div key={athleteId} className="mb-1 last:mb-0">
+          <div key={athleteId} className="mb-1.5 last:mb-0">
             <div className="flex items-center gap-2">
               <span
                 className="w-2 h-2 rounded-full flex-shrink-0"
@@ -408,7 +409,7 @@ function CustomTooltip({
             <div className="ml-4">
               {isGapModeTooltip ? (
                 <>
-                  <span className="text-sm font-medium" style={{ color: primaryColor }}>
+                  <span className="text-sm font-medium" style={{ color: primaryColor, fontFamily: "'JetBrains Mono', monospace" }}>
                     {entry.value >= 0 ? "+" : ""}
                     {entry.value.toFixed(2)}s
                   </span>
@@ -425,7 +426,7 @@ function CustomTooltip({
                 </>
               ) : isPositionModeTooltip ? (
                 <>
-                  <span className="text-sm font-medium" style={{ color: primaryColor }}>
+                  <span className="text-sm font-medium" style={{ color: primaryColor, fontFamily: "'JetBrains Mono', monospace" }}>
                     P{Math.round(entry.value)}
                   </span>
                   {elapsed != null && (
@@ -436,7 +437,7 @@ function CustomTooltip({
                 </>
               ) : (
                 <>
-                  <span className="text-sm font-medium" style={{ color: primaryColor }}>
+                  <span className="text-sm font-medium" style={{ color: primaryColor, fontFamily: "'JetBrains Mono', monospace" }}>
                     {formatSeconds(entry.value)}
                   </span>
                   {elapsed != null && (
@@ -462,7 +463,7 @@ const Y_ZOOM_LEVELS = [
 ];
 
 export default function SplitChart({ athletes }: SplitChartProps) {
-  const [mode, setMode] = useState<ChartMode>("virtual");
+  const [mode, setMode] = useState<ChartMode>("raw");
   const [yZoom, setYZoom] = useState(1);
   const [overlayA, setOverlayA] = useState(false);
   const [overlayB, setOverlayB] = useState(false);
@@ -470,9 +471,9 @@ export default function SplitChart({ athletes }: SplitChartProps) {
   const [fieldAthletes, setFieldAthletes] = useState<AthleteResult[]>([]);
   const [fieldLoading, setFieldLoading] = useState(false);
   const theme = useThemeStore((s) => s.theme);
-  const gridColor = theme === "dark" ? "#333" : "#e4e4e7";
-  const axisColor = theme === "dark" ? "#999" : "#71717a";
-  const refLineColor = theme === "dark" ? "#666" : "#a1a1aa";
+  const gridColor = theme === "dark" ? "#2A2520" : "#E7E5E4";
+  const axisColor = theme === "dark" ? "#A8A29E" : "#78716C";
+  const refLineColor = theme === "dark" ? "#6B6560" : "#A8A29E";
 
   const firstEventId = athletes[0]?.athleteResult.event.id ?? null;
 
@@ -495,7 +496,7 @@ export default function SplitChart({ athletes }: SplitChartProps) {
 
   if (data.length === 0 || visibleAthletes.length === 0) {
     return (
-      <div className="flex items-center justify-center h-48 text-zinc-400 dark:text-zinc-500 text-sm">
+      <div className="flex items-center justify-center h-48 text-pace-text-muted text-sm font-light">
         Add athletes to see split data
       </div>
     );
@@ -569,38 +570,38 @@ export default function SplitChart({ athletes }: SplitChartProps) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between px-2">
-        <div className="flex items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400">
-          <span>Y</span>
+        <div className="flex items-center gap-1 text-xs text-pace-text-muted">
+          <span className="font-medium">Y</span>
           <button
-            className="w-6 h-6 flex items-center justify-center rounded border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-500 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="w-7 h-7 flex items-center justify-center rounded-full border border-pace-border text-pace-text-secondary hover:text-pace-text hover:border-pace-text-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
             onClick={() => setYZoom((z) => Math.min(z + 1, Y_ZOOM_LEVELS.length - 1))}
             disabled={yZoom === Y_ZOOM_LEVELS.length - 1}
             title="Zoom in Y axis"
           >+</button>
           <button
-            className="w-6 h-6 flex items-center justify-center rounded border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-500 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="w-7 h-7 flex items-center justify-center rounded-full border border-pace-border text-pace-text-secondary hover:text-pace-text hover:border-pace-text-secondary disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300"
             onClick={() => setYZoom((z) => Math.max(z - 1, 0))}
             disabled={yZoom === 0}
             title="Zoom out Y axis"
-          >−</button>
+          >&#8722;</button>
         </div>
         <div className="flex items-center gap-2">
           <ChartFaqModal />
-          <div className="flex rounded overflow-hidden border border-zinc-300 dark:border-zinc-700 text-xs">
+          <div className="flex rounded-full overflow-hidden border border-pace-border text-sm">
             {(
               [
                 ["virtual", "Virtual Gap"],
                 ["raw", "Lap Pace"],
                 ["position", "Position"],
-                ["time_gain_loss", "Time Gain/Loss"],
+                ["time_gain_loss", "Gain/Loss"],
               ] as [ChartMode, string][]
             ).map(([key, label]) => (
               <button
                 key={key}
-                className={`px-3 py-1 transition-colors ${
+                className={`px-3.5 py-1.5 font-medium transition-all duration-300 ${
                   mode === key
-                    ? "bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-white"
-                    : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                    ? "bg-pace-text text-pace-bg"
+                    : "text-pace-text-muted hover:text-pace-text"
                 }`}
                 onClick={() => setMode(key)}
               >
@@ -614,7 +615,7 @@ export default function SplitChart({ athletes }: SplitChartProps) {
       {/* Overlay toggles — Lap Pace mode only */}
       {mode === "raw" && (
         <div className="flex items-center justify-end gap-2 px-2">
-          <span className="text-xs text-zinc-400 dark:text-zinc-600">Overlays:</span>
+          <span className="text-xs text-pace-text-muted">Overlays:</span>
           {(
             [
               ["A", "Athlete avg", overlayA, () => setOverlayA((v) => !v)],
@@ -625,24 +626,24 @@ export default function SplitChart({ athletes }: SplitChartProps) {
             <button
               key={key}
               onClick={toggle}
-              className={`text-xs px-2 py-0.5 rounded border transition-colors ${
+              className={`text-xs font-medium px-3 py-1 rounded-full border transition-all duration-300 ${
                 active
-                  ? "border-zinc-400 dark:border-zinc-500 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-white"
-                  : "border-zinc-300 dark:border-zinc-700 text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+                  ? "border-pace-text-secondary bg-pace-text text-pace-bg"
+                  : "border-pace-border text-pace-text-muted hover:text-pace-text hover:border-pace-text-secondary"
               }`}
             >
               {label}
             </button>
           ))}
           {fieldLoading && (
-            <span className="text-xs text-zinc-400 dark:text-zinc-600 italic">loading...</span>
+            <span className="text-xs text-pace-text-muted italic">loading...</span>
           )}
         </div>
       )}
 
       <div className="w-full">
         {mode === "time_gain_loss" && visibleAthletes.length < 2 ? (
-          <div className="flex items-center justify-center h-48 text-zinc-400 dark:text-zinc-500 text-sm">
+          <div className="flex items-center justify-center h-48 text-pace-text-muted text-sm font-light">
             Time Gain/Loss requires at least 2 athletes
           </div>
         ) : (
@@ -654,11 +655,11 @@ export default function SplitChart({ athletes }: SplitChartProps) {
               <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
               <XAxis
                 dataKey="label"
-                tick={{ fill: axisColor, fontSize: 12 }}
+                tick={{ fill: axisColor, fontSize: 13, fontWeight: 500 }}
                 interval={xInterval}
               />
               <YAxis
-                tick={{ fill: axisColor, fontSize: 12 }}
+                tick={{ fill: axisColor, fontSize: 13, fontWeight: 500 }}
                 tickFormatter={
                   isGapMode
                     ? (v: number) => `${v >= 0 ? "+" : ""}${v.toFixed(1)}s`
@@ -695,10 +696,10 @@ export default function SplitChart({ athletes }: SplitChartProps) {
                     type="monotone"
                     dataKey={a.athleteResult.athlete.id}
                     stroke={a.color}
-                    strokeWidth={2}
+                    strokeWidth={2.5}
                     strokeDasharray={isCustom ? "8 4" : undefined}
                     dot={{ r: 5, fill: a.color }}
-                    activeDot={{ r: 7, stroke: "#fff", strokeWidth: 2 }}
+                    activeDot={{ r: 8, stroke: "#fff", strokeWidth: 2 }}
                     connectNulls
                   />
                 );

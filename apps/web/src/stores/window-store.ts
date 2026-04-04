@@ -23,7 +23,7 @@ function genId() {
 }
 
 export const useWindowStore = create<WindowStore>((set, get) => ({
-  windows: [],
+  windows: [{ id: genId(), athletes: [] }],
 
   addWindow: () => {
     const { windows } = get();
