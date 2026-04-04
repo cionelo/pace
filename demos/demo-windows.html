@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>PACE — Windows</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:rgb(23,20,18);--card:rgb(30,27,24);--card-inner:rgb(37,34,32);
+      --input:rgb(37,34,32);--border:rgb(42,37,32);--border-subtle:rgb(34,31,28);
+      --text:rgb(250,249,247);--text-secondary:rgb(168,162,158);--text-muted:rgb(107,101,96);
+      --accent:rgb(234,88,12);--accent-subtle:rgb(30,21,16);--grid:rgb(42,37,32);
+    }
+    html,body{width:430px;height:940px;background:#080604;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Work Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    .phone{width:414px;height:896px;background:var(--bg);border-radius:50px;border:9px solid #1c1814;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05),0 0 0 1.5px #080604,0 30px 80px rgba(0,0,0,0.8);position:relative;overflow:hidden}
+    .phone::before{content:'';position:absolute;right:-11px;top:160px;width:4px;height:72px;background:#1c1814;border-radius:0 2px 2px 0}
+    .phone::after{content:'';position:absolute;left:-11px;top:140px;width:4px;height:38px;background:#1c1814;border-radius:2px 0 0 2px}
+    .island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#000;border-radius:20px;z-index:100}
+    .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+    .pace-header{display:flex;align-items:center;justify-content:space-between;padding:56px 16px 12px;border-bottom:1px solid var(--border);background:var(--bg);flex-shrink:0}
+    .logo{display:flex;align-items:center;gap:7px}
+    .logo-mark{width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
+    .logo-name{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+    .header-right{display:flex;align-items:center;gap:6px}
+    .icon-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .new-win-btn{font-size:10px;font-weight:600;padding:6px 12px;border-radius:9999px;background:var(--accent);color:#fff;border:none;cursor:pointer}
+    .content-area{flex:1;overflow:hidden;padding-bottom:64px;position:relative}
+    .window-view{position:absolute;inset:0;padding:10px;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;opacity:1;transition:opacity 200ms}
+    .window-view.hidden{opacity:0;pointer-events:none}
+    .window-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .window-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border)}
+    .window-header span{font-size:10px;color:var(--text-secondary);font-weight:500}
+    .wh-right{display:flex;gap:4px}
+    .reset-btn{font-size:8px;color:var(--text-muted);border:1px solid var(--border);border-radius:9999px;padding:2px 7px;background:transparent}
+    .search-area{padding:7px 12px;border-bottom:1px solid var(--border-subtle)}
+    .filter-pills{display:flex;gap:4px;margin-bottom:6px}
+    .pill{font-size:9px;padding:2px 9px;border-radius:9999px;border:1px solid var(--border);color:var(--text-muted);background:transparent}
+    .pill.active{border-color:var(--accent);color:var(--accent);background:var(--accent-subtle)}
+    .search-mock{background:var(--input);border:1px solid var(--border);border-radius:9999px;padding:7px 14px;font-size:11px;color:var(--text-muted)}
+    .chips-area{display:flex;flex-wrap:wrap;gap:4px;padding:5px 12px 7px;border-bottom:1px solid var(--border-subtle)}
+    .chip{display:inline-flex;align-items:center;gap:4px;background:var(--card-inner);border-radius:9999px;padding:3px 8px;font-size:9px;color:var(--text-secondary)}
+    .chip-dot{width:6px;height:6px;border-radius:50%}
+    .chart-area{padding:8px 10px 4px}
+    .chart-controls{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+    .zoom-btns{display:flex;align-items:center;gap:2px}
+    .zoom-lbl{font-size:9px;color:var(--text-muted);margin-right:2px;font-weight:600}
+    .zoom-btn{width:20px;height:20px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .mode-btns{display:flex;border:1px solid var(--border);border-radius:9999px;overflow:hidden;font-size:8px}
+    .mode-btn{padding:3px 7px;font-weight:500;background:transparent;color:var(--text-muted);border:none;cursor:pointer}
+    .mode-btn.active{background:var(--text);color:var(--bg)}
+    svg .grid-line{stroke:var(--grid);stroke-width:0.5}
+    svg .axis-label{fill:var(--text-secondary);font-size:7px;font-family:'Work Sans',sans-serif}
+    .pace-line{stroke-dasharray:300;stroke-dashoffset:0;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .legend{display:flex;flex-wrap:wrap;gap:6px;padding:6px 12px 10px;border-top:1px solid var(--border-subtle)}
+    .legend-item{display:inline-flex;align-items:center;gap:4px;font-size:8px;color:var(--text-secondary)}
+    .legend-swatch{width:14px;height:2px;border-radius:2px}
+    .empty-state{display:flex;align-items:center;justify-content:center;min-height:220px}
+    .empty-state span{font-size:11px;color:var(--text-muted);font-weight:300;text-align:center;padding:0 20px}
+    .tab-bar{position:absolute;bottom:0;left:0;right:0;padding:8px 20px 20px;background:rgba(23,20,18,0.88);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;justify-content:center;gap:8px;z-index:50}
+    .tab-pill{padding:5px 18px;border-radius:9999px;font-size:11px;font-weight:500;cursor:pointer;border:none;transition:all 300ms}
+    .tab-pill.active{background:var(--accent);color:#fff}
+    .tab-pill.inactive{background:var(--card-inner);color:var(--text-secondary)}
+    .fade-overlay{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:500;transition:opacity 500ms}
+    .fade-overlay.show{opacity:1}
+  </style>
+</head>
+<body>
+<div class="phone">
+  <div class="island"></div>
+  <div class="screen">
+    <header class="pace-header">
+      <div class="logo">
+        <div class="logo-mark">P</div>
+        <span class="logo-name">PACE</span>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn">☽</button>
+        <button class="icon-btn">♥</button>
+        <button class="icon-btn">✉</button>
+        <button class="new-win-btn">+ New Window (2/3)</button>
+      </div>
+    </header>
+
+    <div class="content-area">
+      <!-- W1: loaded with chart -->
+      <div class="window-view" id="view1">
+        <div class="window-card">
+          <div class="window-header">
+            <span>Pace Window</span>
+            <div class="wh-right"><button class="reset-btn">Reset</button></div>
+          </div>
+          <div class="search-area">
+            <div class="filter-pills">
+              <button class="pill active">Men</button>
+              <button class="pill">Women</button>
+            </div>
+            <div class="search-mock">NCAA D1 Nationals · Men · 5000m ×</div>
+          </div>
+          <div style="padding:4px 12px 8px;border-bottom:1px solid var(--border-subtle)">
+            <button style="font-size:9px;font-weight:500;padding:4px 10px;border-radius:9999px;border:1px dashed var(--border);color:var(--text-muted);background:transparent">+ Custom</button>
+          </div>
+          <div class="chips-area">
+            <div class="chip"><span class="chip-dot" style="background:rgb(234,88,12)"></span>Habtom Samuel<span style="color:var(--text-muted)">&times;</span></div>
+            <div class="chip"><span class="chip-dot" style="background:#3b82f6"></span>Marco Langon<span style="color:var(--text-muted)">&times;</span></div>
+          </div>
+          <div class="chart-area">
+            <div class="chart-controls">
+              <div class="zoom-btns"><span class="zoom-lbl">Y</span><button class="zoom-btn">+</button><button class="zoom-btn">−</button></div>
+              <div class="mode-btns">
+                <button class="mode-btn">Virtual Gap</button>
+                <button class="mode-btn active">Lap Pace</button>
+                <button class="mode-btn">Position</button>
+                <button class="mode-btn">Gain/Loss</button>
+              </div>
+            </div>
+            <svg viewBox="0 0 300 130" width="100%" style="display:block">
+              <line x1="28" y1="27" x2="291" y2="27" class="grid-line"/>
+              <line x1="28" y1="43" x2="291" y2="43" class="grid-line"/>
+              <line x1="28" y1="60" x2="291" y2="60" class="grid-line"/>
+              <line x1="28" y1="77" x2="291" y2="77" class="grid-line"/>
+              <text x="22" y="29" text-anchor="end" class="axis-label">1:16</text>
+              <text x="22" y="45" text-anchor="end" class="axis-label">1:14</text>
+              <text x="22" y="62" text-anchor="end" class="axis-label">1:12</text>
+              <text x="22" y="79" text-anchor="end" class="axis-label">1:10</text>
+              <text x="30" y="120" text-anchor="middle" class="axis-label">400m</text>
+              <text x="117" y="120" text-anchor="middle" class="axis-label">1600m</text>
+              <text x="175" y="120" text-anchor="middle" class="axis-label">2400m</text>
+              <text x="291" y="120" text-anchor="middle" class="axis-label">4000m</text>
+              <polyline class="pace-line" stroke="rgb(234,88,12)"
+                points="30,27 59,35 88,43 117,52 146,52 175,60 204,68 233,77 262,85 291,93"/>
+              <polyline class="pace-line" stroke="#3b82f6"
+                points="30,43 59,43 88,43 117,43 146,43 175,43 204,43 233,35 262,27 291,18"/>
+            </svg>
+          </div>
+          <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:rgb(234,88,12)"></div>H. Samuel</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#3b82f6"></div>M. Langon</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- W2: empty -->
+      <div class="window-view hidden" id="view2">
+        <div class="window-card">
+          <div class="window-header">
+            <span>Pace Window</span>
+            <div class="wh-right"><button class="reset-btn">Reset</button></div>
+          </div>
+          <div class="search-area">
+            <div class="filter-pills">
+              <button class="pill active">Men</button>
+              <button class="pill">Women</button>
+            </div>
+            <div class="search-mock">Search races or athletes...</div>
+          </div>
+          <div class="empty-state">
+            <span>Search for a race or athlete to get started</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="tab-bar">
+      <button class="tab-pill active" id="tab1">W1</button>
+      <button class="tab-pill inactive" id="tab2">W2</button>
+    </div>
+  </div>
+  <div class="fade-overlay" id="fadeOverlay"></div>
+</div>
+
+<script>
+  const view1 = document.getElementById('view1');
+  const view2 = document.getElementById('view2');
+  const tab1 = document.getElementById('tab1');
+  const tab2 = document.getElementById('tab2');
+  const fade = document.getElementById('fadeOverlay');
+
+  function showW1() {
+    view1.classList.remove('hidden');
+    view2.classList.add('hidden');
+    tab1.className = 'tab-pill active';
+    tab2.className = 'tab-pill inactive';
+  }
+  function showW2() {
+    view2.classList.remove('hidden');
+    view1.classList.add('hidden');
+    tab2.className = 'tab-pill active';
+    tab1.className = 'tab-pill inactive';
+  }
+  function timeline(steps) {
+    let t = 0;
+    steps.forEach(([d, fn]) => { t += d; setTimeout(fn, t); });
+  }
+
+  function run() {
+    showW1();
+    fade.classList.remove('show');
+    timeline([
+      [1500, () => showW2()],
+      [1500, () => showW1()],
+      [1500, () => showW2()],
+      [1000, () => fade.classList.add('show')],
+      [700,  () => setTimeout(run, 200)],
+    ]);
+  }
+
+  run();
+</script>
+</body>
+</html>

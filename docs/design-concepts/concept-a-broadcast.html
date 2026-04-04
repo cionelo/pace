@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PACE — Concept A: Race Day Broadcast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FAFAF9;
+    --bg-card: #FFFFFF;
+    --bg-input: #FFFFFF;
+    --bg-section: #F5F5F4;
+    --border: #D6D3D1;
+    --border-subtle: #E7E5E4;
+    --text: #1C1917;
+    --text-secondary: #78716C;
+    --text-muted: #A8A29E;
+    --accent: #B91C1C;
+    --accent-hover: #991B1B;
+    --accent-subtle: #FEF2F2;
+    --control-bg: #F5F5F4;
+    --control-active: #1C1917;
+    --control-active-text: #FFFFFF;
+    --tooltip-bg: #1C1917;
+    --tooltip-text: #FAFAF9;
+    --chart-grid: #E7E5E4;
+  }
+
+  .dark {
+    --bg: #0A0A0A;
+    --bg-card: #141210;
+    --bg-input: #1C1917;
+    --bg-section: #1C1917;
+    --border: #292524;
+    --border-subtle: #1C1917;
+    --text: #FAFAF9;
+    --text-secondary: #A8A29E;
+    --text-muted: #78716C;
+    --accent: #DC2626;
+    --accent-hover: #EF4444;
+    --accent-subtle: #1C1210;
+    --control-bg: #1C1917;
+    --control-active: #FAFAF9;
+    --control-active-text: #0A0A0A;
+    --tooltip-bg: #292524;
+    --tooltip-text: #FAFAF9;
+    --chart-grid: #292524;
+  }
+
+  /* Athlete colors */
+  --c1: #DC2626; --c2: #0369A1; --c3: #059669; --c4: #D97706;
+  --c5: #7C3AED; --c6: #E11D48; --c7: #0D9488; --c8: #EA580C;
+  --c9: #4F46E5; --c10: #C026D3;
+
+  body {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, .label, .section-label, .mode-btn, .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Theme toggle ── */
+  .theme-bar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: var(--bg-section);
+    border-bottom: 1px solid var(--border);
+  }
+  .theme-bar button {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .theme-bar button.active {
+    background: var(--control-active);
+    color: var(--control-active-text);
+    border-color: var(--control-active);
+  }
+
+  /* ── Accent stripe ── */
+  .accent-stripe {
+    height: 3px;
+    background: var(--accent);
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+  .header-left {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .wordmark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .wordmark-dot {
+    color: var(--accent);
+  }
+  .attribution {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+  .attribution a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .attribution a:hover { color: var(--text-secondary); }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .icon-btn:hover {
+    color: var(--text);
+    border-color: var(--text-secondary);
+  }
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+
+  /* ── Layout ── */
+  .concept-label {
+    text-align: center;
+    padding: 24px 16px 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 16px 24px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── Window card ── */
+  .window-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-section);
+  }
+  .window-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  .window-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .window-controls button {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .window-controls button:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+  }
+  .close-btn {
+    font-size: 18px !important;
+    padding: 0 4px !important;
+    border: none !important;
+    color: var(--text-muted) !important;
+  }
+  .close-btn:hover { color: var(--accent) !important; }
+
+  /* ── Filter pills ── */
+  .filters {
+    padding: 10px 12px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .pill-group {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    border-right: 1px solid var(--border);
+  }
+  .pill:last-child { border-right: none; }
+  .pill.active {
+    background: var(--control-active);
+    color: var(--control-active-text);
+  }
+
+  /* ── Search ── */
+  .search-area {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .search-input {
+    width: 100%;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-input:focus { border-bottom-color: var(--accent); }
+
+  .capacity {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* ── Race chip ── */
+  .race-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    padding: 4px 10px;
+    background: var(--accent-subtle);
+    border: 1px solid var(--accent);
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .race-chip .x {
+    cursor: pointer;
+    opacity: 0.6;
+    font-size: 14px;
+  }
+  .race-chip .x:hover { opacity: 1; }
+
+  /* ── Custom button ── */
+  .custom-btn-row {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .custom-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px dashed var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .custom-btn:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+  }
+
+  /* ── Athlete chips ── */
+  .athlete-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .athlete-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    background: var(--bg-section);
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .athlete-chip .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 0;
+  }
+  .athlete-chip .x {
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-left: 2px;
+  }
+  .athlete-chip .x:hover { color: var(--accent); }
+
+  /* ── Chart mode bar ── */
+  .chart-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+  }
+  .zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .zoom-controls .lbl {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .zoom-btn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .zoom-btn:hover { border-color: var(--text-secondary); color: var(--text); }
+
+  .mode-btns {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .mode-btn {
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border: none;
+    border-right: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .mode-btn:last-child { border-right: none; }
+  .mode-btn.active {
+    background: var(--control-active);
+    color: var(--control-active-text);
+  }
+
+  /* ── Chart ── */
+  .chart-area {
+    padding: 8px 12px;
+    height: 260px;
+    position: relative;
+  }
+  .chart-area svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .legend-item:hover { opacity: 0.7; }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+  }
+  .legend-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .legend-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ── Tooltip mock ── */
+  .tooltip-mock {
+    position: absolute;
+    top: 60px;
+    right: 80px;
+    background: var(--tooltip-bg);
+    color: var(--tooltip-text);
+    padding: 10px 14px;
+    min-width: 180px;
+    z-index: 10;
+  }
+  .tooltip-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .tooltip-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .tooltip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 0;
+    flex-shrink: 0;
+  }
+  .tooltip-name {
+    font-size: 12px;
+    color: var(--tooltip-text);
+    opacity: 0.7;
+  }
+  .tooltip-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: auto;
+  }
+
+  /* ── Search dropdown mock ── */
+  .search-dropdown {
+    margin-top: 4px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    max-height: 200px;
+    overflow: hidden;
+  }
+  .dropdown-section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    background: var(--bg-section);
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .dropdown-item:hover { background: var(--bg-section); }
+  .dropdown-item:last-child { border-bottom: none; }
+  .dropdown-add {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ── SVG chart lines ── */
+  .chart-line { fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .chart-dot { stroke: var(--bg-card); stroke-width: 2; }
+  .grid-line { stroke: var(--chart-grid); stroke-width: 1; }
+  .axis-text { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: var(--text-muted); }
+  .ref-line { stroke: var(--text-muted); stroke-width: 1; stroke-dasharray: 6 4; opacity: 0.5; }
+
+  /* ── Responsive ── */
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="theme-bar">
+    <button class="active" onclick="setTheme('light')">Light</button>
+    <button onclick="setTheme('dark')">Dark</button>
+  </div>
+
+  <div class="accent-stripe"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <span class="wordmark">PACE<span class="wordmark-dot">.</span></span>
+      <span class="attribution">built by <a href="#">itsnemo.dev</a></span>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" title="Toggle theme">&#9789;</button>
+      <button class="icon-btn" title="Support">&#9829;</button>
+      <button class="icon-btn" title="Contact">&#9993;</button>
+      <button class="btn-primary">+ New Window</button>
+    </div>
+  </header>
+
+  <p class="concept-label">Concept A &mdash; Race Day Broadcast</p>
+
+  <!-- Grid of windows -->
+  <div class="grid">
+
+    <!-- Window 1: Full state with chart -->
+    <div class="window-card">
+      <div class="window-header">
+        <span class="window-title">Pace Window</span>
+        <div class="window-controls">
+          <button>Reset</button>
+          <button class="close-btn">&times;</button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="pill-group">
+          <button class="pill active">All</button>
+          <button class="pill">M</button>
+          <button class="pill">W</button>
+        </div>
+        <div class="pill-group">
+          <button class="pill active">All</button>
+          <button class="pill">D1</button>
+          <button class="pill">D2</button>
+        </div>
+      </div>
+
+      <div class="search-area">
+        <div class="race-chip">
+          Big 12 Indoor &middot; W 800m &middot; Feb 28, 2026
+          <span class="x">&times;</span>
+        </div>
+        <input class="search-input" placeholder="Search athletes in this race..." value="" />
+        <p class="capacity">3 / 10 athletes</p>
+      </div>
+
+      <div class="custom-btn-row">
+        <button class="custom-btn">+ Custom</button>
+      </div>
+
+      <div class="athlete-chips">
+        <span class="athlete-chip">
+          <span class="dot" style="background:#DC2626"></span>
+          J. Martinez
+          <span class="x">&times;</span>
+        </span>
+        <span class="athlete-chip">
+          <span class="dot" style="background:#0369A1"></span>
+          A. Thompson
+          <span class="x">&times;</span>
+        </span>
+        <span class="athlete-chip">
+          <span class="dot" style="background:#059669"></span>
+          K. Williams
+          <span class="x">&times;</span>
+        </span>
+      </div>
+
+      <div class="chart-controls">
+        <div class="zoom-controls">
+          <span class="lbl">Y</span>
+          <button class="zoom-btn">+</button>
+          <button class="zoom-btn">&minus;</button>
+        </div>
+        <div class="mode-btns">
+          <button class="mode-btn active">Virtual Gap</button>
+          <button class="mode-btn">Lap Pace</button>
+          <button class="mode-btn">Position</button>
+          <button class="mode-btn">Gain/Loss</button>
+        </div>
+      </div>
+
+      <div class="chart-area">
+        <svg viewBox="0 0 500 200" preserveAspectRatio="none">
+          <!-- Grid -->
+          <line class="grid-line" x1="60" y1="20" x2="480" y2="20" />
+          <line class="grid-line" x1="60" y1="60" x2="480" y2="60" />
+          <line class="grid-line" x1="60" y1="100" x2="480" y2="100" />
+          <line class="grid-line" x1="60" y1="140" x2="480" y2="140" />
+          <line class="grid-line" x1="60" y1="180" x2="480" y2="180" />
+          <!-- Reference line -->
+          <line class="ref-line" x1="60" y1="100" x2="480" y2="100" />
+          <!-- Axis labels -->
+          <text class="axis-text" x="10" y="24">+2.0s</text>
+          <text class="axis-text" x="10" y="64">+1.0s</text>
+          <text class="axis-text" x="14" y="104">0.0s</text>
+          <text class="axis-text" x="10" y="144">-1.0s</text>
+          <text class="axis-text" x="10" y="184">-2.0s</text>
+          <text class="axis-text" x="100" y="198">200m</text>
+          <text class="axis-text" x="200" y="198">400m</text>
+          <text class="axis-text" x="300" y="198">600m</text>
+          <text class="axis-text" x="400" y="198">800m</text>
+          <!-- Athlete lines -->
+          <polyline class="chart-line" stroke="#DC2626" points="100,95 200,80 300,75 400,60" />
+          <polyline class="chart-line" stroke="#0369A1" points="100,105 200,110 300,100 400,90" />
+          <polyline class="chart-line" stroke="#059669" points="100,90 200,95 300,115 400,130" />
+        </svg>
+
+        <!-- Tooltip -->
+        <div class="tooltip-mock">
+          <div class="tooltip-label">600m</div>
+          <div class="tooltip-row">
+            <span class="tooltip-dot" style="background:#DC2626"></span>
+            <span class="tooltip-name">J. Martinez</span>
+            <span class="tooltip-value">-0.62s</span>
+          </div>
+          <div class="tooltip-row">
+            <span class="tooltip-dot" style="background:#0369A1"></span>
+            <span class="tooltip-name">A. Thompson</span>
+            <span class="tooltip-value">+0.00s</span>
+          </div>
+          <div class="tooltip-row">
+            <span class="tooltip-dot" style="background:#059669"></span>
+            <span class="tooltip-name">K. Williams</span>
+            <span class="tooltip-value">+0.38s</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-dot" style="background:#DC2626"></span>
+          <span class="legend-name">J. Martinez</span>
+          <span class="legend-time">2:04.31</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background:#0369A1"></span>
+          <span class="legend-name">A. Thompson</span>
+          <span class="legend-time">2:05.88</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background:#059669"></span>
+          <span class="legend-name">K. Williams</span>
+          <span class="legend-time">2:06.42</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Window 2: Empty + search dropdown -->
+    <div class="window-card">
+      <div class="window-header">
+        <span class="window-title">Pace Window</span>
+        <div class="window-controls">
+          <button>Reset</button>
+          <button class="close-btn">&times;</button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="pill-group">
+          <button class="pill active">All</button>
+          <button class="pill">M</button>
+          <button class="pill">W</button>
+        </div>
+        <div class="pill-group">
+          <button class="pill active">All</button>
+          <button class="pill">D1</button>
+          <button class="pill">D2</button>
+        </div>
+      </div>
+
+      <div class="search-area">
+        <input class="search-input" placeholder="Search races or athletes..." value="big 12 800" />
+        <div class="search-dropdown">
+          <div class="dropdown-section-label">Races</div>
+          <div class="dropdown-item">
+            Big 12 Indoor &middot; W 800m &middot; Feb 28, 2026
+          </div>
+          <div class="dropdown-item">
+            Big 12 Indoor &middot; M 800m &middot; Feb 28, 2026
+          </div>
+          <div class="dropdown-section-label">Athletes</div>
+          <div class="dropdown-item">
+            <div>
+              <div style="font-weight:500; color:var(--text)">Jane Smith &middot; <span style="color:var(--text-muted)">Houston</span></div>
+              <div style="font-size:11px; margin-top:2px"><span class="mono">2:04.31</span> &middot; Big 12 Indoor</div>
+            </div>
+            <button class="dropdown-add">+</button>
+          </div>
+          <div class="dropdown-item">
+            <div>
+              <div style="font-weight:500; color:var(--text)">Maria Lopez &middot; <span style="color:var(--text-muted)">Kansas</span></div>
+              <div style="font-size:11px; margin-top:2px"><span class="mono">2:05.88</span> &middot; Big 12 Indoor</div>
+            </div>
+            <button class="dropdown-add">+</button>
+          </div>
+        </div>
+        <p class="capacity" style="margin-top:10px">0 / 10 athletes</p>
+      </div>
+
+      <div class="custom-btn-row">
+        <button class="custom-btn">+ Custom</button>
+      </div>
+
+      <div style="flex:1; display:flex; align-items:center; justify-content:center; min-height:200px; color:var(--text-muted); font-size:14px;">
+        Search for a race or athlete to get started
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setTheme(t) {
+      document.body.classList.toggle('dark', t === 'dark');
+      document.querySelectorAll('.theme-bar button').forEach(b => {
+        b.classList.toggle('active', b.textContent.trim().toLowerCase() === t);
+      });
+    }
+  </script>
+</body>
+</html>

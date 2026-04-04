@@ -3,38 +3,56 @@
 ## Event Sources
 
 ### NCAA D1 Indoor Championships
-- **Location:** Fayetteville, AR  
-- **Dates:** March 13–14, 2026  
-- **Estimated Altitude:** TBD  
-- **Results URL:**  
-  https://www.flashresults.com/2026_Meets/Indoor/03-13_NCAA/index.htm  
+- **Location:** Fayetteville, AR
+- **Dates:** March 13–14, 2026
+- **Altitude:** 427m
+- **Results URL:**
+  https://www.flashresults.com/2026_Meets/Indoor/03-13_NCAA/index.htm
 
-**Ingestion Pipeline Supported:** Y/N  
+**Ingestion Pipeline Supported:** YES — `flashresults` provider
+**Status:** ✅ COMPLETE (March 15, 2026) — 14/14 events ingested, division=D1
+
+**Events ingested (14):**
+- Women/Men 1 Mile Prelims + Final
+- Women/Men 800m Prelims + Final
+- Women/Men 3000m Final
+- Women/Men 5000m Final
+- Women/Men DMR
 
 **Notes:**
-- FlashResults site structure
-- Likely HTML table scraping
-- Verify lap split availability
-- Confirm athlete ID consistency across rounds
+- `discover_flashresults()` handles index.htm — no Playwright needed
+- `pace_ingest_meet.py --url ... --auto --season indoor --date 2026-03-13 --location "Fayetteville, AR"`
 
 
 ---
 
 ### NCAA D2 Indoor Championships
-- **Venue:** Virginia Beach Sports Center  
-- **Location:** Virginia Beach, VA  
-- **Dates:** March 13–14, 2026  
-- **Estimated Altitude:** TBD  
-- **Results URL:**  
-  https://results.leonetiming.com/?mid=8658  
+- **Venue:** Virginia Beach Sports Center
+- **Location:** Virginia Beach, VA
+- **Dates:** March 13–14, 2026
+- **Altitude:** ~3m (sea level)
+- **Results URL:**
+  https://results.leonetiming.com/?mid=8658
 
-**Ingestion Pipeline Supported:** Y/N  
+**Ingestion Pipeline Supported:** YES — `pttiming` provider (same Firebase RTDB structure)
+**Status:** ✅ COMPLETE (March 15, 2026) — 12/12 distance events ingested, division=D2
+
+**Events ingested (12):**
+- Women's/Men's Mile Prelims (ENR 9-1/10-1) + Final (9-2/10-2)
+- Women's/Men's 800m Prelims (13-1/14-1) + Final (13-2/14-2)
+- Women's/Men's 3000m Final (17-1/18-1)
+- Women's/Men's 5000m Final (7-1/8-1)
+
+**Skipped:** 4x400 relays, DMR relays (relay upload bug), pentathlon/heptathlon sub-events
 
 **Notes:**
-- Leone Timing platform
-- API or structured HTML likely available
-- Confirm if lap splits exist
-- Check event/heat URL patterns
+- `results.leonetiming.com/?mid=...` uses Firebase RTDB (`franklin-f56f3.firebaseio.com`) — same structure as pttiming
+- `pace_scraper.py` updated: `results.leonetiming.com` (non-xc URLs) now routes to `pttiming` provider
+- Two-step ingest (SPA — no auto-discover):
+  1. `pace_ingest.py "https://results.leonetiming.com/?mid=8658" --data-root py/data`
+  2. Upload each event: `pace_upload.py py/data/{dir}/pace_normalized.json --meta '{"name":"...","gender":"Men"/"Women",...}'`
+- Firebase `RN` field: "1st Round" = prelims, "Final" = final
+- Gender must be "Men"/"Women" (DB constraint) — not "M"/"W"/"F"
 
 
 ---

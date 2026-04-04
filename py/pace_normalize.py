@@ -61,6 +61,24 @@ import re
 from typing import Any, Dict, List, Optional, Tuple
 
 
+DISTANCE_NORMALIZE_MAP = {
+    "800": "800m", "800M": "800m",
+    "1500": "1500m", "1500M": "1500m",
+    "mile": "Mile", "MILE": "Mile",
+    "3000": "3000m", "3000M": "3000m",
+    "5000": "5000m", "5,000": "5000m", "5000M": "5000m",
+    "10000": "10,000m", "10,000": "10,000m", "10000m": "10,000m", "10000M": "10,000m",
+    "5k": "5K",
+    "8k": "8K",
+    "10k": "10K",
+}
+
+
+def normalize_distance(distance: str) -> str:
+    """Normalize distance string to canonical form."""
+    return DISTANCE_NORMALIZE_MAP.get(distance, distance)
+
+
 # ---------- small helpers ----------
 
 def load_json(path: pathlib.Path) -> Optional[Dict[str, Any]]:
@@ -744,6 +762,9 @@ def main():
     ap.add_argument("--distance", help="Event distance (e.g. '3000m', 'mile', '5K') for distance_m inference")
     ap.add_argument("--season", choices=["indoor", "outdoor", "xc"], help="Season for distance_m inference")
     args = ap.parse_args()
+
+    if args.distance:
+        args.distance = normalize_distance(args.distance)
 
     root = pathlib.Path(args.root)
     if not root.exists():

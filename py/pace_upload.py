@@ -25,6 +25,28 @@ if not SUPABASE_URL or not SUPABASE_KEY:
 
 sb = create_client(SUPABASE_URL, SUPABASE_KEY)
 
+ALLOWED_DISTANCES = frozenset([
+    "800m", "1500m", "Mile", "3000m", "5000m", "10,000m",
+    "5K", "8K", "10K", "DMR", "4xMile",
+])
+
+DISTANCE_NORMALIZE_MAP = {
+    "800": "800m", "800M": "800m",
+    "1500": "1500m", "1500M": "1500m",
+    "mile": "Mile", "MILE": "Mile",
+    "3000": "3000m", "3000M": "3000m",
+    "5000": "5000m", "5,000": "5000m", "5000M": "5000m",
+    "10000": "10,000m", "10,000": "10,000m", "10000m": "10,000m", "10000M": "10,000m",
+    "5k": "5K",
+    "8k": "8K",
+    "10k": "10K",
+}
+
+
+def normalize_distance(distance: str) -> str:
+    """Normalize distance string to canonical form."""
+    return DISTANCE_NORMALIZE_MAP.get(distance, distance)
+
 
 def get_or_create_team(name: str) -> str:
     """Return team UUID, creating if needed."""
@@ -59,6 +81,12 @@ def upload_event(data: Dict[str, Any], event_meta: Optional[Dict[str, str]] = No
     source_id = ev["id"]
     meta = event_meta or {}
 
+    raw_distance = meta.get("distance", "")
+    distance = normalize_distance(raw_distance)
+    if distance not in ALLOWED_DISTANCES:
+        print(f"[skip] event {source_id}: distance '{raw_distance}' (normalized: '{distance}') is out of scope")
+        return
+
     # Upsert event
     event_row = {
         "source_id": source_id,
@@ -66,7 +94,7 @@ def upload_event(data: Dict[str, Any], event_meta: Optional[Dict[str, str]] = No
         "date": meta.get("date") or None,
         "location": meta.get("location") or None,
         "gender": meta.get("gender", "Men"),
-        "distance": meta.get("distance", ""),
+        "distance": distance,
         "season": meta.get("season") or None,
         "provider": ev.get("provider"),
         "source_url": meta.get("source_url") or None,
@@ -82,6 +110,9 @@ def upload_event(data: Dict[str, Any], event_meta: Optional[Dict[str, str]] = No
 
     for a in athletes:
         name = a.get("name", "").strip()
+        # Title-case ALL CAPS names
+        if name == name.upper() and len(name) > 1:
+            name = name.title()
         team_name = a.get("team", "").strip()
         if not name:
             continue

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>PACE — Chart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:rgb(23,20,18);--card:rgb(30,27,24);--card-inner:rgb(37,34,32);
+      --input:rgb(37,34,32);--border:rgb(42,37,32);--border-subtle:rgb(34,31,28);
+      --text:rgb(250,249,247);--text-secondary:rgb(168,162,158);--text-muted:rgb(107,101,96);
+      --accent:rgb(234,88,12);--accent-subtle:rgb(30,21,16);--grid:rgb(42,37,32);
+    }
+    html,body{width:430px;height:940px;background:#080604;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Work Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    .phone{width:414px;height:896px;background:var(--bg);border-radius:50px;border:9px solid #1c1814;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05),0 0 0 1.5px #080604,0 30px 80px rgba(0,0,0,0.8);position:relative;overflow:hidden}
+    .phone::before{content:'';position:absolute;right:-11px;top:160px;width:4px;height:72px;background:#1c1814;border-radius:0 2px 2px 0}
+    .phone::after{content:'';position:absolute;left:-11px;top:140px;width:4px;height:38px;background:#1c1814;border-radius:2px 0 0 2px}
+    .island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#000;border-radius:20px;z-index:100}
+    .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+    .pace-header{display:flex;align-items:center;justify-content:space-between;padding:56px 16px 12px;border-bottom:1px solid var(--border);background:var(--bg);flex-shrink:0}
+    .logo{display:flex;align-items:center;gap:7px}
+    .logo-mark{width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
+    .logo-name{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+    .header-right{display:flex;align-items:center;gap:6px}
+    .icon-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .new-win-btn{font-size:10px;font-weight:600;padding:6px 12px;border-radius:9999px;background:var(--accent);color:#fff;border:none;cursor:pointer}
+    .window-card{margin:10px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .window-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border)}
+    .window-header span{font-size:10px;color:var(--text-secondary);font-weight:500}
+    .wh-right{display:flex;gap:4px}
+    .reset-btn{font-size:8px;color:var(--text-muted);border:1px solid var(--border);border-radius:9999px;padding:2px 7px;background:transparent}
+    .chips-area{display:flex;flex-wrap:wrap;gap:4px;padding:5px 12px 7px;border-bottom:1px solid var(--border-subtle)}
+    .chip{display:inline-flex;align-items:center;gap:4px;background:var(--card-inner);border-radius:9999px;padding:3px 8px;font-size:9px;color:var(--text-secondary)}
+    .chip-dot{width:6px;height:6px;border-radius:50%}
+    .chart-area{padding:8px 10px 4px;position:relative}
+    .chart-controls{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+    .zoom-btns{display:flex;align-items:center;gap:2px}
+    .zoom-lbl{font-size:9px;color:var(--text-muted);margin-right:2px;font-weight:600}
+    .zoom-btn{width:20px;height:20px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .mode-btns{display:flex;border:1px solid var(--border);border-radius:9999px;overflow:hidden;font-size:8px}
+    .mode-btn{padding:3px 7px;font-weight:500;background:transparent;color:var(--text-muted);border:none;cursor:pointer;transition:all 200ms}
+    .mode-btn.active{background:var(--text);color:var(--bg)}
+    svg .grid-line{stroke:var(--grid);stroke-width:0.5}
+    svg .axis-label{fill:var(--text-secondary);font-size:7px;font-family:'Work Sans',sans-serif}
+    svg .ref-line{stroke:var(--text-muted);stroke-width:1;stroke-dasharray:4 3}
+    .pace-line{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 1.5s ease-in-out}
+    .pace-line.draw{stroke-dashoffset:0}
+    .legend{display:flex;flex-wrap:wrap;gap:6px;padding:6px 12px 10px;border-top:1px solid var(--border-subtle)}
+    .legend-item{display:inline-flex;align-items:center;gap:4px;font-size:8px;color:var(--text-secondary)}
+    .legend-swatch{width:14px;height:2px;border-radius:2px}
+    .tooltip{
+      position:absolute;background:rgba(30,27,24,0.96);border:1px solid var(--border);
+      border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.4);
+      padding:8px 10px;font-size:9px;z-index:50;
+      display:none;min-width:120px;
+    }
+    .tooltip.show{display:block}
+    .tt-label{font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:5px}
+    .tt-row{display:flex;align-items:center;gap:5px;margin-bottom:3px}
+    .tt-row:last-child{margin-bottom:0}
+    .tt-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+    .tt-name{color:var(--text-secondary);font-size:8px}
+    .tt-val{color:var(--text);font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;margin-left:auto}
+    .fade-overlay{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:500;transition:opacity 500ms}
+    .fade-overlay.show{opacity:1}
+  </style>
+</head>
+<body>
+<div class="phone">
+  <div class="island"></div>
+  <div class="screen">
+    <header class="pace-header">
+      <div class="logo">
+        <div class="logo-mark">P</div>
+        <span class="logo-name">PACE</span>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn">☽</button>
+        <button class="icon-btn">♥</button>
+        <button class="icon-btn">✉</button>
+        <button class="new-win-btn">+ New Window</button>
+      </div>
+    </header>
+
+    <div style="overflow-y:auto;overflow-x:hidden;flex:1;scrollbar-width:none">
+      <div class="window-card">
+        <div class="window-header">
+          <span>Pace Window · NCAA D1 Nationals 5000m</span>
+          <div class="wh-right"><button class="reset-btn">Reset</button></div>
+        </div>
+        <div class="chips-area">
+          <div class="chip"><span class="chip-dot" style="background:rgb(234,88,12)"></span>Habtom Samuel<span style="color:var(--text-muted)">&times;</span></div>
+          <div class="chip"><span class="chip-dot" style="background:#3b82f6"></span>Marco Langon<span style="color:var(--text-muted)">&times;</span></div>
+        </div>
+        <div class="chart-area" id="chartArea">
+          <div class="chart-controls">
+            <div class="zoom-btns"><span class="zoom-lbl">Y</span><button class="zoom-btn">+</button><button class="zoom-btn">−</button></div>
+            <div class="mode-btns">
+              <button class="mode-btn" id="vgapBtn">Virtual Gap</button>
+              <button class="mode-btn active" id="lapBtn">Lap Pace</button>
+              <button class="mode-btn">Position</button>
+              <button class="mode-btn">Gain/Loss</button>
+            </div>
+          </div>
+
+          <div class="tooltip" id="tooltip">
+            <div class="tt-label" id="ttLabel">2400m</div>
+            <div class="tt-row">
+              <div class="tt-dot" style="background:rgb(234,88,12)"></div>
+              <span class="tt-name">H. Samuel</span>
+              <span class="tt-val" id="ttSamuel">1:12.0</span>
+            </div>
+            <div class="tt-row">
+              <div class="tt-dot" style="background:#3b82f6"></div>
+              <span class="tt-name">M. Langon</span>
+              <span class="tt-val" id="ttLangon">1:14.0</span>
+            </div>
+          </div>
+
+          <svg viewBox="0 0 300 130" width="100%" style="display:block" id="chartSvg">
+            <line x1="28" y1="27" x2="291" y2="27" class="grid-line"/>
+            <line x1="28" y1="43" x2="291" y2="43" class="grid-line"/>
+            <line x1="28" y1="60" x2="291" y2="60" class="grid-line"/>
+            <line x1="28" y1="77" x2="291" y2="77" class="grid-line"/>
+            <text x="22" y="29" text-anchor="end" class="axis-label" id="yLabel1">1:16</text>
+            <text x="22" y="45" text-anchor="end" class="axis-label" id="yLabel2">1:14</text>
+            <text x="22" y="62" text-anchor="end" class="axis-label" id="yLabel3">1:12</text>
+            <text x="22" y="79" text-anchor="end" class="axis-label" id="yLabel4">1:10</text>
+            <text x="30" y="120" text-anchor="middle" class="axis-label">400m</text>
+            <text x="117" y="120" text-anchor="middle" class="axis-label">1600m</text>
+            <text x="175" y="120" text-anchor="middle" class="axis-label">2400m</text>
+            <text x="291" y="120" text-anchor="middle" class="axis-label">4000m</text>
+            <line id="refLine" x1="28" y1="53" x2="291" y2="53" class="ref-line" style="display:none"/>
+            <polyline id="samuelLine" class="pace-line" stroke="rgb(234,88,12)"
+              points="30,27 59,35 88,43 117,52 146,52 175,60 204,68 233,77 262,85 291,93"/>
+            <polyline id="langonLine" class="pace-line" stroke="#3b82f6"
+              points="30,43 59,43 88,43 117,43 146,43 175,43 204,43 233,35 262,27 291,18"/>
+            <line id="xMarker" x1="175" y1="10" x2="175" y2="110" stroke="var(--text-muted)" stroke-width="0.5" stroke-dasharray="2 2" style="display:none"/>
+          </svg>
+        </div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-swatch" style="background:rgb(234,88,12)"></div>H. Samuel</div>
+          <div class="legend-item"><div class="legend-swatch" style="background:#3b82f6"></div>M. Langon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fade-overlay" id="fadeOverlay"></div>
+</div>
+
+<script>
+  const samuelLine = document.getElementById('samuelLine');
+  const langonLine = document.getElementById('langonLine');
+  const tooltip = document.getElementById('tooltip');
+  const ttLabel = document.getElementById('ttLabel');
+  const ttSamuel = document.getElementById('ttSamuel');
+  const ttLangon = document.getElementById('ttLangon');
+  const refLine = document.getElementById('refLine');
+  const xMarker = document.getElementById('xMarker');
+  const vgapBtn = document.getElementById('vgapBtn');
+  const lapBtn = document.getElementById('lapBtn');
+  const fade = document.getElementById('fadeOverlay');
+  const chartArea = document.getElementById('chartArea');
+
+  const yLabels = ['yLabel1','yLabel2','yLabel3','yLabel4'].map(id => document.getElementById(id));
+  const lapYLabels = ['1:16','1:14','1:12','1:10'];
+  const vgapYLabels = ['+0.5','+0.0','−0.5','−1.0'];
+
+  const samuelLapPts = "30,27 59,35 88,43 117,52 146,52 175,60 204,68 233,77 262,85 291,93";
+  const langonLapPts = "30,43 59,43 88,43 117,43 146,43 175,43 204,43 233,35 262,27 291,18";
+  const samuelVgapPts = "30,59 59,61 88,67 117,70 146,76 175,81 204,84 233,87 262,93 291,96";
+  const langonVgapPts = "30,53 59,53 88,53 117,53 146,53 175,53 204,50 233,41 262,36 291,30";
+
+  function timeline(steps) {
+    let t = 0;
+    steps.forEach(([d, fn]) => { t += d; setTimeout(fn, t); });
+  }
+
+  function showTooltip(label, samVal, lanVal, xPos) {
+    ttLabel.textContent = label;
+    ttSamuel.textContent = samVal;
+    ttLangon.textContent = lanVal;
+    xMarker.setAttribute('x1', xPos);
+    xMarker.setAttribute('x2', xPos);
+    xMarker.style.display = '';
+    const svgWidth = 300;
+    const areaWidth = chartArea.offsetWidth;
+    const scale = areaWidth / svgWidth;
+    const tooltipX = (xPos * scale) - 10;
+    tooltip.style.left = Math.min(tooltipX, areaWidth - 140) + 'px';
+    tooltip.style.top = '32px';
+    tooltip.classList.add('show');
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove('show');
+    xMarker.style.display = 'none';
+  }
+
+  function reset() {
+    samuelLine.setAttribute('points', samuelLapPts);
+    langonLine.setAttribute('points', langonLapPts);
+    samuelLine.classList.remove('draw');
+    langonLine.classList.remove('draw');
+    void samuelLine.getBoundingClientRect();
+    void langonLine.getBoundingClientRect();
+    refLine.style.display = 'none';
+    hideTooltip();
+    lapBtn.classList.add('active');
+    vgapBtn.classList.remove('active');
+    yLabels.forEach((el, i) => el.textContent = lapYLabels[i]);
+    fade.classList.remove('show');
+  }
+
+  function switchToVgap() {
+    vgapBtn.classList.add('active');
+    lapBtn.classList.remove('active');
+    yLabels.forEach((el, i) => el.textContent = vgapYLabels[i]);
+    samuelLine.classList.remove('draw');
+    langonLine.classList.remove('draw');
+    void samuelLine.getBoundingClientRect();
+    void langonLine.getBoundingClientRect();
+    samuelLine.setAttribute('points', samuelVgapPts);
+    langonLine.setAttribute('points', langonVgapPts);
+    refLine.style.display = '';
+    requestAnimationFrame(() => {
+      samuelLine.classList.add('draw');
+      langonLine.classList.add('draw');
+    });
+  }
+
+  function run() {
+    reset();
+    timeline([
+      [500, () => { samuelLine.classList.add('draw'); }],
+      [1700, () => { langonLine.classList.add('draw'); }],
+      [1800, () => { showTooltip('2400m', '1:12.0', '1:14.0', 175); }],
+      [1500, () => { hideTooltip(); switchToVgap(); }],
+      [2000, () => { showTooltip('4000m', '−1.2s', '+0.4s', 291); }],
+      [1500, () => { hideTooltip(); fade.classList.add('show'); }],
+      [700, () => setTimeout(run, 200)],
+    ]);
+  }
+
+  run();
+</script>
+</body>
+</html>

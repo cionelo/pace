@@ -24,7 +24,7 @@
 | **Mountain West (MWC)** | https://www.rtspt.com/events/mw/2026-Indoor/ |
 | **NEC (Northeast)** | https://milesplit.live/timers/959 |
 | **OVC (Ohio Valley)** | https://www.milesplit.live/meets/731447 *(linked from cfpitiming.com as "Nearly live MileSplit Live Results")* |
-| **Patriot League** | https://live.athletic.net/meets/62258 |
+| **Patriot League** | https://results.leonetiming.com/?mid=8713 |
 | **SEC (Southeastern)** | https://flashresults.com/2026_Meets/Indoor/02-26_SEC/index.htm|
 | **SoCon (Southern)** | https://snapresults.snaptiming.com/meets/62366 |
 | **Southland** | https://live.xpresstiming.com/meets/62106 |

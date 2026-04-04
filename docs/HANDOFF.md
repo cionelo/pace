@@ -188,9 +188,24 @@ Static HTML provider. Each event page is a separate URL.
 - Known working: ACC (`flashresults.com/2026_Meets/Indoor/02-26_ACC/index.htm`), SEC (`flashresults.com/2026_Meets/Indoor/02-26_SEC/index.htm`)
 - `pace_ingest_meet.py` handles these via the `flashresults` provider path.
 
+### leone_xc (XC-only)
+
+Static HTML compiled-results scraper. Only for XC meet URLs with `xc.html`:
+- `results.leonetiming.com/xc.html?mid=...`
+
+### leonetiming track (→ pttiming provider)
+
+Track meet URLs (`results.leonetiming.com/?mid=...`) use the same Firebase RTDB as pttiming.
+- `pace_scraper.py` routes these to the `pttiming` provider automatically (since March 2026)
+- Firebase DB: `franklin-f56f3.firebaseio.com` (detected from page `fbURL` var)
+- Two-step ingest required (SPA — no `pace_ingest_meet.py` discover):
+  1. `pace_ingest.py "https://results.leonetiming.com/?mid=XXXX" --data-root py/data`
+  2. Upload each event via `pace_upload.py` with explicit `--meta`
+- Known working: NCAA D2 Indoor 2026 (`mid=8658`, March 15 2026)
+
 ### Other providers
 
-`rtspt_html`, `leone_xc` — see `pace_scraper.py`.
+`rtspt_html` — see `pace_scraper.py`.
 
 ---
 
@@ -408,6 +423,6 @@ The `_infer_distances_from_count()` function in `pace_normalize.py` already hand
    - Backfill location for all events (Phase 3)
    - Add altitude field + lookup (Phases 2-3)
    - Optional: year filter, altitude display in frontend (Phase 4)
-4. **NCAA Indoor Championships ingestion** — D1 (flashresults) + D2 (leone_xc) results from March 13-14. See `docs/ingests/2026/NCAA Indoor Champs D1 and D2 - 2026`.
+4. ~~**NCAA Indoor Championships ingestion**~~ ✅ Done March 15 — D1 (14 events, flashresults) + D2 (12 events, leonetiming via pttiming provider). Division tagged. See `docs/ingests/2026/NCAA Indoor Champs D1 and D2 - 2026`.
 5. **Outdoor season ingestion** — Separate session once outdoor conference meets are posted.
 6. **Source URL link UX** — Tooltip disappears before user can click link. Needs rework.

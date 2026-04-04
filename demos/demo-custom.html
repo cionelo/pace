@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>PACE — Custom Athlete</title>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:rgb(23,20,18);--card:rgb(30,27,24);--card-inner:rgb(37,34,32);
+      --input:rgb(37,34,32);--border:rgb(42,37,32);--border-subtle:rgb(34,31,28);
+      --text:rgb(250,249,247);--text-secondary:rgb(168,162,158);--text-muted:rgb(107,101,96);
+      --accent:rgb(234,88,12);--accent-subtle:rgb(30,21,16);--grid:rgb(42,37,32);
+    }
+    html,body{width:430px;height:940px;background:#080604;display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Work Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    .phone{width:414px;height:896px;background:var(--bg);border-radius:50px;border:9px solid #1c1814;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05),0 0 0 1.5px #080604,0 30px 80px rgba(0,0,0,0.8);position:relative;overflow:hidden}
+    .phone::before{content:'';position:absolute;right:-11px;top:160px;width:4px;height:72px;background:#1c1814;border-radius:0 2px 2px 0}
+    .phone::after{content:'';position:absolute;left:-11px;top:140px;width:4px;height:38px;background:#1c1814;border-radius:2px 0 0 2px}
+    .island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#000;border-radius:20px;z-index:100}
+    .screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+    .pace-header{display:flex;align-items:center;justify-content:space-between;padding:56px 16px 12px;border-bottom:1px solid var(--border);background:var(--bg);flex-shrink:0}
+    .logo{display:flex;align-items:center;gap:7px}
+    .logo-mark{width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
+    .logo-name{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+    .header-right{display:flex;align-items:center;gap:6px}
+    .icon-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .new-win-btn{font-size:10px;font-weight:600;padding:6px 12px;border-radius:9999px;background:var(--accent);color:#fff;border:none;cursor:pointer}
+    .window-card{margin:10px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .window-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--border)}
+    .window-header span{font-size:10px;color:var(--text-secondary);font-weight:500}
+    .reset-btn{font-size:8px;color:var(--text-muted);border:1px solid var(--border);border-radius:9999px;padding:2px 7px;background:transparent}
+    .search-area{padding:7px 12px;border-bottom:1px solid var(--border-subtle)}
+    .filter-pills{display:flex;gap:4px;margin-bottom:6px}
+    .pill{font-size:9px;padding:2px 9px;border-radius:9999px;border:1px solid var(--border);color:var(--text-muted);background:transparent}
+    .pill.active{border-color:var(--accent);color:var(--accent);background:var(--accent-subtle)}
+    .search-mock{background:var(--input);border:1px solid var(--border);border-radius:9999px;padding:7px 14px;font-size:10px;color:var(--text-muted)}
+    .custom-btn-area{padding:4px 12px 8px;border-bottom:1px solid var(--border-subtle)}
+    .custom-btn{font-size:9px;font-weight:500;padding:4px 10px;border-radius:9999px;border:1px dashed var(--border);color:var(--text-muted);background:transparent;cursor:pointer}
+    .chips-area{display:flex;flex-wrap:wrap;gap:4px;padding:5px 12px 7px;border-bottom:1px solid var(--border-subtle)}
+    .chip{display:inline-flex;align-items:center;gap:4px;background:var(--card-inner);border-radius:9999px;padding:3px 8px;font-size:9px;color:var(--text-secondary)}
+    .chip-dot{width:6px;height:6px;border-radius:50%}
+    .chart-area{padding:8px 10px 4px}
+    .chart-controls{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+    .zoom-btns{display:flex;align-items:center;gap:2px}
+    .zoom-lbl{font-size:9px;color:var(--text-muted);margin-right:2px;font-weight:600}
+    .zoom-btn{width:20px;height:20px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+    .mode-btns{display:flex;border:1px solid var(--border);border-radius:9999px;overflow:hidden;font-size:8px}
+    .mode-btn{padding:3px 7px;font-weight:500;background:transparent;color:var(--text-muted);border:none;cursor:pointer}
+    .mode-btn.active{background:var(--text);color:var(--bg)}
+    svg .grid-line{stroke:var(--grid);stroke-width:0.5}
+    svg .axis-label{fill:var(--text-secondary);font-size:7px;font-family:'Work Sans',sans-serif}
+    .pace-line{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:300;stroke-dashoffset:0}
+    .pace-line-anim{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:8 4;stroke-dashoffset:300;transition:stroke-dashoffset 1.5s ease-in-out}
+    .pace-line-anim.draw{stroke-dashoffset:0}
+    .legend{display:flex;flex-wrap:wrap;gap:6px;padding:6px 12px 10px;border-top:1px solid var(--border-subtle)}
+    .legend-item{display:inline-flex;align-items:center;gap:4px;font-size:8px;color:var(--text-secondary)}
+    .legend-swatch{width:14px;height:2px;border-radius:2px}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0);backdrop-filter:blur(0px);z-index:200;display:flex;align-items:flex-end;pointer-events:none;transition:background 300ms,backdrop-filter 300ms}
+    .modal-backdrop.show{background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);pointer-events:all}
+    .modal-card{background:var(--card);border:1px solid var(--border);border-radius:20px 20px 0 0;width:100%;max-height:75%;overflow-y:auto;transform:translateY(100%);transition:transform 350ms cubic-bezier(0.34,1.2,0.64,1)}
+    .modal-backdrop.show .modal-card{transform:translateY(0)}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 10px;border-bottom:1px solid var(--border)}
+    .modal-title{font-size:14px;font-weight:600;color:var(--text)}
+    .modal-close{color:var(--text-muted);font-size:16px;background:transparent;border:none;cursor:pointer}
+    .modal-tabs{display:flex;border-bottom:1px solid var(--border)}
+    .modal-tab{flex:1;padding:9px;font-size:10px;font-weight:500;text-align:center;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 200ms}
+    .modal-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .modal-body{padding:14px 18px}
+    .form-label{display:block;font-size:9px;font-weight:500;color:var(--text-secondary);margin-bottom:4px}
+    .form-input{width:100%;background:var(--input);border:1px solid var(--border);border-radius:9px;padding:7px 11px;font-size:11px;color:var(--text);font-family:'Work Sans',sans-serif;margin-bottom:10px;outline:none}
+    .form-input.focused{border-color:var(--accent)}
+    .preview-table{background:var(--card-inner);border:1px solid var(--border);border-radius:9px;overflow:hidden;margin-bottom:10px;opacity:0;transition:opacity 400ms}
+    .preview-table.show{opacity:1}
+    .pt-header{display:grid;grid-template-columns:1fr 1fr 1fr;padding:4px 10px;border-bottom:1px solid var(--border)}
+    .pt-header span{font-size:8px;color:var(--text-muted);font-weight:500}
+    .pt-row{display:grid;grid-template-columns:1fr 1fr 1fr;padding:3px 10px;border-bottom:1px solid var(--border-subtle)}
+    .pt-row:last-child{border-bottom:none}
+    .pt-row span{font-size:8px;color:var(--text);font-family:'JetBrains Mono',monospace}
+    .pt-row span:first-child{color:var(--text-secondary);font-family:'Work Sans',sans-serif}
+    .add-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:9999px;padding:10px;font-size:11px;font-weight:500;cursor:pointer}
+    .fade-overlay{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:500;transition:opacity 500ms}
+    .fade-overlay.show{opacity:1}
+  </style>
+</head>
+<body>
+<div class="phone">
+  <div class="island"></div>
+  <div class="screen">
+    <header class="pace-header">
+      <div class="logo">
+        <div class="logo-mark">P</div>
+        <span class="logo-name">PACE</span>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn">☽</button>
+        <button class="icon-btn">♥</button>
+        <button class="icon-btn">✉</button>
+        <button class="new-win-btn">+ New Window</button>
+      </div>
+    </header>
+
+    <div style="overflow-y:auto;overflow-x:hidden;flex:1;scrollbar-width:none">
+      <div class="window-card">
+        <div class="window-header">
+          <span>Pace Window</span>
+          <div><button class="reset-btn">Reset</button></div>
+        </div>
+        <div class="search-area">
+          <div class="filter-pills">
+            <button class="pill active">Men</button>
+            <button class="pill">Women</button>
+          </div>
+          <div class="search-mock">NCAA D1 Nationals · Men · 5000m ×</div>
+        </div>
+        <div class="custom-btn-area">
+          <button class="custom-btn">+ Custom</button>
+        </div>
+        <div class="chips-area">
+          <div class="chip"><span class="chip-dot" style="background:rgb(234,88,12)"></span>Habtom Samuel<span style="color:var(--text-muted)">&times;</span></div>
+        </div>
+        <div class="chart-area">
+          <div class="chart-controls">
+            <div class="zoom-btns"><span class="zoom-lbl">Y</span><button class="zoom-btn">+</button><button class="zoom-btn">−</button></div>
+            <div class="mode-btns">
+              <button class="mode-btn">Virtual Gap</button>
+              <button class="mode-btn active">Lap Pace</button>
+              <button class="mode-btn">Position</button>
+              <button class="mode-btn">Gain/Loss</button>
+            </div>
+          </div>
+          <svg viewBox="0 0 300 130" width="100%" style="display:block" id="chartSvg">
+            <line x1="28" y1="27" x2="291" y2="27" class="grid-line"/>
+            <line x1="28" y1="43" x2="291" y2="43" class="grid-line"/>
+            <line x1="28" y1="60" x2="291" y2="60" class="grid-line"/>
+            <line x1="28" y1="77" x2="291" y2="77" class="grid-line"/>
+            <text x="22" y="29" text-anchor="end" class="axis-label">1:16</text>
+            <text x="22" y="45" text-anchor="end" class="axis-label">1:14</text>
+            <text x="22" y="62" text-anchor="end" class="axis-label">1:12</text>
+            <text x="22" y="79" text-anchor="end" class="axis-label">1:10</text>
+            <text x="30" y="120" text-anchor="middle" class="axis-label">400m</text>
+            <text x="175" y="120" text-anchor="middle" class="axis-label">2400m</text>
+            <text x="291" y="120" text-anchor="middle" class="axis-label">4000m</text>
+            <polyline class="pace-line" stroke="rgb(234,88,12)"
+              points="30,27 59,35 88,43 117,52 146,52 175,60 204,68 233,77 262,85 291,93"/>
+            <polyline id="customLine" class="pace-line-anim" stroke="#8b5cf6"
+              points="30,30 59,38 88,45 117,53 146,53 175,62 204,70 233,78 262,86 291,93"
+              style="display:none"/>
+          </svg>
+        </div>
+        <div class="legend" id="legend">
+          <div class="legend-item"><div class="legend-swatch" style="background:rgb(234,88,12)"></div>H. Samuel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-backdrop" id="modalBackdrop">
+      <div class="modal-card">
+        <div class="modal-header">
+          <span class="modal-title">Custom Athlete</span>
+          <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-tabs">
+          <div class="modal-tab active">Pace Line</div>
+          <div class="modal-tab">Manual Splits</div>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Target time (mm:ss.ss)</label>
+          <div class="form-input focused" id="targetTimeDisplay"><span id="targetTimeText"></span></div>
+          <label class="form-label">Number of splits</label>
+          <div class="form-input" id="splitsDisplay">8</div>
+          <label class="form-label">Strategy</label>
+          <div class="form-input" id="strategyDisplay">Negative Split</div>
+          <label class="form-label">% faster (2nd half)</label>
+          <div class="form-input" id="pctDisplay" style="display:none">5</div>
+          <div class="preview-table" id="previewTable">
+            <div class="pt-header"><span>Split</span><span>Lap</span><span>Elapsed</span></div>
+            <div class="pt-row"><span>S1</span><span>1:45.70</span><span>1:45.70</span></div>
+            <div class="pt-row"><span>S2</span><span>1:45.70</span><span>3:31.40</span></div>
+            <div class="pt-row"><span>S3</span><span>1:45.70</span><span>5:17.10</span></div>
+            <div class="pt-row"><span>S4</span><span>1:45.70</span><span>7:02.80</span></div>
+            <div class="pt-row"><span>S5</span><span>1:40.50</span><span>8:43.30</span></div>
+            <div class="pt-row"><span>S6</span><span>1:40.50</span><span>10:23.80</span></div>
+            <div class="pt-row"><span>S7</span><span>1:40.50</span><span>12:04.30</span></div>
+            <div class="pt-row"><span>S8</span><span>1:40.50</span><span>13:44.80</span></div>
+          </div>
+          <button class="add-btn" id="addBtn">Add to Window</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fade-overlay" id="fadeOverlay"></div>
+</div>
+
+<script>
+  const modal = document.getElementById('modalBackdrop');
+  const targetTimeText = document.getElementById('targetTimeText');
+  const targetTimeDisplay = document.getElementById('targetTimeDisplay');
+  const pctDisplay = document.getElementById('pctDisplay');
+  const previewTable = document.getElementById('previewTable');
+  const customLine = document.getElementById('customLine');
+  const legend = document.getElementById('legend');
+  const fade = document.getElementById('fadeOverlay');
+
+  function typewriter(el, text, charDelay, cb) {
+    let i = 0;
+    const tick = () => {
+      el.textContent = text.slice(0, ++i);
+      if (i < text.length) setTimeout(tick, charDelay);
+      else if (cb) cb();
+    };
+    setTimeout(tick, charDelay);
+  }
+
+  function timeline(steps) {
+    let t = 0;
+    steps.forEach(([d, fn]) => { t += d; setTimeout(fn, t); });
+  }
+
+  function reset() {
+    modal.classList.remove('show');
+    targetTimeText.textContent = '';
+    targetTimeDisplay.classList.add('focused');
+    pctDisplay.style.display = 'none';
+    previewTable.classList.remove('show');
+    customLine.style.display = 'none';
+    customLine.classList.remove('draw');
+    void customLine.getBoundingClientRect();
+    const custLeg = document.getElementById('custLegItem');
+    if (custLeg) custLeg.remove();
+    fade.classList.remove('show');
+  }
+
+  function run() {
+    reset();
+    timeline([
+      [800, () => modal.classList.add('show')],
+      [1000, () => typewriter(targetTimeText, '13:45.00', 80, null)],
+      [1800, () => pctDisplay.style.display = ''],
+      [1000, () => previewTable.classList.add('show')],
+      [1500, () => modal.classList.remove('show')],
+      [500, () => {
+        customLine.style.display = '';
+        void customLine.getBoundingClientRect();
+        customLine.classList.add('draw');
+      }],
+      [1000, () => {
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+        item.id = 'custLegItem';
+        item.style.color = '#8b5cf6';
+        item.innerHTML = '<div style="width:14px;height:0;border-top:2px dashed #8b5cf6"></div>13:45.00 Neg 5%';
+        legend.appendChild(item);
+      }],
+      [1500, () => fade.classList.add('show')],
+      [700, () => setTimeout(run, 200)],
+    ]);
+  }
+
+  run();
+</script>
+</body>
+</html>
