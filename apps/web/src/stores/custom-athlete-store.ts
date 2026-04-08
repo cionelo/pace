@@ -2,6 +2,28 @@ import type { Split } from "../types/pace";
 
 let counter = 0;
 
+export interface SplitPoint {
+  /** Cumulative distance from the start (m) */
+  cumulative: number;
+  /** Distance covered in this lap (m) — <400 for remainder laps */
+  lapDistance: number;
+}
+
+/**
+ * Compute split points for a race at 400m intervals.
+ * The final point covers whatever distance remains (may be <400m).
+ */
+export function computeSplitPoints(distanceM: number): SplitPoint[] {
+  const points: SplitPoint[] = [];
+  let current = 0;
+  while (current < distanceM) {
+    const lapDist = Math.min(400, distanceM - current);
+    current += lapDist;
+    points.push({ cumulative: current, lapDistance: lapDist });
+  }
+  return points;
+}
+
 /** Generate a unique custom athlete ID */
 export function genCustomId(): string {
   return `custom_${++counter}_${Date.now()}`;

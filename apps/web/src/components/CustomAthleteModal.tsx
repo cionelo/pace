@@ -6,15 +6,12 @@ import {
   generateNegativeSplits,
   generatePositiveSplits,
   timeStringToSeconds,
+  computeSplitPoints,
+  type SplitPoint,
 } from "../stores/custom-athlete-store";
 
-type Tab = "manual" | "generator";
+type Tab = "coach" | "generator";
 type Strategy = "even" | "negative" | "positive";
-
-interface ManualRow {
-  label: string;
-  elapsedStr: string;
-}
 
 interface CustomAthleteModalProps {
   onAdd: (athleteResult: AthleteResult) => void;
@@ -31,11 +28,7 @@ function formatSecondsToStr(s: number): string {
 function buildAthleteResult(name: string, splits: Split[], timeSeconds: number): AthleteResult {
   const id = genCustomId();
   return {
-    athlete: {
-      id,
-      name,
-      team_id: null,
-    },
+    athlete: { id, name, team_id: null },
     team: null,
     result: {
       id: `result_${id}`,
@@ -64,145 +57,261 @@ function buildAthleteResult(name: string, splits: Split[], timeSeconds: number):
   };
 }
 
-const inputClass = "w-full bg-pace-input border border-pace-border text-pace-text text-sm rounded-xl px-4 py-2.5 placeholder-pace-text-muted focus:border-pace-accent focus:outline-none focus:ring-2 focus:ring-pace-accent/10 transition-all duration-300";
-const smallInputClass = "bg-pace-input border border-pace-border text-pace-text text-xs rounded-lg px-3 py-2 focus:border-pace-accent focus:outline-none focus:ring-2 focus:ring-pace-accent/10 transition-all duration-300";
+const inputClass =
+  "w-full bg-pace-input border border-pace-border text-pace-text text-sm rounded-xl px-4 py-2.5 placeholder-pace-text-muted focus:border-pace-accent focus:outline-none focus:ring-2 focus:ring-pace-accent/10 transition-all duration-300";
+const smallInputClass =
+  "bg-pace-input border border-pace-border text-pace-text text-xs rounded-lg px-3 py-2 focus:border-pace-accent focus:outline-none focus:ring-2 focus:ring-pace-accent/10 transition-all duration-300";
 
-function ManualSplitsTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" | "onClose">) {
+// ─── Common race distances ────────────────────────────────────────────────────
+
+const PRESET_DISTANCES = [
+  { label: "800m", value: 800 },
+  { label: "1500m", value: 1500 },
+  { label: "Mile", value: 1609 },
+  { label: "3000m", value: 3000 },
+  { label: "5000m", value: 5000 },
+  { label: "10K", value: 10000 },
+];
+
+function splitLabel(sp: SplitPoint): string {
+  return `${sp.cumulative}m`;
+}
+
+// ─── Coach Splits Tab ─────────────────────────────────────────────────────────
+
+function CoachSplitsTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" | "onClose">) {
   const [name, setName] = useState("");
-  const [rows, setRows] = useState<ManualRow[]>([
-    { label: "S1", elapsedStr: "" },
-    { label: "S2", elapsedStr: "" },
-    { label: "S3", elapsedStr: "" },
-    { label: "S4", elapsedStr: "" },
-  ]);
+  const [selectedDist, setSelectedDist] = useState<number | null>(1500);
+  const [customDistStr, setCustomDistStr] = useState("");
+  const [lapStrs, setLapStrs] = useState<string[]>([]);
   const [error, setError] = useState("");
 
-  function addRow() {
-    setRows((prev) => [
-      ...prev,
-      { label: `S${prev.length + 1}`, elapsedStr: "" },
-    ]);
+  const effectiveDist =
+    selectedDist !== null ? selectedDist : parseInt(customDistStr, 10) || null;
+
+  const splitPoints: SplitPoint[] =
+    effectiveDist && effectiveDist > 0 ? computeSplitPoints(effectiveDist) : [];
+
+  // Reset lap inputs whenever the distance changes
+  useEffect(() => {
+    setLapStrs(Array(splitPoints.length).fill(""));
+    setError("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [effectiveDist]);
+
+  function updateLap(i: number, val: string) {
+    setLapStrs((prev) => prev.map((s, idx) => (idx === i ? val : s)));
   }
 
-  function removeRow() {
-    if (rows.length <= 1) return;
-    setRows((prev) => prev.slice(0, -1));
+  // Compute running elapsed from lap inputs
+  const parsedLaps = lapStrs.map((s) => timeStringToSeconds(s));
+  const elapsedSecs: (number | null)[] = [];
+  let running: number | null = 0;
+  for (const lap of parsedLaps) {
+    if (running !== null && lap !== null && lap > 0) {
+      running += lap;
+      elapsedSecs.push(running);
+    } else {
+      running = null;
+      elapsedSecs.push(null);
+    }
   }
 
-  function updateRow(index: number, field: keyof ManualRow, value: string) {
-    setRows((prev) =>
-      prev.map((r, i) => (i === index ? { ...r, [field]: value } : r))
-    );
-  }
+  const totalTime = elapsedSecs[elapsedSecs.length - 1] ?? null;
+  const allFilled = splitPoints.length > 0 && parsedLaps.every((l) => l !== null && l > 0);
 
   function handleAdd() {
     setError("");
-
     if (!name.trim()) {
       setError("Name is required");
       return;
     }
-
-    const splits: Split[] = [];
-    let prevElapsed = 0;
-
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i];
-      const elapsed = timeStringToSeconds(row.elapsedStr);
-      if (elapsed === null) {
-        setError(`Invalid time in row ${i + 1}: "${row.elapsedStr}"`);
-        return;
-      }
-      if (elapsed <= prevElapsed) {
-        setError(`Row ${i + 1} elapsed must be greater than row ${i}`);
-        return;
-      }
-      const lap = elapsed - prevElapsed;
-      splits.push({
-        id: `gen_${i}`,
-        result_id: "",
-        label: row.label || `S${i + 1}`,
-        ordinal: i,
-        distance_m: null,
-        elapsed_s: elapsed,
-        lap_s: lap,
-        place: null,
-      });
-      prevElapsed = elapsed;
+    if (!effectiveDist || effectiveDist <= 0) {
+      setError("Select a race distance");
+      return;
     }
 
-    const totalSeconds = splits[splits.length - 1].elapsed_s!;
-    const ar = buildAthleteResult(name.trim(), splits, totalSeconds);
-    onAdd(ar);
+    const validLaps: number[] = [];
+    for (let i = 0; i < splitPoints.length; i++) {
+      const t = timeStringToSeconds(lapStrs[i] ?? "");
+      if (t === null || t <= 0) {
+        setError(`Enter a valid lap time for ${splitPoints[i].cumulative}m`);
+        return;
+      }
+      validLaps.push(t);
+    }
+
+    const totalSeconds = validLaps.reduce((a, b) => a + b, 0);
+    let cumulative = 0;
+    const splits: Split[] = validLaps.map((lap, i) => {
+      cumulative += lap;
+      const sp = splitPoints[i];
+      const isLast = i === validLaps.length - 1;
+      return {
+        id: `gen_${i}`,
+        result_id: "",
+        label: splitLabel(sp),
+        ordinal: i,
+        distance_m: sp.cumulative,
+        elapsed_s: isLast ? totalSeconds : cumulative,
+        lap_s: lap,
+        place: null,
+      };
+    });
+
+    onAdd(buildAthleteResult(name.trim(), splits, totalSeconds));
     onClose();
   }
 
   return (
     <div className="space-y-4">
+      {/* Name */}
       <div>
-        <label className="block text-xs font-medium text-pace-text-secondary mb-1.5">
-          Name
-        </label>
+        <label className="block text-xs font-medium text-pace-text-secondary mb-1.5">Name</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="e.g. My Athlete"
+          placeholder="e.g. Race Plan A"
           className={inputClass}
         />
       </div>
 
-      <div className="space-y-2">
-        <label className="block text-xs font-medium text-pace-text-secondary">
-          Splits (elapsed time, mm:ss.ss)
+      {/* Distance selector */}
+      <div>
+        <label className="block text-xs font-medium text-pace-text-secondary mb-2">
+          Race distance
         </label>
-        {rows.map((row, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <input
-              type="text"
-              value={row.label}
-              onChange={(e) => updateRow(i, "label", e.target.value)}
-              className={`w-16 ${smallInputClass}`}
-            />
-            <input
-              type="text"
-              value={row.elapsedStr}
-              onChange={(e) => updateRow(i, "elapsedStr", e.target.value)}
-              placeholder="0:00.00"
-              className={`flex-1 ${smallInputClass}`}
-            />
-          </div>
-        ))}
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {PRESET_DISTANCES.map((d) => (
+            <button
+              key={d.value}
+              onClick={() => {
+                setSelectedDist(d.value);
+                setCustomDistStr("");
+              }}
+              className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-all duration-200 ${
+                selectedDist === d.value
+                  ? "border-pace-accent text-pace-accent bg-pace-accent/10"
+                  : "border-pace-border text-pace-text-muted hover:text-pace-text hover:border-pace-text-muted"
+              }`}
+            >
+              {d.label}
+            </button>
+          ))}
           <button
-            onClick={addRow}
-            className="text-xs font-medium px-3 py-1.5 rounded-full border border-pace-border text-pace-text-secondary hover:text-pace-text hover:border-pace-text-secondary transition-all duration-300"
+            onClick={() => setSelectedDist(null)}
+            className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-all duration-200 ${
+              selectedDist === null
+                ? "border-pace-accent text-pace-accent bg-pace-accent/10"
+                : "border-pace-border text-pace-text-muted hover:text-pace-text hover:border-pace-text-muted"
+            }`}
           >
-            + Add row
-          </button>
-          <button
-            onClick={removeRow}
-            disabled={rows.length <= 1}
-            className="text-xs font-medium px-3 py-1.5 rounded-full border border-pace-border text-pace-text-secondary hover:text-pace-text hover:border-pace-text-secondary transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            - Remove row
+            Custom
           </button>
         </div>
+        {selectedDist === null && (
+          <input
+            type="number"
+            min={100}
+            max={100000}
+            value={customDistStr}
+            onChange={(e) => setCustomDistStr(e.target.value)}
+            placeholder="Distance in meters (e.g. 2000)"
+            className={inputClass}
+          />
+        )}
       </div>
 
-      {error && (
-        <p className="text-xs text-red-500">{error}</p>
+      {/* Split rows */}
+      {splitPoints.length > 0 && (
+        <div>
+          <label className="block text-xs font-medium text-pace-text-secondary mb-1.5">
+            Lap times — enter the split-to-split time for each point
+          </label>
+          <div className="bg-pace-card-inner border border-pace-border rounded-xl overflow-hidden">
+            {/* Header */}
+            <div className="grid grid-cols-[5rem_1fr_5rem] text-xs border-b border-pace-border">
+              <span className="px-3 py-2 text-pace-text-muted font-medium">Point</span>
+              <span className="px-3 py-2 text-pace-text-muted font-medium">Lap time</span>
+              <span className="px-3 py-2 text-pace-text-muted font-medium text-right">Elapsed</span>
+            </div>
+
+            {/* Rows — scrollable for long races */}
+            <div className="max-h-64 overflow-y-auto">
+              {splitPoints.map((sp, i) => {
+                const isRemainder = sp.lapDistance < 400;
+                const elapsed = elapsedSecs[i] ?? null;
+                return (
+                  <div
+                    key={sp.cumulative}
+                    className="grid grid-cols-[5rem_1fr_5rem] items-center border-b border-pace-border-subtle last:border-0"
+                  >
+                    {/* Point label */}
+                    <div className="px-3 py-2">
+                      <span className="text-xs font-medium text-pace-text font-mono">
+                        {sp.cumulative}m
+                      </span>
+                      {isRemainder && (
+                        <span className="block text-[10px] text-pace-text-muted leading-tight">
+                          {sp.lapDistance}m lap
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Lap input */}
+                    <div className="px-2 py-1.5">
+                      <input
+                        type="text"
+                        value={lapStrs[i] ?? ""}
+                        onChange={(e) => updateLap(i, e.target.value)}
+                        placeholder="0:00.00"
+                        className={`w-full ${smallInputClass}`}
+                      />
+                    </div>
+
+                    {/* Elapsed */}
+                    <div className="px-3 py-2 text-right">
+                      <span
+                        className={`text-xs font-mono ${
+                          elapsed !== null ? "text-pace-text" : "text-pace-text-muted"
+                        }`}
+                      >
+                        {elapsed !== null ? formatSecondsToStr(elapsed) : "—"}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Total row */}
+            {allFilled && totalTime !== null && (
+              <div className="flex justify-between items-center px-3 py-2 border-t border-pace-border bg-pace-card">
+                <span className="text-xs font-medium text-pace-text-secondary">Total</span>
+                <span className="text-xs font-mono font-semibold text-pace-accent">
+                  {formatSecondsToStr(totalTime)}
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
       )}
+
+      {error && <p className="text-xs text-red-500">{error}</p>}
 
       <button
         onClick={handleAdd}
-        className="w-full bg-pace-accent hover:bg-pace-accent-hover text-white text-sm font-medium rounded-full px-4 py-2.5 transition-all duration-300"
+        disabled={!effectiveDist || splitPoints.length === 0}
+        className="w-full bg-pace-accent hover:bg-pace-accent-hover text-white text-sm font-medium rounded-full px-4 py-2.5 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
       >
         Add to Window
       </button>
     </div>
   );
 }
+
+// ─── Pace Line Tab (unchanged) ────────────────────────────────────────────────
 
 function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" | "onClose">) {
   const [targetTimeStr, setTargetTimeStr] = useState("");
@@ -218,7 +327,6 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
       setPreview([]);
       return;
     }
-
     let splits: Split[];
     switch (strategy) {
       case "negative":
@@ -252,16 +360,10 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
       setError("No splits generated");
       return;
     }
-
     const strategyLabel =
-      strategy === "even"
-        ? "Even"
-        : strategy === "negative"
-          ? `Neg ${pct}%`
-          : `Pos ${pct}%`;
+      strategy === "even" ? "Even" : strategy === "negative" ? `Neg ${pct}%` : `Pos ${pct}%`;
     const name = `${targetTimeStr} ${strategyLabel}`;
-    const ar = buildAthleteResult(name, preview, totalSeconds);
-    onAdd(ar);
+    onAdd(buildAthleteResult(name, preview, totalSeconds));
     onClose();
   }
 
@@ -357,9 +459,7 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
         </div>
       )}
 
-      {error && (
-        <p className="text-xs text-red-500">{error}</p>
-      )}
+      {error && <p className="text-xs text-red-500">{error}</p>}
 
       <button
         onClick={handleAdd}
@@ -371,8 +471,10 @@ function PaceLineTab({ onAdd, onClose }: Pick<CustomAthleteModalProps, "onAdd" |
   );
 }
 
+// ─── Modal shell ──────────────────────────────────────────────────────────────
+
 export default function CustomAthleteModal({ onAdd, onClose }: CustomAthleteModalProps) {
-  const [tab, setTab] = useState<Tab>("generator");
+  const [tab, setTab] = useState<Tab>("coach");
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -394,9 +496,7 @@ export default function CustomAthleteModal({ onAdd, onClose }: CustomAthleteModa
       <div className="bg-pace-card border border-pace-border rounded-2xl shadow-pace-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-pace-border">
-          <h2 className="font-display text-lg text-pace-text">
-            Custom Athlete
-          </h2>
+          <h2 className="font-display text-lg text-pace-text">Custom Athlete</h2>
           <button
             onClick={onClose}
             className="text-pace-text-muted hover:text-pace-text text-xl leading-none transition-colors duration-300"
@@ -409,8 +509,8 @@ export default function CustomAthleteModal({ onAdd, onClose }: CustomAthleteModa
         <div className="flex border-b border-pace-border">
           {(
             [
+              ["coach", "Custom Splits"],
               ["generator", "Pace Line"],
-              ["manual", "Manual Splits"],
             ] as [Tab, string][]
           ).map(([key, label]) => (
             <button
@@ -429,8 +529,8 @@ export default function CustomAthleteModal({ onAdd, onClose }: CustomAthleteModa
 
         {/* Content */}
         <div className="p-5">
-          {tab === "manual" ? (
-            <ManualSplitsTab onAdd={onAdd} onClose={onClose} />
+          {tab === "coach" ? (
+            <CoachSplitsTab onAdd={onAdd} onClose={onClose} />
           ) : (
             <PaceLineTab onAdd={onAdd} onClose={onClose} />
           )}
